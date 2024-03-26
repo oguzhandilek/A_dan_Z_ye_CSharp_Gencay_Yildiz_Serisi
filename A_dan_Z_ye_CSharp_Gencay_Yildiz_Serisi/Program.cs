@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
@@ -130,6 +131,25 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             //builder.Append(" ");
             //builder.Append(soyisim);
             //Console.WriteLine(builder.ToString());
+
+            // int[] sayilar = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            // Span<int> span = new Span<int>(sayilar);
+            // Span<int> span2 = sayilar; //üsteki ile aynı referansı veriri
+            // Span<int> span3 = new Span<int>(sayilar, 3, 5);
+
+            // Span<int> span4=sayilar.AsSpan(); //San türünde br nesne döndürürür //Yukarıda ki yöntemle aynı işlevi gören farklı bir yordamdır
+            //Span<int> span5= sayilar.AsSpan(3, 5); // döndürülen nesnnenin belirli aralığını refere eder
+
+
+            // string text = "Sen kalbimde batan güneş, ben yollarda çilekeş...";
+            // ReadOnlySpan<char> readOnlySpan = text.AsSpan(); //Kritik strig türelerde refere edilince ReadOnlySpan döndürür
+
+            string text = "92111kasdbkafkbvbbsdl";
+            Regex regex = new Regex(@"^9\d\S");
+            Match match = regex.Match(text);
+            Console.WriteLine(match.Success);
+
+
 
 
 

@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
 {
@@ -638,7 +641,109 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         #region Span Türü
         // Bellek üzerinde belirli bir alan temsil ederek işlemler gerçekleştirmemizi sağlayan bir struct'tır.
         //Bu belirli alanlardan kasıt tabi ki de ardışıl alan kaplayan Array  değerleridir.
+        // Normal şartlarda  Arraflerin belleğin HEAP kısmında tutulduğunu biliyoruz. Lakin stackalloc keyword'ü
+        //sayesinde STACKlte de Array tanımlayabilmekteyiz.
 
+        //Span, stack yahut heap   farketmeksizin tanımlanmış olan Array'lerin tümünü yahut bir bölümünü bizler
+        //için refere edebilen ve üzerinde işlem gerçekleştirebimemizi sağlayan kullanışlı bir türdür,
+
+        //todo ReadOnlySpan<T> nedir?
+        // Span niteliklerinin tümünü sağlamakta lakin adı üzerinde sadece okunabilir kılmaktadır.
+
+        //todo Span ile ArraySegment & StringSegment Farkı Nedir?
+        //ArraySegment sadece string ve dizilerde temsiliyet yapabiliyorken, Span bellek  üzerinde olan herhangi bir yeri temsil edebilir.
+        //ArraySegmentlte referans edilen alana hertürlü müdahale edilebilirken, ReadOnIySpanlda bu verişel operasyonlar engellenebilir ve sadece okunabilir bir
+        //davranış sergilenebilir.
+        //Sadece string yahut array türler ile çalışılacaksa eğer ArraySegment ve StringSegment tavsiye edilir.
+
+        //Örnek
+        // int[] sayilar = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+        // Span<int> span = new Span<int>(sayilar);
+        // Span<int> span2 = sayilar; //üsteki ile aynı referansı veriri
+        // Span<int> span3 = new Span<int>(sayilar, 3, 5);
+
+        // Span<int> span4=sayilar.AsSpan(); //San türünde br nesne döndürürür //Yukarıda ki yöntemle aynı işlevi gören farklı bir yordamdır
+        //Span<int> span5= sayilar.AsSpan(3, 5); // döndürülen nesnnenin belirli aralığını refere eder
+
+
+        // string text = "Sen kalbimde batan güneş, ben yollarda çilekeş...";
+        // ReadOnlySpan<char> readOnlySpan = text.AsSpan(); //Kritik strig türelerde refere edilince ReadOnlySpan döndürür
+
+
+        #endregion
+
+        #region Memory Türü
+        //todo Memory Türü Nedir
+        //Span ref struct olarak tasarlanmış bir structltır.
+        //Dolayısıyla Heaplte allocation(tahsis) edilememe, object, dynamic yahut interface
+        //türleri aracılığıyla referans edilememe yahut bir class içerisinde field veya property
+        //olarak tanımlanamama gibi kısıtlamaları vardır.
+        //Memory türü Spanlın bu kısıtlamalarından münezzeh versiyonudur.
+        // ReadOnlyMemory memory'nini sadece okunabilen bir türüdür.
+
+        #endregion
+
+        #region Regular Expressions (Düzenli İfadelerde)
+        ////Metinsel yapılanmalarda belirli koşulları sağlayabilen ifadelerdir.
+        ////Metinsel ifade içerisinde ihtiyaca istinaden düzenlenirler.
+        //Örenk;
+        //Bir metinsel ifade içerisinde @ karakteri geçen bütün aralıkları elde etmek istediğimizi varsayalım.
+        //baasdseda@asm 1 23 1232'dkasd@dIqvgödq213'asdasdwd
+        //Dikkat ederseniz bu değerlerdeki karakterlerin uzunluğu ve ne olduğu önemli değil. Yeter ki @
+        //karakteri olsun.
+        //Her email adresi mutlaka @ ve ardından .(nokta) karakteri barındırır. Eğer birden fazla nokta varsa,
+        //noktalardan biri mutlaka @ karakterinden sonra olmalıdır.
+        //gencay.yildiz @sebepsizbosyereayrilacaksan com
+        //Haliyle bir karakter dizisinin email adresi olup olmadığını test etmek oldukça zor olacaktır.
+
+        //todo Regex
+        //Bu yüzden C#'ta bu tür düzenli ifadeleri temsil edebilmek için Regular Expressions operatörleri
+        //geliştirilmiştir.
+        // Bu operatörler eşliğinde elde edilen verinin tasarlanan metinsel düzene uyup uymadığı
+        //değerlendirilebilmektedir.
+        // Regular ifadeler System.Text.RegularExpressions namespace'i altındaki Regex sınıfı tarafından
+        //temsil edilmektedir.
+        //Regular Expressions'lar ufak tefek farklılık olsa dahi hemen hemen tüm programlama
+        //dillerinde olan evrensel yapılanmalardır.
+
+
+
+        #endregion
+
+        #region Regular Expression Operatörleri
+        #region ^ Operatörü
+        //todo Regex ^ Operatörü: Satır başının istenilen ifadeyle başlamasını sağlar.
+        //string text = "92111kasdbkafkbvbbsdl";
+        //Regex regex = new Regex("^9");
+        //Match match = regex.Match(text);
+        //Console.WriteLine(match.Success);
+        #endregion
+        #region \ Operatörü
+        // todo Regex \ Operatörü
+        // \ : Belirli karakter gruplarını içermesini istiyorsak kullanırız.
+        // \D : Metinsel değerin ilgili yerinde rakam olmayan tek bir karakterin bulunması gerektiği belirtilir.
+        // \d : Metinsel değerin ilgili yerinde 0 - 9 arasında tek bir sayı olacağı ifade edilir.
+        // \W : Metinsel değerin ilgili yerinde alfanümerik olmayan karakterin olması gerektiği belirtilir. Alfanümerik
+        //karakterler  :  a-z A-Z 0-9
+        // \w : Metinsel değerin ilgili yerinde alfanümerik olan karakterin olacağı ifade edilir.
+        // \S : Metinsel değerin ilgili yerinde boşluk karakterleri(tab/space) Işında herhangi bir karakterin olamayacağı belirtilir
+        // \s : Metinsel değerin ilgili yerinde sadece boşluk karakterinin olacağı ifade edilir.
+
+        //Orn;
+        //9 ile başlayan, ikinci karakteri herhangi bir sayı olan ve son karakteri de boşluk olmayan bir düzenli ifade
+        //oluşturalım.
+        // ^9\d\S
+        //string text = "92111kasdbkafkbvbbsdl";
+        //Regex regex = new Regex(@"^9\d\S"); ilk 3 karakteri denetler yani 92 1.. olsa idid false ocaktı
+        //Match match = regex.Match(text);
+        //Console.WriteLine(match.Success);
+
+        #endregion
+
+        #region + Operatörü
+        //todo Regex + Operatörü
+        //
+        #endregion
         #endregion
     }
 }
