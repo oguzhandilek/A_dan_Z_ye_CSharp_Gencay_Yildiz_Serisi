@@ -742,7 +742,62 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
 
         #region + Operatörü
         //todo Regex + Operatörü
-        //
+        ////Be1irti1en gruptaki karakterlerden bir ya da daha fazlasının olmasını istiyorsak kullanılır
+        /////Örn;
+        /////9 ile başlayan, arada herhangi bir sayısal değerleril olan ve son karakteri de boşluklolmayan bir düzenli ifade
+        //oluşturalım.
+        // ^9\d+\S
+        #endregion
+
+        #region | Operatörü
+        //todo RegEx | Operatörü
+        //Birden fazla karakter grubundan bir ya da birkaçının ilgili yerde olabileceğini belirtmek istiyorsak mantıksal
+        //veya operatörü kullanılır.
+        //Örn;
+        //Baş harfi a ya da b ya da c olan metinsel ifadeyi girelim.
+        //alblc
+        //string text = "ahmet";
+        //Regex regex = new Regex(@"a|b|c");
+        //Match match = regex.Match(text);
+        //Console.WriteLine(match.Success);
+
+        #endregion
+
+        #region {n} Operatörü
+        // Sabit sayıda karakterin olması isteniyorsa (adet) şeklinde belirtilmeli.
+        //507-7514592 cce tel formatını doğrulayalım
+        // \d\d\d-\d\d\d\d\d\d bu da bir yöntem ama daha efektif alttaki
+        // \d{3}-\d{6}
+        #endregion
+
+        #region ? Operatörü
+        ////Bu karakterin önüne gelen karakter en fazla bir en az sıfır defa olabilmektedir.
+        ///\d{3}B?A --> 234BA, 543BA, 543A bu değerler true döner ama 123BBA false döner
+        #endregion
+
+        #region . Operatörü
+        // Kullanıldığı yerde \n karakteri dışında herhangi bir karakter bulunabilir.
+        //\d{3}.A 
+        #endregion
+
+        #region \b \B Operatörü
+        // \B: Bu ifade ile kelimenin başında ya da sonunda olmaması gereken karakterler bildirilir.
+        // \b: Bu ifade ilgili kelimenin belirtilen karakter dizisi ile sonlanmasını sağlar.
+        // Örn;
+        // \d{3}dır\B --> 123dır, dır123 false ama 123dır2 true
+
+
+        #endregion
+
+        #region [n] Operatörü
+        // [n] : Karakter aralığı belirtilebilir.
+        //Ayrıca özel karakterlerin yerinde yazılmasınıda ifade eder.
+        //Örn;
+        // \d{3}[A-E]  123A,123D,123E true ama 123P false döner
+        //Örn2;
+        //(507) 751 45 92
+        // [(]\d{3}[)]\s\d{2}\s\d{2} paarntezleri ve boşlukarı doğru yerde yazdırdık
+
         #endregion
         #endregion
     }

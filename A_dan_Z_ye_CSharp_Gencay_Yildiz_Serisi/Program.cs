@@ -144,8 +144,8 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             // string text = "Sen kalbimde batan güneş, ben yollarda çilekeş...";
             // ReadOnlySpan<char> readOnlySpan = text.AsSpan(); //Kritik strig türelerde refere edilince ReadOnlySpan döndürür
 
-            string text = "92111kasdbkafkbvbbsdl";
-            Regex regex = new Regex(@"^9\d\S");
+            string text = "ahmet";
+            Regex regex = new Regex(@"a|b|c");
             Match match = regex.Match(text);
             Console.WriteLine(match.Success);
 
