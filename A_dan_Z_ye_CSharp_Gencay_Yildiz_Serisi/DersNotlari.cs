@@ -516,7 +516,6 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //Console.WriteLine(string.Compare(metin,"Z"));
         //    Console.WriteLine(metin.CompareTo("Z")); aynı mantık ama kullanımı burda olduğu gibi farklı
         #endregion
-
         #region IndexOf
         //verilen değerin string ifade içerisinde Olup olmamasını geriye İnt döndüren bir fonksiyondur.
         //geriye int olarak indexNoyu döndürür.
@@ -525,13 +524,11 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //string metin = "Deneme şansını bende deneme";
         //Console.WriteLine(metin.IndexOf("bende"));
         #endregion
-
         #region Insert
         //EIimizdeki metinsel ifadeye bir değer dahil etmemizi/eklememizi sağlayan bir fonksiyondur.
         //string metin = "Deneme şansını bende deneme";
         // Console.WriteLine(metin.Insert(5, "ata")); string olarak return olur orjinali aynı kalır.
         #endregion
-
         #region Remove
         //Metinsel ifadede indexel olarak verilen değer aralığını silen bir fonksiyondur.
         //  Console.WriteLine( metin.Remove(5)); 5. indexten sonraki tüm değerleri sil.
@@ -825,10 +822,158 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //    _yaslar.Add("Ahmet"); //object türünde değer alıp Boxing yapar
         #endregion
         #region Tanımlanmış Koleksiyondan Değer Okuma
+        //for (int i = 0; i < 17; i++)
+        //{
+        //    yaslar[i] = i+10;
+        //    _yaslar.Add(i+10);
+        //}
+        //Console.WriteLine(yaslar[5]);
+        //Console.WriteLine(_yaslar[5]);
+        #endregion
+        #region ArrayList Kullanılırken Boxing -UnBoxing Durumları
+        //ArrayLİst, verilen datayı boxing işlemine tabi tutuar.
+        //ArrayList içerisindeki herhangi bir veriyi talep ettiğimizde o veri object olarak gelecektir. Dolayısıyla kendi
+        // türünde işlem yapabilmek için unboxing işlemine tabi tutuannz gerekir.
+        //    int toplam = 0;
+        //        for (int i = 0; i<_yaslar.Count; i++)
+        //        {
+        // if (_yaslar[i] is int) eğer değer int ise 
+        //            toplam += (int) _yaslar[i]; // () cast operatörü ile unboxing yaptık
+
+        //}
 
         #endregion
 
+        #region ArrayList Collection InitiaIizers(Koleksiyon İlklendirici) İle Değer Ekleme
+        //todo ArrayList Collection InitiaIizers örneği aşağıdaki gibidir
+        //ArrayList array = new ArrayList()
+        //{
+        //    "Zehre",
+        //    123,
+        //    'a',
+        //    true
+        //};
         #endregion
+        #endregion
+        #endregion
+
+        #region İterasyon
+        //todo İterasyon Nedir?
+        // Mantiksal acidan her tahminin mantigi yatar.
+        // Örn: 1 3 5 7 9 .. tek sayıların yazıldığı tahmini
+        #region İterasyon ve Döngü
+        //Foreach(1terasyon) BİR DOUGÜ DEĞİLDİR!
+        #endregion
+        #region ForEach İterasyonu
+        // foreach (değişken in collection veya dizi)
+        //{  }
+        //örn;
+        //ArrayList array = new ArrayList()
+        //{
+        //    "Zehra",
+        //    123,
+        //    'a',
+        //    true
+        //};
+
+        //foreach(object item in array)
+        //{
+        //    Console.WriteLine(item);
+        //}
+        #endregion
+        #endregion
+
+        #region C#'da Hazır Sınıf ve Metotlar
+        #region Math Sınıfı
+        #region Abs Fonksiyonu
+        //todo Abs fonk.
+        //Mutlak Değer işlemini yapar
+        //Absolute Value
+        //int i = Math.Abs(-59);
+        #endregion
+        #region Ceiling Fonksiyonu
+        //todo Ceiling Fonk.
+        //Ondalıklı değeri tamsayıya yuvarlar. Yukarı doğru yuvaralr 3.14 ->> 4
+        //int i = Math.Ceiling(3.14);
+        #endregion
+        #region Floor 
+        //todo Floor Fonk
+        ////Ondalıklı değeri tamsayıya yuvarlar. Aşağı doğru yuvaralr 3.14 ->> 3
+        //int i = Math.Floor(3.14);
+        #endregion
+        #region Round Fonksiyonu
+        //todo Round Fonk
+        ////Ondalıklı değeri en yakın tamsayıya yuvarlar. 3.4 ->> 3 , 3.5 --> 4 , 3.6--> 4
+        //int i = Math.Round(3.5);
+        #endregion
+        #region Pow Fonksiyonu
+        //todo Pow Fonk
+        ////Üstlü sayılar için kullanılırı . x taban y üst
+        //int i = Math.pow(3,5); 3'ün 5. kuvveti
+        #endregion
+        #region Sqrt Fonksiyonu
+        //todo Sqrt Fonk.
+        //Karekök için kullanılr
+        //Console.WriteLine(Math.Sqrt(4));
+        #endregion
+        #region Truncate
+        //todo Truncate
+        // Elindeki ondlık değerin sadece tam sayı değerini elde etmek için kullanılır
+        ////Console.WriteLine(Math.Truncate(3.14)); --> 3
+        #endregion
+        #endregion
+
+        #region DateTime Struct'ı
+        #region Now
+        // Şimdiki zamamnı milisaniyey kadar döndüren bir property'dir.
+        //Console.WriteLine(DateTime.Now);
+        #endregion
+        #region Today
+        //Şimdidki zamanın sadece gün ay yılını getirir
+        //Console.WriteLine(DateTime.Today);
+        #endregion
+        #region Compaire
+        //iki tarih aarsında kıayslama yapıp sonucu int döndürür
+        //Örn;
+        //DateTime tarih1 = new DateTime(2024, 01, 01);
+        //DateTime tarih2 = new DateTime(2024, 01, 01);
+        //int result = DateTime.Compare(tarih1, tarih2);
+        //Console.WriteLine(result>0?$"{tarih1} Büyük":(result==0? $"{tarih1} Eşittir":(result<0? $"{tarih1} Küçüktür":"Hata")));
+        #endregion
+        #region DateTime - Tarihsel Zamana Saat, Gün, Ay, Yıl Ekleyerek Sonucu Hesaplamak
+        //Console.WriteLine(DateTime.Now.AddYears (999 ) ) ;
+        #endregion
+        #endregion
+
+        #region TimeSpanStruct'ı
+        //iki tarih arasında zaman farkını hesaplayan struct'tır
+        //DateTime t1=DateTime.Now;
+        //DateTime t2= new DateTime(2000,1,1);
+        //TimeSpan span =t1-t2;
+        //Console.WriteLine(  span.Days);
+        //Console.WriteLine(span.Minutes);
+
+        #endregion
+
+        #region Random Sınıfı
+        #region Next Fonksiyonu
+        //Random rnd = new Random();
+        //Console.WriteLine(rnd.Next()); 00 ile integer son sınırına kadar son sınır dahil değil
+        //Console.WriteLine(rnd.Next(10)); 0 ile 10'a kadar ama 10 dahil değil
+        //Console.WriteLine(rnd.Next(1,10)); 1 ile 10 kadar. 1 dahil ama 10 değil
+        #endregion
+        #region NextDouble Fonksiyonu
+        // 0 ile 1 arasında random sayı üretir
+        //Random rnd = new Random();
+        //Console.WriteLine(  rnd.NextDouble());
+        #endregion
+        #endregion
+
+
+        #endregion
+
+        #region Metotlar
+
         #endregion
     }
 }

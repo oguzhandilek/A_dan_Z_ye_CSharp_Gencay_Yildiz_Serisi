@@ -153,23 +153,59 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             //Console.WriteLine(match.Index);
             //Console.WriteLine(match.Length);
 
-            int[] yaslar=new int[17]; //Dizi
-            ArrayList _yaslar = new ArrayList(); //Koleksiyon
+            //int[] yaslar = new int[17]; //Dizi
+            //ArrayList _yaslar = new ArrayList(); //Koleksiyon
 
-            //yaslar[0] = 1; // diziye değer atama
+            ////yaslar[0] = 1; // diziye değer atama
 
-            //_yaslar.Add(1);
-            //_yaslar.Add("Ahmet"); //object türünde değer alıp Boxing yapar
-            for (int i = 0; i < 17; i++)
-            {
-                yaslar[i] = i+10;
-                _yaslar.Add(i+10);
-            }
-            Console.WriteLine(yaslar[5]);
-            Console.WriteLine(_yaslar[5]);
+            ////_yaslar.Add(1);
+            ////_yaslar.Add("Ahmet"); //object türünde değer alıp Boxing yapar
+            //for (int i = 0; i < 17; i++)
+            //{
+            //    yaslar[i] = i + 10;
+            //    _yaslar.Add(i + 10);
+            //}
+            //Console.WriteLine(yaslar[5]);
+            //Console.WriteLine(_yaslar[5]);
+            //int toplam = 0;
+            //for (int i = 0; i < _yaslar.Count; i++)
+            //{
+            //    toplam += (int)_yaslar[i]; // () cast operatörü ile unboxing yaptık
 
+            //}
 
+            //ArrayList array = new ArrayList()
+            //{
+            //    "Zehra",
+            //    123,
+            //    'a',
+            //    true
+            //};
 
+            //foreach (object item in array)
+            //{
+
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.WriteLine( Math.Sqrt(4));
+
+            //Console.WriteLine(DateTime.Now);
+
+            //DateTime tarih1 = new DateTime(2024, 01, 01);
+            //DateTime tarih2 = new DateTime(2024, 01, 01);
+            //int result = DateTime.Compare(tarih1, tarih2);
+            //Console.WriteLine(result > 0 ? $"{tarih1} Büyük" : (result == 0 ? $"{tarih1} Eşittir" : (result < 0 ? $"{tarih1} Küçüktür" : "Hata")));
+
+            //DateTime t1=DateTime.Now;
+            //DateTime t2= new DateTime(2000,1,1);
+            //TimeSpan span =t1-t2;
+            //Console.WriteLine(  span.Days);
+            //Console.WriteLine(span.Minutes);
+
+            //Random rnd = new Random();
+            //Console.WriteLine(rnd.Next(1,10));
+            //Console.WriteLine(  rnd.NextDouble());
             Console.ReadLine();
         }
     }
