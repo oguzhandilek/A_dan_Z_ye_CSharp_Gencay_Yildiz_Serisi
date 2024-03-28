@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -144,12 +145,28 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             // string text = "Sen kalbimde batan güneş, ben yollarda çilekeş...";
             // ReadOnlySpan<char> readOnlySpan = text.AsSpan(); //Kritik strig türelerde refere edilince ReadOnlySpan döndürür
 
-            string text = "ahmet";
-            Regex regex = new Regex(@"a|b|c");
-            Match match = regex.Match(text);
-            Console.WriteLine(match.Success);
+            //string text = "ahmet";
+            //Regex regex = new Regex(@"a|b|c");
+            //Match match = regex.Match(text);
+            //Console.WriteLine(match.Success);
+            //Console.WriteLine(match.Value);
+            //Console.WriteLine(match.Index);
+            //Console.WriteLine(match.Length);
 
+            int[] yaslar=new int[17]; //Dizi
+            ArrayList _yaslar = new ArrayList(); //Koleksiyon
 
+            //yaslar[0] = 1; // diziye değer atama
+
+            //_yaslar.Add(1);
+            //_yaslar.Add("Ahmet"); //object türünde değer alıp Boxing yapar
+            for (int i = 0; i < 17; i++)
+            {
+                yaslar[i] = i+10;
+                _yaslar.Add(i+10);
+            }
+            Console.WriteLine(yaslar[5]);
+            Console.WriteLine(_yaslar[5]);
 
 
 

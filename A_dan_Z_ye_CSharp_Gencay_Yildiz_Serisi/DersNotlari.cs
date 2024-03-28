@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -797,6 +798,35 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //Örn2;
         //(507) 751 45 92
         // [(]\d{3}[)]\s\d{2}\s\d{2} paarntezleri ve boşlukarı doğru yerde yazdırdık
+
+        #endregion
+        #region Regex Match Sınıfı Özellikleri
+        //Console.WriteLine(match.Success); doğrulamamını true yada false değerini döndürür
+        //    Console.WriteLine(match.Value); doğrulamının yapıldığı değeri verir
+        //    Console.WriteLine(match.Index); doğrulamanın başlangıç değerini döner
+        //    Console.WriteLine(match.Length); doğrulama yaılacak karakterlerin adetini döner
+
+        #endregion
+        #endregion
+
+        #region Koleksiyonlar
+        //todo Koleksiyonlar
+        #region ArrayList Koleksiyonu
+        //todo ArrayList Koleksiyonu
+        //Koleksiyonların ilkidir. 
+        #region ArrayList Tanımlama
+        //  int[] yaslar=new int[4]; //Dizi
+        //ArrayList _yaslar = new ArrayList(); //Koleksiyon
+        #endregion
+        #region Tanımlanmış Koleksiyona Değer Atama
+        //yaslar[0] = 1; // diziye değer atama
+
+        //    _yaslar.Add(1);
+        //    _yaslar.Add("Ahmet"); //object türünde değer alıp Boxing yapar
+        #endregion
+        #region Tanımlanmış Koleksiyondan Değer Okuma
+
+        #endregion
 
         #endregion
         #endregion
