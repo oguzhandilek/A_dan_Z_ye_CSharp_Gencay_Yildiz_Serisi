@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -206,7 +208,34 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             //Random rnd = new Random();
             //Console.WriteLine(rnd.Next(1,10));
             //Console.WriteLine(  rnd.NextDouble());
+
+            DersNotlari dersNotlari = new DersNotlari();
+            //Console.WriteLine(dersNotlari.Topla(3,5));
+            //Çıkarma();
+
+            //bool sonuc = dersNotlari.PersonelEkle("Zehra", "Dilek", 1);
+            //if (sonuc)
+            //{
+            //    Console.WriteLine("Veritabanına eklendi");
+
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Utanmıyor musun parmak kadar çocuğu çaıştırmaa!!!");
+            //}
+            //Matematik matematik = new Matematik();
+            //matematik.Topla(3,5);
+            //dersNotlari.Function();
+            dersNotlari.RecursiveFunc();
             Console.ReadLine();
+            
         }
+    
+        static public int Çıkarma()
+        { return 5 - 2; }
+      
+       
+        
     }
+
 }

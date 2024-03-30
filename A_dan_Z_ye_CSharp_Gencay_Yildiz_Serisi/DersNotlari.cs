@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -13,7 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
 {
-    internal class DersNotlari
+    public class DersNotlari
     {
         #region .Net'e giriş
         //.NET Framework ve .NET Core arasındaki Fark nedir?
@@ -973,7 +974,282 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         #endregion
 
         #region Metotlar
+        //Yapılacak işelem göre 4 farklı türde metot oluşturulabilir.
+        // Geriye değer döndürmeyen ve parametre almayan 
+        // Geriye değer döndürmeyen ve parametre alan
+        // Geriye değer döndüren ve parametre almayan 
+        // Geriye değer döndüren ve parametre alan
+
+        //Her türlü koşulda metot imzası aşağıdaki gibidir.
+        // [Erişim Belirleyicisi(Access Modifier] [geri dönüş değeri] [Metot Adı] ( parametler)
+        //{
+        //}
+
+        // SOLID Prensipleri gereği bir metot bir iş yapacaktır.
+        // Bir yanan toplama yapıp diğer yandan veritabanına ekleme yapan metot doğru değildir
+        #region Geriye değer döndürmeyen ve parametre almayan metot
+        //Bir metot geriye değer döndürmüyorsa void kullanılır
+        public void Metot()
+        {
+            Console.WriteLine("Geriye değer döndürmeyen paraetre almayan metot oluşturuludu.");
+        }
+        #endregion
+        #region Geriye değer döndürmeyen ve parametre alan metot
+        public void Metot(int a)
+        {
+            Console.WriteLine("");
+        }
+        #endregion
+        #region Geriye değer döndüren ve parametre almayan metot
+        //Bir etot herhangi bir türde değer döndüreceğini ifade ediyorsa kesinlikle o türde bir dğer döndürmelidir. Yoksa hata verir.
+        //return nerede işlenirse orada ilgili fonksiyondan /mettodan çıkılır. Yazıldığı satır bu anlamda önemlidir.
+        public char Metot3()
+        {
+            return 'A';
+            Console.WriteLine("Returnden sonara yazıldığı için console boş kalacak");
+        }
+        int Metot4() // Erişim belirleyicisi default olarak private'dır
+        {
+            if (DateTime.Now.Second > 10) // Şart sadece true değeri değil false değerlerinide yazmanız geryor. Aksi halde derleyici hatası alırsınız
+            {
+                return 5;
+            }
+            return 1;
+        }
+        #endregion
+        #region Geriye değer döndüren ve parametre alan metot
+        public bool Metot5(int x)
+        {
+            return x == 3 ? true : false; // return brda işlem yapmamıza olanak sağlıyor. Örnektede olduğu gibi ternary opt. ile bir kıyaslama yapıp değer döndürdük
+
+        }
+        #endregion
+        #region Metodun Geriye Değer Döndürmesi Ne Demektir?
+        public int Topla(int sayi1, int sayi2)
+        {
+            int sonuc = sayi1 + sayi2;
+            Console.WriteLine(sonuc); // Geriye değer döndürmek ekrana çıktı vermesi demek değidir!!!
+            return sonuc; // Metodun geriye döndürdüğü değer programatik olarak yakalanıp algoritmanın akışında farklı yönlendirme sebebiyet verebilen değerdir.
+            //Metodoun döndürdüğü değer algoritmanın akışında farklı amaçlar ile kullanılabilir
+
+        }
+        // örnk
+        public bool PersonelEkle(string ad, string soyadi, int yas)
+        {
+            if (yas >= 20)
+            {
+                //.veritabına eklendi
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+        //örneğin devam eden kodou Progam Classs'nın 216. satırında
 
         #endregion
+        #region Optional Parameters (İsteğe Bağlı Parametreler)
+        //todo Optional Parameters (İsteğe Bağlı Parametreler)
+        //Bir metot eğer parametreli ise o metodun parametrelerine uygun değeri göndermek zorundasın.
+        // Eğer bir metodun parametlerine zorunlu bir şekide değer göndermek istmeiyorsak, parametreye
+        // değeri isteüimze göre/opsiyonel olarak o parametrenin bu durumu karsilayabilecek
+        // bir ozellikte olmasi gerekmektedir.İste bu ozellgide opsiyonel parametreler denmektedir.
+        // Bir parametrenin opsiyonel olmasi demek 0 parametrenin varsayilan/default degeri olmasi demektir...
+
+        static public void X(int a, int x, int y, int b = 0, int c = 5)
+        // Metot parametrelerine (assign) ile bir deger atanirsa eger 0 parametreye varsayilan
+        //degerİ atanmİs olur.Haliyle opsiyonel parametre haline getirilmiş olunur...
+        {
+
+        }
+        static void Y()
+        {
+            X(5, 6, 7, 8);
+            X(5, 6, 7);
+        }
+        #region Kritik
+        // Tüm parametreler opsiyonel olabilir.
+        // Birden fazla parametre içerisinde bir kısmı opsiyonel olabilir mi?
+        // Birden fazla parametre durumunda opsiyonel olanlar sağ tarafta TANIMLANMALIDIR!
+        #endregion
+        #region Non-Trailing Named Arguments
+        //todo Non-Trailing Named Arguments
+        //Hangi parametreye hangi değerlerin gönderildiğini direkt görebilmek için bu özelliği kullanıırız.
+        //Görece1i bir şekilde çok parametreli fonksiyonlarda hedef parametrelere değer göndermemizi sağlayan bir, özelliktir.
+        public void X(int a, int b, string c)
+        { }
+        public void NonTrailingNamedArg()
+        {
+            X(c: "abc", a: 5, b: 5);
+            X(1, c: "abc", b: 2);
+        }
+        #endregion
+        #endregion
+        #region Tanımlanmış Metodun Kullanımı
+        //Tetikleme=Çağırma=Kullanım
+        #region Tanımlandığı Sınıf İçinde Çağrılması
+        // Bir metot tanımlandıuğl sınıf içerisindeki farklı bir metot içerisinden çağrılacaksa eğer
+        // tek yapılması gereken sadece isminin çağrılmasıdır/ tetiklenmesidir/ çalıştırılmasıdır.
+        public void A()
+        {
+            B();
+        }
+        public void B()
+        {
+            C();
+        }
+        public void C(int a = 0)
+        {
+            A();
+        }
+        #endregion
+        #region Başka Sınıflarda Kullanımı
+        #region Referans ve Nesne İlişkisine Hafiften Temas Edelim
+        // Bir sınıfın içnde bulunan metotlara erişebilmek için bir nesne üretmen gerekecek bunu new ile yaparsın
+        //   sonra bu nesneyi aynı sınıf tipi ile işaretlemen gerekecek
+        // Random sınıfının metotlarına erişmek için;
+        Random rnd = new Random(); //new Random ile nesne oluşturduk bunu Random türünde rnd değişkeni ile referans ettik
+                                   // Sınıf (Class) Yeryüzündeki herhangi bir olguyu modellememizi sağlayan yapılanma!
+                                   // İçerisinde ilgil iolguya dair verileri tutacak alanları(field) barındıran ve
+                                   // bu alanlar üzerinde işlem yapmamızı sağlayacak olan metotları barındıran bir yapı!
+                                   //Nesne Class 'tan üretilen değer/ veri.
+                                   // Referans Class•tan üretilen değeri kullanmamızı sağlayan yapı!
+
+
+        #endregion
+        #endregion
+        #endregion
+        #region In Parameters
+        //// 1. parametrenin değerini metodun içerisinde herhangi bir yerde çağırıp kullanabiliriz.
+        // 2. metot içerisinde üretilen herhangi bir değeri tutacak değişken oluşturmaktansa parametre üzerinde bu değeri
+        //tutabiliriz.Yani parametrenin değerini değiştirebililriz. (Çünkü parametreler özünde bir değişkendir)
+        //todo metodlarda in keywordü
+        // in komutu sayesinde parametreye verilen değeri sabit tutabilmekteyiz.
+        // İn komutu, metodun parametresini readon1y(Sadece okunabilir) hale getirir.
+        // in komutunun kullanılıdğı parametrelerde eğer ki metot içerisinde farklı bir assign durumu soz konusu olursa
+        // derleyici hatası verecektir.
+        void X(in int x, int b, in char c)
+        {
+            b = 5;
+
+        }
+        #endregion
+        #region Local Functions
+        //todo Local Functions
+        // Bir metot içerisinde tanımlanmış olan metotlardır!
+        //C#'ta metotlar sade ve sadece class içerisinde tanımlanırlar diye söylemiştik! Halbuki OOP'de göreceğimiz struct,
+        // abstract class, interface, record yapılanmalarında da metotlar tanımlanmaktadır.Metotlar bu saydıklarıomızın
+        // dışında KESİNLİKLE başka bir yerde tanımlanamaz! !! !
+        //Metot1ar kesinlikle metotların içerisinde tanımlanamaz demiştirk! !! Halbuki C# 7.0'Da gelen local function
+        //özelliği sayesinde metot içerisinde metot tanımlana ilmektedir.
+        //Local func.larda Eriim belirleyicisi yoktur. yani direkt geri dönüş değerinden başlanır
+
+        //Tanımlama Kuarlları
+        // 1. Erişim belirleyici (Access Modifier) yazılmaz!
+        // 2. Local function olarak tanımlanan fonksiyon adı tanımlandığı fonksiyonun adından farklı olmalıdır! Aksi
+        //taktirde derleyici hatası VERMEZ! ! !
+        //Kullanım Kuralları
+        //- Bir local function sade ve sadece tanımlandığı metodun içerisinde kullanılabilir.
+        //- Local function tanımlandığı metodun içerisinde her yârden erişilebilir.
+        //Amacı
+        // Local function, sadece tek bir metotta tekrarlı bir şekilde kullanılacak bir algoritmayı/ kod parçacığını/ işlemi o
+        //metoda özel bir şekilde tek seferlik tanımlamamızı ve kullanmamızı sağlamaktadır.
+        //Muadilleri;
+        ////Anonim, Delegate, Func
+        public void Function()
+        {
+            LocalFunction();
+
+            void LocalFunction()
+            {
+                Console.WriteLine("Local Functions");
+            }
+
+            LocalFunction();
+        }
+        #endregion
+        #region Static Local Functions
+        //todo Static Local Functions
+
+        //public void Funct(int a)
+        //{
+        //    int b= 5;
+        //    static void StaticLocalFunction(int a, int b)
+        //    {
+        //        Console.WriteLine(a);
+        //        Console.WriteLine(b);
+        //    }
+        //}
+        #endregion
+        #region Overloading Kuralları
+        // Bir sınıf içerisinde birden fazla aynı isimde metot tanımlayabilmek için şu kuırallara dikkat edilmesi gerekmektedir.
+        //Metot Overloading işlemini yapabilmek için metotların isimleri aynı olmalıdır!
+        //Bu metotlar içerisinde fark yaratmamız gerekmektedir.
+        // Bu fark bizzat metot imzalarında OLMALIDIR!
+        //MetotIar arasında farkı yaratırken erişim belirleyicileri ve geri dönüş değerleri aktif rol oynamamaktadır.
+        // *Parametre sayıları ya da parametre türleri fakrı 1 olmalıdır! *
+        //OverIoading işlemine tabi tutulmuş metotlardan istediğimizi kullanabilmek için o metodun imzasına uygun parametreleri
+        //tetiklememiz(ya da bir başka deyişle o imzadaki metodu kullanmamız) yeterli olacaktır.
+        #endregion
+        #region Recursive Yaklaşım (Tekrarlamalı/Öz Yinelemeli) Metotlar
+        //todo Recursive Yaklaşım (Tekrarlamalı/Öz Yinelemeli) Metotlar
+        //Recursive Fonk kendi içerisinde kendisini çağıran/ tetikleyen fonksiyonlardır.
+        //Recursive fonk. bir yaklaşımdır!
+        //Anlaşılması, kullanması ve anlatılması zordur!
+        //Revursive fonk. ne amaçla kullanılmaktadır?
+        //Öngörü1emeyen, derinlıgı tahmin edileme en sonu bılınme en durumlarda tercih edilebilir.
+
+        //Örnkler;
+        //public  void RecursiveFunc()
+        //  {
+        //      Console.WriteLine("Merhaba");
+        //      RecursiveFunc(); //Sonsuz döngüye girer dikkat
+        //      Console.WriteLine( "Dünya");// bu koda gelmeden kendisini tekrarlayacak
+        //  }
+        //public void RecursiveFunc(int a=1)
+        //{
+        //    Console.WriteLine("Merhaba");
+        //    if (a<3)
+        //    {
+        //       RecursiveFunc(++a);  
+        //    }
+
+        //}
+        //public void RecursiveFunc(int a = 1)
+        //{
+        //    Console.WriteLine("Merhaba");
+        //    if (a < 3)
+        //    {
+        //        RecursiveFunc(++a);
+        //    }
+        //    Console.WriteLine("Dünya");
+        //}
+        #region Örnek 1
+        // Belirli değer aralığındaki 5in katı olan tüm sayıları toplayan rec.fonk.yazalım.
+        
+        #endregion
+        #endregion
+        #endregion
+
+    }
+    public class Matematik
+    {
+
+
+        public int Topla(int sayi1, int sayi2)
+        {
+            return sayi1 + sayi2;
+        }
+        public int Cikar(int sayi1, int sayi2)
+        {
+            return sayi1 - sayi2;
+        }
+        public int Carp(int sayi1, int sayi2) { return sayi1 * sayi2; }
+        public double Böl(int sayi1, int sayi2)
+        {
+            return sayi1 / sayi2;
+        }
     }
 }
