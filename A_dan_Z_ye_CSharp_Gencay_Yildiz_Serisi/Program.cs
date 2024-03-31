@@ -226,16 +226,54 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
             //Matematik matematik = new Matematik();
             //matematik.Topla(3,5);
             //dersNotlari.Function();
-            dersNotlari.RecursiveFunc();
+            //dersNotlari.RecursiveFunc();
+
+            //int a = 5;
+            //ref int b = ref a;
+            //a *= 5;
+            //Console.WriteLine(b);
+
+            //b -= 10;
+            //Console.WriteLine(a);
+
+            //int y = 10;
+            //dersNotlari.RefKey(ref y);
+            //Console.WriteLine(y);
+
+            //int a = 5;
+            //int b= dersNotlari.RefReturn(ref a);
+            //Console.WriteLine(a);
+            //Console.WriteLine(b);
+
+            //kullanım 1
+            //int _b = 0;
+            //string _d = "";
+
+            //int a=dersNotlari.OutKey(out _b,123, out _d);
+
+            //Kullanım 2
+            //int a = dersNotlari.OutKey(out int _b, 123, out string _d);
+            //Console.WriteLine(_b);
+            //Console.WriteLine(_d);
+
+            //string a = "123";
+            //if (int.TryParse(a, out int result))
+            //{
+            //}
+            //else
+            //{
+
+            //}
+
             Console.ReadLine();
-            
+
         }
-    
+
         static public int Çıkarma()
         { return 5 - 2; }
-      
-       
-        
+
+
+
     }
 
 }

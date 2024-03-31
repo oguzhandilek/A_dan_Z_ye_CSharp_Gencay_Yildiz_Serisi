@@ -1226,13 +1226,81 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //    }
         //    Console.WriteLine("Dünya");
         //}
-        #region Örnek 1
-        // Belirli değer aralığındaki 5in katı olan tüm sayıları toplayan rec.fonk.yazalım.
-        
-        #endregion
+
         #endregion
         #endregion
 
+        #region Ref Keywordü
+        //todo Ref Keywordü
+        //ref keywordü referanstan gelmektedir.
+        //Referans OOP kavramıdır.
+        // OOP'de nesnler(object) RAM'de Heap bölgesinde tutulmaktedır.
+        // OOP'de referanslar = operatörü ile iletişime geçebilmektedir. Bir referans, işaretlediği herhangi bir nesneyi
+        // = operatörü sayesinde farklı bir referansa işaretlenebiir
+        // Yani, referanslar da = operatörü neticesinde herhangi bir veriseL/nesneseL türeme söz konusu. olmamakta,
+        // işaretlenmiş nesne diğer referans tarafından işaretlenmektedir.
+
+        // ref keyword'ü değer türlü değişknlerin referanslarını çağırmamızı/kullanmamızı sağlamış olur.
+        // Değer türlü değişkenlerde referans çalışması yapmak istiyorsak eğer ref keywordü kullanılır!
+        //ref keywordü, değer türlü değişkenlerin referans türlü değişkenler gibi çalışmasını sağlayan bir komuttur.
+        //Değer türü değişkenlerde sha110N copy»apmamızı sağlayna bir keywordüdür
+        //Örnek 1
+        //int a = 5;
+        //ref int b = ref a;
+        //a *= 5;
+        //Console.WriteLine(b);
+
+        //b -= 10;
+        //Console.WriteLine(a);
+
+        //Örenk 2
+        // Kodun öncesi Program.cd 239. satırda
+        public void RefKey(ref int x)
+        { x = 25; }
+
+
+        #endregion
+        #region Ref Returns 
+        // ref returns özelliği sadece metotlarda geçerlidir.
+        //Metotlar  geriye değer döndürebilen yapılardır. Ayrıca metbtlarda geriye nesnelerde döndürebilmekteyiz .
+        //Ayrqca ref returns özelliği sayesinde değer türlü değişkenlerin referanslarımda geriye döndürebilmekteyiz
+
+        //Örnk
+
+        // Algoritmanın önceki kodları Program.c243. satırda
+        public ref int RefReturn(ref int y)
+        {
+            y = 25;
+            return ref y;
+        }
+        #endregion
+        #region Out Keywordü
+        //todo out keywordü
+        //Metodun parametreleri üzerinden dışarıya veri göndermemizi sağlayan keyword'tür
+        //Bir metod out parametre barındırıyorsa o parametlerere kendi içersinde değer aanamsı gerekmekedir. Aksi takdirde derleyici hatası alıncakatır
+        //Output parametre abrındıran bir metodu kullanırken, out parametrelerden gelecek oaln değerleri karşılayacak değişkenler tanımlanmalıdır
+
+
+        // Algoritmanın önceki kodları Program.cs 248. satırdan itibaren yazıldı
+        public int OutKey(out int b, int c, out string d)
+        {
+            b = 25;
+            d = "Rumeysa";
+            return 0;
+        }
+        #endregion
+        #region TryParse
+        //todo TryParse
+        //string a = "123";
+        //if (int.TryParse(a, out int result))  parse edilecek değerin türün uygunluğunu şansa bırakmamak ve runtime da hata almamak için TryParse keywordünü kullanırız. Sonuç bool döner bu doğrultuda işlem yapılır ve ya hata mesajı fırlatılr.
+
+        //{
+        //}
+        //else
+        //{
+
+        //}
+        #endregion
     }
     public class Matematik
     {
