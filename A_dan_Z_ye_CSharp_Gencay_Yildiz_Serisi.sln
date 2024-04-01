@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi", "A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi\A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi.csproj", "{5442CC55-D056-4A0F-88C7-9D0E28C20DF5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A_dan_Z_ye_OOP", "A_dan_Z_ye_OOP\A_dan_Z_ye_OOP.csproj", "{27DB568B-6E94-4C13-BAD0-B7400BFBD7A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoritmaSorulari", "AlgoritmaSorulari\AlgoritmaSorulari.csproj", "{A16E413D-62A8-4D16-8B9D-77686F3AFC4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{5442CC55-D056-4A0F-88C7-9D0E28C20DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5442CC55-D056-4A0F-88C7-9D0E28C20DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5442CC55-D056-4A0F-88C7-9D0E28C20DF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DB568B-6E94-4C13-BAD0-B7400BFBD7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DB568B-6E94-4C13-BAD0-B7400BFBD7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DB568B-6E94-4C13-BAD0-B7400BFBD7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DB568B-6E94-4C13-BAD0-B7400BFBD7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A16E413D-62A8-4D16-8B9D-77686F3AFC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16E413D-62A8-4D16-8B9D-77686F3AFC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16E413D-62A8-4D16-8B9D-77686F3AFC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16E413D-62A8-4D16-8B9D-77686F3AFC4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
