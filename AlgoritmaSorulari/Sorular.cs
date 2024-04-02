@@ -32,8 +32,24 @@ namespace AlgoritmaSorulari
         //Doğw tarihi girilen kişinin yaşını hesaplayan uygulamayı yazınız.
         #endregion
 
-        #region Soru5
+        #region Soru 5
         //Giri1en sayının faktöriyelini hesaplayan uygulamayı yazınız.
+        #endregion
+
+        #region Soru 6
+        //Pozitif sayılarda çarpma işlemini toplama kullanarak bulan uygulamayı yazınız.
+        #endregion
+
+        #region Soru 7
+        //Pozitif sayılarda bölme işlemini çıkarma kullanarak yapan uygulamayı yazınız.
+        #endregion
+
+        #region Soru 8
+        //Gİrİ1en pozitif sayının kaç basamaklı olduğunu söyleyen uygulamayı yazınız.
+        #endregion
+
+        #region Soru 9
+        //Girilen 3 basamaklı bir sayının basanaklarının küpleri toplanı sayının kendine eşit olup olmadığını bulan uygulamayı yazınız.
         #endregion
     }
 }
