@@ -49,7 +49,7 @@ namespace AlgoritmaSorulari
         #endregion
 
         #region Soru 9
-        //Girilen 3 basamaklı bir sayının basanaklarının küpleri toplanı sayının kendine eşit olup olmadığını bulan uygulamayı yazınız.
+        //Girilen 3 basamaklı bir sayının basanaklarının küpleri toplamı sayının kendine eşit olup olmadığını bulan uygulamayı yazınız.
         #endregion
     }
 }

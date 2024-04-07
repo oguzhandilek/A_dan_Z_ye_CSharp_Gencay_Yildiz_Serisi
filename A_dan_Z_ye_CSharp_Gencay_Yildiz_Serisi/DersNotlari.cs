@@ -32,7 +32,7 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
 
         #region todo özelliği
 
-        //todo todo yorum satırlarını kolay bir şekildebulmamızı sağlar. yorum slaşlarından sonra todo yazılır ve yorum yazılrır
+        //todo todo yorum satırlarını kolay bir şekilde bulmamızı sağlar. yorum slaşlarından (//) sonra todo yazılır ve yorum yazılır
         //todo View menüsünden Task List penceresinden görütülenir
 
 
@@ -467,7 +467,7 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         #endregion
 
         #region verbatim @ operatörü
-        //todo @ verbatim operatörünü kaçış karakteri olarak kullanabiiriz
+        //todo@ verbatim operatörünü kaçış karakteri olarak kullanabiiriz
         //  string metin = @"hava çok""güzel""";
         //  Escape karakterlerinin kullanilmasi icap eden durumlarda @ operatorunu kullanarak eylemsel karakterleri kendileriyle
         //ezebilecek ozellik kazandirabiliyoruz...l
@@ -476,7 +476,7 @@ namespace A_dan_Z_ye_CSharp_Gencay_Yildiz_Serisi
         //        string ifade = @"XXXXXXX xxxxx
         //xxxxxxxxxxxxxxx xxxxxxxxxxxxxx xxxxxxxx";
 
-        //todo verbaetim @ ve string interpolation $ aynı anda kullanımında önce verabtim @ sonra interpolation $ yazılır
+        //todoverbaetim @ ve string interpolation $ aynı anda kullanımında önce verabtim @ sonra interpolation $ yazılır
         // string ifade = @$" Merhaba {isim} ....." gibi
         #endregion
 

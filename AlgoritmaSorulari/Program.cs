@@ -342,9 +342,9 @@ string sonuc = default;
 #endregion
 
 #region Soru8-Cevap8
-Console.WriteLine("Lütfen basamak sayısını Öğrenmek İstediğiniz sayıyı giriniz.");
-float sayi=float.Parse(Console.ReadLine());
-int basamak = 1;
+//Console.WriteLine("Lütfen basamak sayısını Öğrenmek İstediğiniz sayıyı giriniz.");
+//float sayi=float.Parse(Console.ReadLine());
+//int basamak = 1;
 //For Döngüsü ile
 //for (int i = 1; sayi >=10; i++)
 //{
@@ -396,5 +396,42 @@ int basamak = 1;
 #endregion
 
 #region Soru9-Cevap9
+Console.WriteLine("3 basamaklı bir sayı giriniz");
+int sayi = int.Parse(Console.ReadLine());
+
+if (Basamak(sayi))
+{
+    int _sayi = sayi;
+    while (true)
+    {
+        int basamak = _sayi % 10;
+        _sayi /= 10;
+        topla += Math.Pow(basamak, 3);
+        if (_sayi < 10)
+        {
+            basamak = _sayi % 10;
+            topla += Math.Pow(basamak, 3);
+            break;
+        }
+
+    }
+    if (topla == sayi)
+    {
+        Console.WriteLine("Eşittir");
+    }
+    else
+    { Console.WriteLine("Eşit değildir"); }
+}
+bool Basamak(int sayi)
+{
+    int basamak = 1;
+    while (sayi >= 10)
+    {
+        sayi /= 10;
+        basamak++;
+    }
+    return basamak == 3 ? true : false;
+}
+
 
 #endregion
