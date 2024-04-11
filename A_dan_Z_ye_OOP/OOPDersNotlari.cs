@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Numerics;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace A_dan_Z_ye_OOP
 {
     public class OOPDersNotlari
     {
-        
+
         #region Nested Class
         //Class içinde Class tanımlama
         //Class İçerisinde Tanımlanan Class Sınıf Elemanı mıdır? DEĞİLDİRRR
@@ -28,13 +31,13 @@ namespace A_dan_Z_ye_OOP
         #endregion
 
         #region Class Elemanlarına Açıklama Satırı Nasıl Eklenır?
-      //  /// <summary>
-     //   /// Bu açıkalama iligli member a ekelenecek açıklamadır
-    //    /// </summary>
+        //  /// <summary>
+        //   /// Bu açıkalama iligli member a ekelenecek açıklamadır
+        //    /// </summary>
 
-       /// <summary>
-       /// BU X'in birinic overload'dır
-       /// </summary>
+        /// <summary>
+        /// BU X'in birinic overload'dır
+        /// </summary>
         public void X()
         {
         }
@@ -166,11 +169,150 @@ namespace A_dan_Z_ye_OOP
 
         #endregion
         #region 2. Aynı simde Field le Metot Parametrelerini Ayırmak çin Kullanılır
-
+        //this keywordü ilgili class yapılanmasının o anki nesnesine karşılık gelir.
+        //this kullanmak zorunda değiliz.
+        class MyClass
+        {
+            int a;
+            void X(int a)
+            {
+                this.a = 1; // MyClass memeber'ında ki a fieldına erisip değere atadık.
+            }
+        }
         #endregion
         #region 3. Bir Constructer'dan Başka Bir Constructer'l Çağırmak İçin Kullanılır
 
         #endregion
         #endregion
+
+        #region Nesne kavramı (Object Concept)
+        //todo Nesne nedir?
+        // Kompleks verilerdir Nesneleri modellemeİzİ saglayan classlar İse Complex Type'lardir.
+        // Bir veri bütünüdür
+        MyClass nesne1 = new MyClass(); // MyClass nesne modeli olup new MyClass ile bir nesne oluşturduk.
+
+        #region Target-Typed New Expressions (C# 9.0)
+        // Nesne oluşum sürecinde, oluşturulacak olan nesne eğer ki direkt bir referansa atılıyorsa eğer
+        //burada hangi nesnenin oluşturulduğu referans sayesinde bilinebilmektedir.Dolayısıyla ilgili
+        //nesnenin oluşturulması için
+        MyClass nesne2 = new();
+        //ilgili makale https://www.gencayyildiz.com/blog/c-9-0-target-typed-new-expressions/
+        #endregion
+
+        #endregion
+
+        #region Referans Nedir?
+        //RAMIin Stack bölgesinde tanımlanan ve Heap bölgesindeki nesneleri işaretleyen/referanseden değişkenlerdir/noktalardır.
+        //Eger ki bir nesne referanssizsa bunu oluşturabilmetkeyiz...Lakin bu nesne
+        //sistemde/memoryde lüzumsuz yer kaplayacagindan dolayi belli bir sure sonra
+        //Garbage Collector dedgimiz cop toplayİcisİ tarafindan temizlenecektir.
+        //GC; heap'de referanssiz olan nesneleri imha etmekten/temzelemekten sorumlu bir yapilanmadir.l
+        //MemberwiseCIone bir sinfiin icerisinde o siniftan uretilmis olan o anki nesneyi clonelamamizi saglayan bir fonksiyondur....l
+
+        #endregion
+
+        #region ENCAPSULATION NEDİR? BİR VERİYİ NEDEN KAPSÜLLERİZ?
+        // Encapsulation, nesnelerimizde ki field'ların kontrollü bir şekilde dışarıya açılmasıdır.
+        //Bir başka deyişle, nesnelerimizi başkalarının yanlış kullanımlarından korumak için kontrolsüz değişime kapatmaktır-
+        #region Eskiden Encapsulation Nasıl Yapılıyordu
+        class OldEncapsulation
+        {
+            int a;
+            public int AGet() { return this.a; }
+            public void AGet(int a)
+            {
+                this.a = a;
+            }
+        }
+        #endregion
+        #region Şimdiki Kullanım yani Full Property
+        //propfull yazarak tab tab yap
+        class NewEncapsulation
+        {
+            private int myVar;
+
+            public int MyProperty
+            {
+                get { return myVar; }
+                set { myVar = value; }
+            }
+        }
+
+        #endregion
+        #endregion
+
+        #region Records Nedir
+        //todo Records Nedir?
+        //Eğer ki bir objeyi bütünsel olarak değişmez yapmak istiyorsak o zaman daha fazlasına ihtiyacımız olacaktır.
+        //İşte bu ihtiyaca istinaden Records türü geliştirilmiştir.
+        //Rçcordı bir objenin topyekü 6Üâre sabit/değişmez olarak kalmasını sağlamakta ve bu durumu güvence altına almaktadır.
+        //Böylece bu obje, artık değeri değişmeyeceğinden dolayı esasında objeden ziyade bir değer gözüyle bakılan bir yapıya dönüşmektedir.
+        // Buradan yola çıkarak record'ları, içerisinde data barındıran lightweight(hafif) class'lar olarakdeğerIendirebiliriz.
+        //Record'lar bir class'tır. Sadece nesnelerinden ziyade, değerleri ön plana çıkmış bir Class.
+
+        //Class ile Record farkı
+        // + Class'lar ğa verişel olarak nesne ön piahdâdır ve bir farklı referansa sahip olan hesne farklı değer olarak algılanmaktadır.
+        //+ Dolayısıyla Equals(xı y) karşılaştırması yanlıştır.
+
+        //Recprdllar ise verişel olarak değeri ön planda tâaktadır.Sadece nesnel olarak bu veriler bir objede tutulmakta lakin
+        //değiştirilmemektedir. Haliyle farklı objelerde de olsa, veriler(property değerleri) aynı olduğu sürece Equals(x, y) önermesi doğru olacaktır.
+        //record MyRecord
+        //{
+        //    public int MyProperty5 { get; init; }
+        //}
+
+        //todo With Expressions 
+        //+ Immutable türlerde çalışırken nesne üzeirnde değişiklik yapabilmek için ilgili nesneyi ya çoğaltmamız/klonlamamız(deep copy) ve
+        //üzerinde değişiklik yapmamız gerekmekte ya da manuel yeni bir nesne üretip mevcut nesnedeki değerleri, değişikliği yansıtılacak şekilde
+        //aktarmamız gerekmektedir.
+        //+ Misal, alt tarafta bu tarz durumlara istinaden yazılımcıların yılların deneyiminden getirdiği With function çözümü ele alınmaktadır.
+        //Kodlar Program.cs 18. satırda
+
+        // Ya da aşağıdaki gibi record oluşturabilir ve With Function yazmadan direkt olarak with expressionslları kullanabilirsiniz.
+
+
+        #region (Init-OnIy Properties) Nedir?
+        //(Init-OnIy Properties) Nedir? ->> C# 9.01daı herhangi bir nesnenin propertylerine ilk değerlerinin verilmesi ve sonraki süreçte bu
+        //değerlerin değiştirilmemesini garanti altına almamızı seğlayan Init - Only Properties Ozelliğigelmiştir.
+        //Bu özellik sayesinde nesnenin sadece ilk oluşturulma anında propertylerine değer atanmakta 
+        //ve böylece iş kuralları gereği untimelda değeri değişmemesi gereken nesneler için ideaLbjr önlem alınmaktadır
+        //Init-OQly pçopefties, d&veloper açısından süreç esnasında değiştirilmemesi gereken property değerlerinin
+        //-yanlışlıkla- değiştirilmesinin önüne geçmekte ve böylece olası hata ve bugl/ardan yazılımı arındırmaktadır.
+
+        public int MyProperty4 { get; init; } = 1;
+
+        //Aytıca getter-only-properties ile çalışmaktansa readonly bir field üzerinde işlem yapmamız gerekiyorsa
+        //eğer aşağıdaki gibi init bizlere eşlik edebilmektedir.
+        private readonly int c;
+        public int InitOnly
+        {
+            get { return c; }
+            init { c = value; }
+        }
+        #endregion
+
+
+        #endregion
+    }
+    public class Employee
+    {
+        public string Name { get; init; }
+        public string Surname { get; init; }
+        public int? Position { get; init; }
+        public Employee With(int position)
+        {
+            return new Employee
+            {
+                Name = this.Name,
+                Surname = this.Surname,
+                Position = position
+            };
+        }
+    }
+    public record MyRecord
+    {
+        public string Name { get; init; }
+        public string Surname { get; init; }
+        public int? Position { get; init; }
     }
 }

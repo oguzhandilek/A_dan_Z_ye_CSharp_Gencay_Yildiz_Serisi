@@ -14,5 +14,22 @@ dersNotlari[5] = 10; //Indexer örnek kodunun devamı
 
 OOPDersNotlari.ClassİcindeClass classİcindeClass=new OOPDersNotlari.ClassİcindeClass(); //Class içinde tanımlanan Class için nesne oluşturma
 
+new OOPDersNotlari(); //Referanssız bir nesne
+Employee empoloyee1 = new Employee
+{
+    Name = "Oğuzhan",
+    Surname = "Dilek",
+    Position = 1
+};
+Employee employee2 = empoloyee1.With(2);
+
+MyRecord myRecord = new MyRecord
+{
+    Name = "Oğuzhan",
+    Surname = "Dilek",
+    Position = 1
+};
+
+MyRecord myRecord2 = myRecord with { Position = 2 };
 
 Console.ReadLine();
