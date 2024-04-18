@@ -32,4 +32,7 @@ MyRecord myRecord = new MyRecord
 
 MyRecord myRecord2 = myRecord with { Position = 2 };
 
-Console.ReadLine();
+
+new ConstructorClass();
+ConstructorClass constructorClass = new();
+Console.ReadLine(); ;

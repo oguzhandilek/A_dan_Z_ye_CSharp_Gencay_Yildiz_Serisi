@@ -293,6 +293,20 @@ namespace A_dan_Z_ye_OOP
 
 
         #endregion
+
+        #region Constructor Nedir
+        //Constructor bir nesne üretimi sÜrecİnde tetiklenen metottur.
+        //Constructor, özel bir sınıf elemanıdır.
+        //Constructor, new ile nesne yaratma talebi geldikten ve ilgili nesneye hafızada yer ayrıl diktan sonra tetiklenir.
+        //Constructor'ların;
+        //Metot adı sınıf adıyla aynı olmalıdır! (Özel sınıf elemanla ın
+        //dışında hiçbir member sınıf adıyla aynı olamaz!)
+        // Geri dönüş değeri olmaz/belirtilmez!
+        //Erişim belirleyicisi public olmalıdır! (private olduğu durum
+        //ayriyetten incelenecektir)
+        
+     
+        #endregion
     }
     public class Employee
     {
@@ -314,5 +328,12 @@ namespace A_dan_Z_ye_OOP
         public string Name { get; init; }
         public string Surname { get; init; }
         public int? Position { get; init; }
+    }
+    public class ConstructorClass
+    {
+        public ConstructorClass()
+        {
+            Console.WriteLine("Bir adet Constructor nesnesi oluşturmuştur");
+        }
     }
 }
