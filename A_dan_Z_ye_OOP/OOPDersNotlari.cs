@@ -12,6 +12,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace A_dan_Z_ye_OOP
@@ -375,6 +376,19 @@ namespace A_dan_Z_ye_OOP
         //Aynı aile grubundan gelen nesnelerin ya da yatayda eşit seviyede olan tüm olguların benzer özelliklerini tekrar tekrar herbirinde tanımlamaktansa bir üst sınıfta tanımlanmasını ve her bir sınıfın bu özellikleri üst sınıftan kalıtımsal olarak almasını sağlamaktadır.
         //Böylece hem kod maliyeti düşmekte, hem de mimarisel tasarım açısından avantaj sağlanmaktadır.
 
+        #region C# Programlama Dilinde Hangi Yapılar Kalıtım Alabilirler?
+        //C# programlama dilinde kalıtım sınıflara özel bir niteliktir.
+        //Yani bir sınıf sade ve sadece bir sınıftan kalıtım alabilir.
+        //Recordlar kalıtım alabiri mi?
+        //Evet, recordlar da kalıtım alabilmekte.Lakin sadece kendi aralarında.Kalıtım alabildikleri tek istisnai sınıf ise ileride göreceğimiz Object sınıfıdır.
+        //Ayrıca sonraki derslerimizde göreceğimiz abstract Class, interface ve struct gibi yapılarında kendilerine göre kalıtımsal operasyonları mevcuttur.Bu yapılardaki kalıtımsal detaylar ilgili derslerde ele alınacaktır.
+
+        //C#lta iki sınıf arasında kalıtımsal ilişki kurabilmek için : operatörü kullanılmaktadır.
+        //Hatta bilsekte bilmesekte kalıtımsal tüm ilişkiler : operatörü tarafından yapılmaktadır.
+        // class KalıtımAlan : KalıtımVeren
+        //class Torun : Dede
+        //Bu operatör, bu sınıftakitüm erişilebilir memberları, bu sınıfa kalıtımsal olarak aktarmaktadır.
+        #endregion
         #endregion
     }
     public class Employee
