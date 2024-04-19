@@ -12,7 +12,7 @@ dersNotlari.Yasi = 65;
 Console.WriteLine(dersNotlari.Yasi);
 dersNotlari[5] = 10; //Indexer örnek kodunun devamı
 
-OOPDersNotlari.ClassİcindeClass classİcindeClass=new OOPDersNotlari.ClassİcindeClass(); //Class içinde tanımlanan Class için nesne oluşturma
+OOPDersNotlari.ClassİcindeClass classİcindeClass = new OOPDersNotlari.ClassİcindeClass(); //Class içinde tanımlanan Class için nesne oluşturma
 
 new OOPDersNotlari(); //Referanssız bir nesne
 Employee empoloyee1 = new Employee
@@ -32,7 +32,40 @@ MyRecord myRecord = new MyRecord
 
 MyRecord myRecord2 = myRecord with { Position = 2 };
 
+void DestrocturExamp()
+{
+    ConstructorClass constructorClass = new ConstructorClass();
+}
+DestrocturExamp();
+GC.Collect(); //GarbagaC011ector devreye sokulmuş oldu. Bu müdahale gerekli olmadığı halde tavsiye edilmez
 
-new ConstructorClass();
-ConstructorClass constructorClass = new();
+new ConstructorClass(15, 20);
+
+int sayi = 10;
+while (sayi >= 1)
+{
+    new MyClass2(sayi--);
+}
+Console.WriteLine("+++++++++++++");
+GC.Collect();
+
+Person person = new Person
+{
+    Name = "Zehra",
+    Age = 0
+};
+var (x, y) = person;
+
+new MyClass3();
+new MyClass3();
+
+var database1 = Database.GetInstance;
+var database2 = Database.GetInstance;
+var database3 = Database.GetInstance;
+database1.ConnectionString = "Singleton Desing Patern";
+
+MyRecord2 m = new MyRecord2("Record", "Positional");
+var (n, s) = m;
+
+
 Console.ReadLine(); ;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
@@ -299,13 +301,80 @@ namespace A_dan_Z_ye_OOP
         //Constructor, özel bir sınıf elemanıdır.
         //Constructor, new ile nesne yaratma talebi geldikten ve ilgili nesneye hafızada yer ayrıl diktan sonra tetiklenir.
         //Constructor'ların;
-        //Metot adı sınıf adıyla aynı olmalıdır! (Özel sınıf elemanla ın
-        //dışında hiçbir member sınıf adıyla aynı olamaz!)
+        //Metot adı sınıf adıyla aynı olmalıdır! (Özel sınıf elemanlarının dışında hiçbir member sınıf adıyla aynı olamaz!)
         // Geri dönüş değeri olmaz/belirtilmez!
-        //Erişim belirleyicisi public olmalıdır! (private olduğu durum
-        //ayriyetten incelenecektir)
-        
-     
+        //Erişim belirleyicisi public olmalıdır! (private olduğu durum incelenecektir)
+
+        #region this Keywordüyle Construtor arası geçişler
+
+        #endregion
+
+        #endregion
+
+        #region Destructor/FinaIizer Metot Nedir? Yıkıcı Metot
+        //Bir classltan üretilmiş olan nesne İmha edilirken otomatik çağrılan metottur.
+        //Parametre alamaz
+        // Class içinde tanımlanır ve sadece bir tane tanımalanabilir
+
+        //Peki Bir Nesne Hangi Şartlarda Kim Tarafından İmha Edilir?
+        //Bir nesnenin imha edilmesi için;
+        //ilgili nesne herhangi bir referans tarafından işaretlenmemelidir,
+        //Yahut nesnenin oluşturulduğu ve kullanıldığı scope sona ermiş olmalıdır.
+        //Yani anlaşılan ilgili nesneye bir daha erişilemez hale gelinmelidir.
+        //işte o zaman nesne imha edilir.
+
+        #region Garbage Collector
+        // Uygulamada lüzumsuz olan nesneleri toplamak için Garbage Collector isimli bir mekanizma
+        //devreye girer.
+        //Esasında Garbage Collector C#'da bellek optimizasyonunu üstlenen bir yapılanmadır.
+        //Dolayısıyla biz geliştiricilerin bu mekanizmaya müdahale etmesi pek öneırlmez
+        #endregion
+
+        #region Destructor Tanımlama Kuralları
+        //Destructor tanımlayabilmek için ~(tilde) işareti kullanılır.
+        //Örnekler Program.cs içinde 35-50 satırlarında
+        #endregion
+        #endregion
+
+        #region Deconstruct Metodu Nedir?
+        //  Bir sınıf içerisinde "Deconstructll ismiyle tanımlanan metot compiler tarafından özel olarak algılanmakta ve sınıfın
+        //nesnesi üzerinden geriye hızlıca Tuple bir değer döndürmemizi sağlamaktadır.
+        //Sınıf isimle aynı isimi barındırmaz!!!
+        #region Deconstruct Prototipı
+        //Örn 403. satır ve Program.cs 52-57 arasında
+
+        #endregion
+        #endregion
+
+        #region Static Constructor
+        //SORU: Bir sınıftan nesne oluşturulurken ilk tetiklenen fonksiyon nedir?
+        //EL-CEVAP:) : Bir sınıftan nesne üretilirken "constructor"a nazaran ilk tetiklenen
+        //metot "staticconstructor"dır. Amma velakin belirli bir duruma istinaden!!!
+        // ctor İlgili siniftan hernesne üretilirken tetiklenen fonksiyondur....
+        // static ctor ise ilgili siniftan ilkkkkk nesne  üretilirken tetiklnen fonksiyondur..."
+        // static constructor'da geri donus degeri ve erişim belirleyicisi bildirilmez!
+        //overloading yapilmaz! Bir sinifin icerisinde sade ve sadece bir tane tanimlanabilir.
+        //Yani parametre
+        //Isrni sinif ismiyle ayni olacaktir..
+
+        #endregion
+
+        #region Singleton Design Pattern
+        // Bir sınıftan uygulama bazında sade ve sadece tek bir nesne oluşturulmasınıistiyorsan kullanabileceğin bir design pattern.
+        #endregion
+
+        #region Positional Record Nedir?
+        //Norminal Recordllar Object Initializerjlar ile ilk degerleri verilerek üretilebilen readonly datalardi
+        //Positional Recordlar ise esasinda Recordllar içerisinde tanimlama yapabildigimiz consfrudor ve deconslrudor kullanimlarini daha da özelleştirerek kullanilmasini saglamaktadirlar
+        #endregion
+
+        #region Inheritance (Kalıtım) Nedir?
+        //Kalıtım OOP'nin ennnn önemli özelliğidir.
+        //Üretilen nesneler farklı nesnelere özelliklerini aktarabilmekte ve böylece hiyerarşik bir düzenleme yapılabilmektedir.
+        //Bir programcı açısından bu özellik;
+        //Aynı aile grubundan gelen nesnelerin ya da yatayda eşit seviyede olan tüm olguların benzer özelliklerini tekrar tekrar herbirinde tanımlamaktansa bir üst sınıfta tanımlanmasını ve her bir sınıfın bu özellikleri üst sınıftan kalıtımsal olarak almasını sağlamaktadır.
+        //Böylece hem kod maliyeti düşmekte, hem de mimarisel tasarım açısından avantaj sağlanmaktadır.
+
         #endregion
     }
     public class Employee
@@ -325,6 +394,10 @@ namespace A_dan_Z_ye_OOP
     }
     public record MyRecord
     {
+        public MyRecord()
+        {
+
+        }
         public string Name { get; init; }
         public string Surname { get; init; }
         public int? Position { get; init; }
@@ -333,7 +406,104 @@ namespace A_dan_Z_ye_OOP
     {
         public ConstructorClass()
         {
-            Console.WriteLine("Bir adet Constructor nesnesi oluşturmuştur");
+            Console.WriteLine("Birinci  Constructor nesnesi oluşturmuştur ");
         }
+
+        public ConstructorClass(int a) : this()
+        {
+            Console.WriteLine("İkinci Constructor nesnesi oluşturmuştur " + a);
+        }
+
+        public ConstructorClass(int a, int b) : this(a)
+        {
+            Console.WriteLine("Üçüncü Constructor nesnesi oluşturmuştur " + a + b);
+        }
+        ~ConstructorClass() { Console.WriteLine("Selametle ben imha oldum"); }
+    }
+    public class MyClass2
+    {
+        int no;
+        public MyClass2(int no)
+        {
+            this.no = no;
+            Console.WriteLine($"{no}. nesne oluşturulmuştur");
+        }
+        ~MyClass2() { Console.WriteLine($"{no}. nesne imha edilmiştir"); }
+    }
+    public class Person //Deconstruct Prototip Örneği
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public void Deconstruct(out string name, out int age)
+        {
+            name = Name;
+            age = Age;
+        }
+    }
+
+    public class MyClass3 //Static Constructor Örneği
+    {
+        public MyClass3()
+        {
+            //Bu sınıftan nesne üretilirken ilk tetiklenecek olan metottur.
+            Console.WriteLine("MyClass3 ctor tetiklenmiştir");
+        }
+
+        static MyClass3() // static constructor'da geri donus degeri ve erişim belirleyicisi bildirilmez!
+        {
+            // Bu sınıftan ilk nesne üretilirken ilk tetiklenecek olan metottur.
+            //Üreti1en ilk nesnenin dışında birdaha tetiklenmez!
+            Console.WriteLine("MyClass3 static ctor tetiklenmiştir");
+            // Stat ic construct'ın tetiklenebilmesi için illa ilk nesne üretimi
+            //yapılmasına gerek yoktur.ilgili sınıf içerisinde herhangi bir static
+            //yapılanmanında tetiklenmesi static cosnt.tetiklenmesini sağlayacaktır.
+        }
+    }
+
+    public class Database // Singleton Design Pattern Örneği//Video 14
+    {
+        Database()
+        {
+
+        }
+        public string ConnectionString { get; set; }
+        static Database database;
+        public static Database GetInstance
+        {
+            get
+            {
+                return database;
+            }
+        }
+
+        static Database()
+        {
+            database = new Database();
+        }
+    }
+
+    public record MyRecord2(string name, string surname) //Positional Record
+    {
+        //Bir record üzerinde constructor ve deconstruct yapilanmasini hizlİ bir şekildeoluşturmamizi saglayan bir semantik saglamaktadir.
+
+        //Bu parametrelerin karsiligi olarak compiler seviyesinde propertyler otomatik oluşturulacaktir.
+        //BU PROPERTYLER OLUŞTURULRUKEN inil OLACAK ŞEKİLDE OLUŞTURULUR....
+        // P.R.kullanirken parametrelerin karsiliklari olan propertyleri manuel oluşturmakzorunda DEGILIZ....
+
+
+
+        //Positional Record tanımlanmışsa eğer nesne üretiminde tetiklenmesi/ kullanılması ZORUNLUDUR!
+        public MyRecord2() : this("Positional", "Record")
+        {
+
+        }
+        public MyRecord2(string name) : this()
+        {
+
+        }
+
+        public string Name => name;
+        public string Surname => surname; // isteğe bağlı kendi proplarımızı yazıp Positional da ki dataları eşitleyebiliriz
     }
 }
