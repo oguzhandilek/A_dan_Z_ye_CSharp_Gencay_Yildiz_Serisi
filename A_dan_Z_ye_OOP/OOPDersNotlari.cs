@@ -499,6 +499,10 @@ namespace A_dan_Z_ye_OOP
         //Static yapılanmalar sanal olarak bildirilemezler! (
         #endregion
         #endregion
+
+        #region Çok Biçimlilik (Polimorfizim)
+
+        #endregion
     }
     public class Employee
     {
