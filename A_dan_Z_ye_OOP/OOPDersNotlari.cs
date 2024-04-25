@@ -13,6 +13,7 @@ using System.Numerics;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -442,7 +443,62 @@ namespace A_dan_Z_ye_OOP
         #endregion
         #endregion
 
+        #region Sanal Yapılar (Virtual  Override)
+        //Bir nesne üzerinde var olan tüm membe larımta mı derleme zamanında belirgindir.
+        //Yani, derleme aşamasında hangi nesne üzerinden hangi metotların çağrılabileceği bilinmektedir.
+        //Sanal yapılar ile derleme zamanında kesin bilinen bu bilgi run time(çalışma zamanın)da belirlenebilmektedir.Yani ilgili nesnenin hangi metodu kullanacağı bilgini kararlaştırılır.
+        #region Sanal Yapılar Nedir
+        //Sanal yapıları bir sınıf içerisinde bildirilmiş olan ve o sınıftan türeyen alt sınıflarda da tekrar bildirilebilen yapılardır.
+        //Bu yapılar metot ya da property olabilir.
+        //.Bir sınıfta bildirilen sanal yapı(metot ya da property) bu sınıftan türeyen torunlarında ezilebilmekte yani devre dışı bırakılıp yeniden oluşturulabilmektedir. Yani yeniden yapılandırmadır.
+        //Yani sanal yapılanmalarda Name Hiding'de olduğu gibi bir isimsel çakışmadan ziyade üstten gelen bir yapının işlevini iptal edip yeniden yapılandırmak vardır
+        //İşte burada bir sınıfta tasarlanmış sanal yapının işlevinin iptal edilip edilmeme durumuna göre tanımlandığı sınıftan mı yoksa bu sınıfın torunlarından mı çağrılacağının belirlenmesi run time'da gerçekleşecektir.
+        //Sanal yapılarda çağrılan memberlın hangi türe ait olduğu Run Time'da belirlenir...
+        //Vee unutma! Metot ya da property fark etmez! Bir sanal memberlın hangi türe ait olduğunun bu şekilde run timeldabelirlenmesine Geç Bağlama(Late Binding) denir!
+        #endregion
+        #region Sanal Ne için Kullanılr
+        //Bir sınıfta tanımlanmış olan herhangi bir memberlın kendisinden türeyen alt sınıflarda Name Hiding durumuna düşmemeksizin ezilip/yeniden yazılıp yapılandırılması için kullanılır.
+        //Peki bu zorunlu mudur?
+        //Yani bir sanal yapı illa ki kendisinden türeyen torunlarda ezilmek/yeniden yazılmak zorunda mıdır?
+        //Tabi ki de h9Y!Y! Yani bir member sanal illa ki kendisinden !türeyen!) alt sınıflarda ezilmez zoru da değildir!
+        //Ama ezilmek istenirse de Name Hiding direkt ilgili sınıfın bir memberlı olacak şekilde sağlamış olur.
+        #endregion
+        #region Bir Sınıfta Sanal Yapı nasıl Oluşturulur
+        //todo virtual keywordü 
+        // public virtual ya da virtual public ilgili memberı (metod veya property) imzasını virtual keywordü ile işaretlemek yeterliir
+        #endregion
+        #region Sanal Yapılar Nasıl Ezilir 
+        //Bir classlta virtual ile işaretlenerek sanal hale getirilmiş bir member(metot ya da property)ı bu classltan miras alan torunlarında ezilmek/yeniden yazılmak isteniyorsa eğer ilgili classlta imzası
+        //todo override keywordü
+        //işaretlenmiş bir vaziyette tekrardan aynı member oluşturulur. 
+        //public override void MyMethod()
+        //Base class'ta ya da atalarda virtual ile işaretlenerek sanallaştırılmış herhangi bir member torunlarda illa ki override ile ezilmek zorunda değildir!
+        //Base class'taki bir member override edilecekse o member virtua ile işaretlenmesi gerekir
+        #endregion
+        #region İkiden Çok Hiyerarş, Kalıtım Durumlarda Override Durumu
+        //Bir Clas virtual InheritanceLevel  işaretlenmiş herhangi bir member illa ki direkt o class'tan türeyen 1. dereceden classllar da override edilmek mecburiyetinde değildir!
+        //İhtiyaca binaen alt seviyede ki torunlardan herhangi birinde override edilebilir.
 
+        #endregion
+        #region Özet
+        //    • Sanal yapılar OOP'de Polimorfızm(Çok Biçimlilik)'i uygulayan
+        //yapılardır. (İleride göreceğiz)
+        //• Sanal yapıların en önemli özelliği Geç Bağlam(Late Binding)'dir.
+        //Eğer bir member sanal olarak bildirilmemişse, derleyici nesnelerin tü
+        //bilgisinden faydalanarak derleme zamanında hangi nesneden ilgili
+        //member'ın çağrılacağını bilir.
+        //Eğer bir member sanal olarak bildirilmişse, ilgili member'ın hangi
+        //nesne üzerinden çağrılacağı run time'da belirlenir.
+        //Hangi member'ın run timelda belirlenmesine Geç Bağlama(Late
+        //Binding) denir.
+        //• Sanal yapı oluşturabilmek için ilgili member'ı virtual keywordü ile
+        //işaretlemeliyiz.
+        //        Türeyen sınıflarda sanal yapıyı ezebilmek için override
+        //kullanılır.
+        //Türeyen sınıflar sanal yapıları override etmek zorunlu değildir
+        //Static yapılanmalar sanal olarak bildirilemezler! (
+        #endregion
+        #endregion
     }
     public class Employee
     {
@@ -644,4 +700,104 @@ namespace A_dan_Z_ye_OOP
 
         }
     }
+
+
+    #region Virtual Override için Örnekler
+    #region örnek 1
+    public class Obje
+    {
+        public virtual void Bilgi()
+        {
+            Console.WriteLine("Ben bir objeyim");
+        }
+    }
+    public class Terlik : Obje
+    {
+        public override void Bilgi()
+        {
+            Console.WriteLine("Ben bir terliğim");
+        }
+    }
+    public class Kalem : Obje
+    {
+        public override void Bilgi()
+        {
+            Console.WriteLine("Ben bir kalemim");
+        }
+    }
+    #endregion
+    #region Örnek 2
+    public class Memeli
+    {
+        virtual public void Konus()
+        {
+            Console.WriteLine("Ben konuşmuyorum");
+        }
+    }
+    public class Maymun : Memeli
+    {
+        public override void Konus()
+        {
+            Console.WriteLine("Ben maymunum");
+        }
+    }
+    public class Inek : Memeli
+    {
+        public override void Konus()
+        {
+            Console.WriteLine("Ben ineğim..");
+        }
+    }
+    #endregion
+    #region Örnek 3
+    public class Sekil
+    {
+        protected int _boy; //todo Protected ile işaretlenmiş herhangi bir member sade ve sadece ilgili sınıfta yahut o sınıftan kalıtım almış olan sınıfların içerisinde erişilebilir. Amma velakin nesne üzerinden erişilemez!
+        protected int _en;
+        public Sekil(int boy, int en)
+        {
+            _boy = boy;
+            _en = en;
+        }
+        public virtual int AlanHesapla()
+        {
+            return 0;
+        }
+
+    }
+    public class Ucgen : Sekil
+    {
+        public Ucgen(int boy, int en) : base(boy, en)
+        {
+
+        }
+        public override int AlanHesapla()
+        {
+            return _boy * _en / 2;
+        }
+    }
+    public class Dortgen : Sekil
+    {
+        public Dortgen(int boy, int en) : base(boy, en)
+        {
+
+        }
+        public override int AlanHesapla()
+        {
+            return _boy * _en;
+        }
+    }
+    public class Dikdörtgen : Sekil
+    {
+        public Dikdörtgen(int boy, int en) : base(boy, en)
+        {
+
+        }
+        public override int AlanHesapla()
+        {
+            return _boy * _en;
+        }
+    }
+    #endregion
+    #endregion
 }

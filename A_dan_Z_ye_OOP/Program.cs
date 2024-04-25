@@ -69,4 +69,17 @@ var (n, s) = m;
 
 D d= new D();
 
-Console.ReadLine(); ;
+Kalem k= new Kalem();
+k.Bilgi();
+Terlik t= new Terlik();
+t.Bilgi();
+Maymun maymun = new Maymun();
+maymun.Konus();
+Inek i= new Inek();
+i.Konus();
+Ucgen u = new Ucgen(3, 4);
+Console.WriteLine(u.AlanHesapla());
+
+Dortgen dortgen = new Dortgen(3,4);
+Console.WriteLine(dortgen.AlanHesapla());
+Console.ReadLine(); 
