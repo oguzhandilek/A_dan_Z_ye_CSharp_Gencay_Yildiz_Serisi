@@ -1,17 +1,24 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Numerics;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -389,7 +396,53 @@ namespace A_dan_Z_ye_OOP
         //class Torun : Dede
         //Bu operatör, bu sınıftakitüm erişilebilir memberları, bu sınıfa kalıtımsal olarak aktarmaktadır.
         #endregion
+        #region Kaltımda Nesne Üretim Sıras Nasıldır?
+        // Örnek A,B,C,D sınıfları oluşturulup sonuç Console yazılmıştır
+        //   Yani buradan anlaşılıyor ki,bir sınıftan nesne üretilirken siz 1 adet nesne ürettiğinizi düşünsenizde kalıtımsal açıdan birden fazla nesne üretimig erçekleştirilebilmektedir.
         #endregion
+
+        #region Nesnelerdeki Default Fonksiyonları İnceleyelim
+        //Nesnelerdeki ToString,Equals, GetHashCode ve GetType Metotları Nereden Gelmektedir?
+        #region Nesnelerin Atası/Ademi Object Türü
+        //C# programlama dilinde tüm sınıflar Object sınıfından türetilir.
+
+        #endregion
+
+
+        #endregion
+
+        #region İsim Saklama(Name Hiding) Sorunsalı
+        //Kalıtım durumlarında atalardaki herhangi bir member ile aynı isimde memberla sahip olan nesneler olabilmektedir.
+        //Neden mi Name Hiding?
+        //Atalar ile aynnı isimde member var ise compoiler atalardaki member ı gizler
+        #endregion
+
+        #region Recordllar da Kalıtım?
+        //        Record'lar sade ve sadece Record'lar dan kalıtım alabilmektedirler.
+        //        Class'lar dan kalıtım alamazlar yahut veremezler!
+        //Kalıtımın tüm temel kuralları record'laş için geçerlidir;
+        //        Bir record aynı anda birden fazla recordldan kalıtım alamaz!
+        //Record'lar da temelde Class oldukları için üretilir üretilmez otomatik olarak
+        //Object'ten türerler.
+        //base ve this keywordleri aynı amaçla kullanılabilmektedir.
+        //Name Hiding söz konusu olabilmektedir.
+        #endregion
+
+        #region Base Keywordü
+        #region Bir Sınıftan Base Class Constructorlına Ulaşım
+
+        //Madem ki/ herhangi bir sınıftan nesne üretimi gerçekleştirilirken öncelikle base classlından nesne üretiliyor, bu demektir ki önce base classlın constructorlı tetikleniyor.
+        //Haliyle bizler nesne üretimi esnasında base classlta üretilecek olan nesnenin istediğimiz constructorllarını tetikleyebilmeli yahut varsa parametre bu değerleri verebilmeliyiz.
+        //• İşte bunun için base Keywordlü nü kullanmaktayız.
+        #endregion
+        //base Keyword vs this Keyword
+        //• this, bir sınıftaki constructorllar arasında geçiş yapmamızı sağlar.
+        //• baseı bir sınıfın base class'ının constructor'larından hangisinin tetikleneceğini belirlememizi ve varsa         parametrelerinin değerlerinin derived class'tan verilmesini sağlar.
+        //Base Class'da erişilebilir olmayan member'lar base keywordüyle erişilemez!
+        #endregion
+        #endregion
+
+
     }
     public class Employee
     {
@@ -519,5 +572,76 @@ namespace A_dan_Z_ye_OOP
 
         public string Name => name;
         public string Surname => surname; // isteğe bağlı kendi proplarımızı yazıp Positional da ki dataları eşitleyebiliriz
+    }
+    public class A
+    {
+        int a;
+        public int b;
+        public int MyProperty { get; set; }//Name Hiding örneği
+        public A()
+        {
+            Console.WriteLine($"{nameof(A)} nesnesi ouşturulmuştur");
+        }
+
+
+    }
+    public class B : A
+    {
+        int c;
+        public int MyProperty { get; set; } //Name Hiding örneği
+        public B()
+        {
+            Console.WriteLine($"{nameof(B)} nesnesi ouşturulmuştur");
+            this.b = 1;
+            base.MyProperty = 2;
+            MyProperty = 3; //compailer başına default base koyacaktır.
+
+        }
+    }
+    public class C : B
+    {
+        public C()
+        {
+            Console.WriteLine($"{nameof(C)} nesnesi ouşturulmuştur");
+        }
+    }
+    public class D : C
+    {
+        public D()
+        {
+            Console.WriteLine($"{nameof(D)} nesnesi ouşturulmuştur");
+        }
+    }
+    class BaseClass
+    {
+        public BaseClass(int a)
+        {
+
+        }
+        public BaseClass(string a)
+        {
+
+        }
+        public BaseClass(int a, string b)
+        {
+            //Bir classin constructorinin yaninda : base(... ) kepvordunu kullanirsak eger o class'in base classinin tum constructorlarini bize getirecektir.Haliyle ilgili siniftan bir nesne uretililrken base classtan nesne üretimi esnasinda hangi constructorin tetiklenegini bu şekilde belirleyebiliriz....
+        }
+        public BaseClass()
+        {
+            //  Eger ki base class'ta bos parametreli bir constructor varsa derived classta base ile bir bildirilmde bulunmak zorunda degiliz...Nicin? Cunku varsayilan olarak kalitimsal durumda base classtaki bos paarametreleri constructor tetiklenir....
+        }
+    }
+    class ChieldClass : BaseClass //DerivedClass
+    {
+
+        public ChieldClass() : base(5, "Asdşsi")
+        {
+            //Eger ki base class'in costructor'i sadece parametre alan constructor ise derived class'larda o constructor'a bir deger GONDERMEK ZORUNDAYIZ....
+            //Bunuda base keyvmrduyle saglayabiliriz...l
+        }
+        public ChieldClass(int a) : base(a)
+        {
+
+        }
     }
 }

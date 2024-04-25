@@ -67,5 +67,6 @@ database1.ConnectionString = "Singleton Desing Patern";
 MyRecord2 m = new MyRecord2("Record", "Positional");
 var (n, s) = m;
 
+D d= new D();
 
 Console.ReadLine(); ;
