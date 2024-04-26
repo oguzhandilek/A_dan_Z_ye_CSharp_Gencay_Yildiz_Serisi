@@ -256,13 +256,13 @@ namespace A_dan_Z_ye_OOP
         //todo Records Nedir?
         //Eğer ki bir objeyi bütünsel olarak değişmez yapmak istiyorsak o zaman daha fazlasına ihtiyacımız olacaktır.
         //İşte bu ihtiyaca istinaden Records türü geliştirilmiştir.
-        //Rçcordı bir objenin topyekü 6Üâre sabit/değişmez olarak kalmasını sağlamakta ve bu durumu güvence altına almaktadır.
+        //Recordı bir objenin topyekün 6Üâre sabit/değişmez olarak kalmasını sağlamakta ve bu durumu güvence altına almaktadır.
         //Böylece bu obje, artık değeri değişmeyeceğinden dolayı esasında objeden ziyade bir değer gözüyle bakılan bir yapıya dönüşmektedir.
         // Buradan yola çıkarak record'ları, içerisinde data barındıran lightweight(hafif) class'lar olarakdeğerIendirebiliriz.
         //Record'lar bir class'tır. Sadece nesnelerinden ziyade, değerleri ön plana çıkmış bir Class.
 
         //Class ile Record farkı
-        // + Class'lar ğa verişel olarak nesne ön piahdâdır ve bir farklı referansa sahip olan hesne farklı değer olarak algılanmaktadır.
+        // + Class'lar da verisel olarak nesne ön plandadır ve bir farklı referansa sahip olan nesne farklı değer olarak algılanmaktadır.
         //+ Dolayısıyla Equals(xı y) karşılaştırması yanlıştır.
 
         //Recprdllar ise verişel olarak değeri ön planda tâaktadır.Sadece nesnel olarak bu veriler bir objede tutulmakta lakin
@@ -501,8 +501,54 @@ namespace A_dan_Z_ye_OOP
         #endregion
 
         #region Çok Biçimlilik (Polimorfizim)
-
+        //İki ya da daha fazla nesnenin aynı tür sınıf tarafından karşılabilmesidir/referans edilebilmesidir.
+        //Bir başka deyişle;Bir nesnenin birden fazla farklı türdeki referans tarafından işaretlenebilmesi polimorfizm'dir.
+        //Polimorfizm, OOP tasarımlarında geliştirilen koda daha manevrasal bir şekilde nitelik kazandıran ve yaklaşım sergilememizi sağlayan bir özelliktir.
+        #region Static Polimorfizm
+        //Static polimorfizm; derleme zamanında sergilenen polimorfizm'dir. Hangi fonksiyonun çağrılacağına derleme zamanında karar verilir.
+        //C#'da static polimorfızm deyince aklımıza Metot Overloading terimi gelmelidir.
+        //Metot Overloading; aynı isimde birbirinden farklı imzalara sahip olan metotların tanımlanmasıdır.Ya da başka deyişle bir isme birden fazla farklı türde metot yüklemektir.Haliyle burada bir metodun birden fazla formunun olması polimorfizm'ken, bunlardan kullanılacak olanın derleme zamanında bilinmesi statik polimorfizm olarak  nitelendirilmektedir.
         #endregion
+        #region Dinamik Polimorfizm
+        //Dinamik polimorfizm; çalışma zamanında sergilenen polimorfizm'dir. Yani hangi fonksiyonun çalışacağına run timeida karar verilir.
+        //C#'da dinamik polimorfizm deyince akla Metot Override gelmektedir.
+        //Metot Override; base class'ta virtual olarak işaretlenmiş metotların derived class'ta override edilerek ezilmesi/ yeniden yazılması işlemidir.Haliyle burada aynı isimde birden fazla forma sahip fonksiyonun olması polimorfizm'ken, bunlardan hangisinin kullanılacağının çalışma zamanında bilinmesi dinamik polimorfizm olarak nitelendirilmektedir.
+        #endregion
+        #region Polimorfizm Durumlarında Tür Dönüşümleri
+        //Polimorfizmı OOPlde bir nesnenin kalıtımsal açıdan ataları olan referanslar tarafından işaretlenebilmesidir.Haliyle ilgili nesne, bu ataları olan referans türlerine göre dönüştürülebilmektedir.
+        //A a = new C();
+        //C c=(C)a; /*Misal olarak, burada görüldüğü üzere A türünden olan a referansındaki özünde C türünden nesne kendi türünden bir referansla işaretlenmiştir.*/
+        //Dikkat ederseniz bu işlem için Cast operatörü kullanılmaktadır.
+        //Bu durumun terside geçerlidir.Yani ilgili nesne kendi türünden kalıtımsal olarak ataları olan diğer türlere Cast edilebilir. C =new C(); --> A a=(A)c;
+
+        #region Cast Operatörü ile
+        //A a = new C();
+        //C c=(C)a; 
+        //Eğer ki, kalıtımsal ilişki olmayan herhangi bir türe dönüştürülmeye çalışılırsa derleyici hatası verecektir.
+
+        //Yok eğer kalıtımsal ilişkide olup fiziksel nesnenin hiyerarşik altında olan bir türe dönüştürülmeye çalışılırsa run time hatası verecektir.
+        //--> D d= (D)a;
+        // kalıtımsal olarak Cnin altında Alnın torunu ise fiziksel C nesnesinin kendisinden küçük olan D referansıyla işaretlenmesi Polimorfizm mantığı gereği mümkün olamayacağı için run time hatası verecektir.
+
+        // --> C C=new C();
+        // A a= c; bilinçsiz tür dönüşümü ilede yapabiliriz ama alttaki açıklama kaydıyla
+        //Tersine olarak, kalıtımsal ilişkide alt türden üst türe cast operatörü ile de bir dönüşüm sağlamaktadır.
+        #endregion
+        #region As Operatörü ile
+        //A a = new C();
+        //C c = a as C;
+        // kalıtımsal ilişkide olup fiziksel nesnenin türünden daha alt hiyerarşide olan nesnelere dönüştürülmeye çalışıldığında Polimorfizm mantığı gereği ilgili referans o nesneyi karşılayamayacağından run time hatası VERMEYECEK! geriye null dönecektir.
+        //A a = new C();
+        // D d= a as D --> run time da null değeri verir. Cast kullanırken Try Catch , as kullanırken null değer kontroledilir
+        #endregion
+        #region is Operatörü 
+        //is operatörü kalıtımsal ilişkiye sahip nesnelerin Polimorfizm özelliğine nazaran fiziksel olarak hangi türde olduğunu veren bir operatördür.
+        //Haliyle çok biçimlilik uygulanmış bir nesnenin ihtiyaç doğrultusunda(uygun olan) farklı bir türe dönüştürülebilmesi için işi garantiye alabilmek adına önce is kontrolü ardından Cast ya da as operasyonu sağlanması kafiidir.
+        #endregion
+        #endregion
+        #endregion
+
+
     }
     public class Employee
     {

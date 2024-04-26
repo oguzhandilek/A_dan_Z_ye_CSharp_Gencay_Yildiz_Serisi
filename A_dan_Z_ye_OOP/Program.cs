@@ -67,8 +67,7 @@ database1.ConnectionString = "Singleton Desing Patern";
 MyRecord2 m = new MyRecord2("Record", "Positional");
 var (n, s) = m;
 
-D d= new D();
-
+D d = new D();
 Kalem k= new Kalem();
 k.Bilgi();
 Terlik t= new Terlik();
