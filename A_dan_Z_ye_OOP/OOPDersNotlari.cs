@@ -20,6 +20,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Net.WebRequestMethods;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -548,7 +549,82 @@ namespace A_dan_Z_ye_OOP
         #endregion
         #endregion
 
+        #region Association, Aggregation, Composition (Nesneler Arası İlişki Türleri)
+        //Nesneler arasında terminolojik olarak nitelendirilebilir ilişki türleri mevcuttur.Bu ilişkiler; kalıtım, referans yahut soyutlama gibi durumların getirisi olan mantıksal izahatlerdir.
+        //Nesneler arası ilişki türleri :
+        //is —a ilişkisi
+        // has —a ilişkisi
+        // can — do ilişkisi
+        #region Nesneler arası ilişki türleri 
+        #region is - a İlişkisi Nedir?
+        //is — a ilişkisi tamamıyle kalıtımla alakalıdır.C# programlama dilinde, iki sınıf arasında : operatörü ile gerçekleştirilen kalıtım neticesinde ortaya bir is — a ilişkisi çıkmaktadır.
+        #endregion
+        #region has-a İlişkisi Nedir?
+        //Bir sınıfın başka bir sınıfın nesnesine dair sahiplik ifadesinde bulunan ilişkidir.Bir yandan kompozisyon/composition ilişkisi de denmektedir.
+        //class Araba
+        //{
 
+        //}
+        //class Opel:Araba Opel bir arabadır yani is -a ilişkisi
+        //{
+        //    Motor motor=new Motor(); // Opelin Motor'u vardır has-a
+        //}
+        //class Motor
+        //{
+
+        //}
+        #endregion
+        #region can-do ilişkis Nedir?
+        //Kısaca interface; bir sınıfın imzasıdır.Yani bir sınıfın içerisinde olacak olan tüm member'ların şablonunu/arayüzünü oluşturduğumuz bir kontrattır.Herhangi bir interface'i uygulayan Class o interface içerisinde tanımlanmış member imzalarını kendisinde oluşturmak zorundadır.Aksi taktirde compiler hata verecektir.Velhasıl tüm bunları a'dan z'ye ilgili konuya ait dersimizde tam teferruatlı incelemiş olacağız.
+        //Interface'ler içlerindeki member'ların imzalarını classlara uygulattırdığından dolayı o interface'ler ilgili nesnelerin yapabilecekleri kabiliyetleri göstermektedir.
+        //Yani can-do ilişkisi bir nesnenin davranışlarını/kabiliyetlerini belirtmektedir.
+        //Bu davranış/kabiliyetlerin interface içerisinde tanımlanmaktadır.
+        #endregion
+        #endregion
+
+        #region Association Nedir?
+        //  •Association, sınıflar arasındaki bağlantının zayıf biçimine verilen addır.
+        //'Bu bağlantı oldukça gevşektir. Yani, sınıflar kendi aralarında ilişkilidir lakin
+        //birbirlerinden de bağımsızdırlar!
+        //'Parça - bütün ilişkisi yoktur!
+        //'Örneğin; bir otobüsteki yolcular ile otobüs arasındaki ilişki Association'dır. Nihayetinde hepsi aynı yöne gitmektedir.Lakin bir yolcu indiğinde bu durum otobüsün ve diğer yolcuların durumunu değiştirmez!
+
+        #endregion
+        #region Aggregation ve Composition Nedir?
+        //-Nesneleri birleştirip daha büyük bir nesne yapmaya verilen isimlerdir.
+        // -Yani her ikisi de birleştirilmiş nesnelerden bütünsel nesneler yapma durumlarını ifade eden
+        //-Her ikisinde de Association'da olmayan parça - bütün ilişkisi söz konusudur.
+        //-Her ikisinde de sahiplik ilişkisi(has a) vardır.
+
+        //Fark Nedir
+        //Usta , Duvar Çimento ilişkisi üzerinden örnek
+
+        // 1- Duvarla Tuğla arasındaki ilişki
+        //        Duvar, tuğlalardan örülmektedir.Yani
+        //tuğlaların bir araya gelmesiyle oluşur.
+        //Haliyle tuğla olmadan duvar olmaz!
+        //Amma velakin, tuğla tek başına bir anlam
+        //ifade edebilmektedir.Nihayetinde bir
+        //tuğlayı duvar örmenin dışında farklı
+        //noktalarda da kullanabiliriz.
+        //O yüzden duvarla tuğla arasındaki ilişki
+        //Aggregation'dır.
+
+        // 2 - Duvarla Çimento arasındaki İlişki
+        //  Duvar, çimento olmadan örülemez.Lakin
+        //çimento da duvar örmenin dışında tek başına
+        //bir anlam ifade etmez!(öyle kabul edelim)
+        //Bu sebepten dolayı duvarla çimento
+        //arasındaki ilişki Composition'dır.
+
+        // 3- Duvarla Usta Arasındaki İlişki
+        // Duvar ile usta arasında parça - bütün ilişkisi
+        //yoktur.Duvarı herhangi bir usta örebilir.
+        //Haliyle duvar ile usta arasındaki ilişki de sıkı
+        //bağlılık olmadığından dolayı Association'dır.
+        #endregion
+
+        #endregion
     }
     public class Employee
     {
