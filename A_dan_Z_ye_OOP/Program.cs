@@ -81,4 +81,9 @@ Console.WriteLine(u.AlanHesapla());
 
 Dortgen dortgen = new Dortgen(3,4);
 Console.WriteLine(dortgen.AlanHesapla());
+
+PartialClass partial = new PartialClass();
+partial.A();
+partial.B();
+
 Console.ReadLine(); 

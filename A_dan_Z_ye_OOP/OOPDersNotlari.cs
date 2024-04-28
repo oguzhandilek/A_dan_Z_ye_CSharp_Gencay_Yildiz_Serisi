@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Numerics;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
@@ -180,7 +181,7 @@ namespace A_dan_Z_ye_OOP
         #region 1.Sınıfın Nesnesini Temsil Eder
 
         #endregion
-        #region 2. Aynı simde Field le Metot Parametrelerini Ayırmak çin Kullanılır
+        #region 2. Aynı isimde Field le Metot Parametrelerini Ayırmak çin Kullanılır
         //this keywordü ilgili class yapılanmasının o anki nesnesine karşılık gelir.
         //this kullanmak zorunda değiliz.
         class MyClass
@@ -625,6 +626,106 @@ namespace A_dan_Z_ye_OOP
         #endregion
 
         #endregion
+
+        #region sealed Keyword
+        //Bir sınıfın miras vermesini yahut bir başka deyişle başka bir sınıf tarafından miras alınmasını engelleyen bir keyword'dür.
+        //Sadece sınıflarda ve sadece 'override' edilmiş metotlarda kullanılabilir.
+
+        #region Method Üzerinde sealed işlevi
+        //Kalıtımsal durumlarda, atalardan gelen ve birinci dereceden alt sınıf tarafından 'override' edilmiş olan 'virtual' member'ların hiyerarşideki sonraki sınıflar tarafından 'override' edilmesini ilgili member'ı sealed ile işaretleyerek engelleyebiliriz.
+        //Pratikte bu yöntem sayesinde üst sınıfın davranışını güvenli bir şekilde korumuş ve ilgili metodun değiştirilmesini önlemiş oluyoruz.
+        #endregion
+        #region Hangi durumlarda kullanılmalıdır
+        //        Sınıfların Davranışlarını Korumak İstediğimizde
+        //Kalıtımsal Hiyerarşide üst sınıfların özel metotları/davranışları varsa ve bu
+        //metotlardaki davranışların alt sınıflar tarafından değiştirilebilir olmasını istemediğimiz
+        //durumlarda, o metodu sealed olarak işaretleyebiliriz.
+
+        //         Performans İyileştirmesi İstendiğinde
+        //Mikro seviyede yapılan bir optimizasyon neticesinde C#'ta bir sınıf sealed ile
+        //işaretlendiğinde sealed olmayan bir sınıfa göre ufak çapta bir performans artışı
+        //gösterdiği anlaşılmıştır.Bunun nedeni, derleyicinin sealed ile işaretlenmiş sınıfın
+        //miras alınamayacağını bilerek daha hızlı derleme yapmasıdır.
+
+        //            Singleton Design Pattern
+        //Singleton Design Pattern'da bir sınıfın uygulama çapında tekil bir instance'ının
+        //olması amaçlanmaktadır.Haliyle ilgili sınıf sealed ile işaretlenerek, bu sınıftan
+        //herhangi bir kalıtımsal ilişkinin yaratılmasını engelleyebilir ve tek instance üretimini
+        //daha da garanti hale getirmiş oluruz.
+        #endregion
+        #endregion
+
+        #region PARTIAL YAPILANMALAR
+        //Bir classlını structlın yahut interfacelin aynı yahut farklı dosyalarda birden fazla parçasının tasarlanmasını lakin bu parçaların ÖzÜnde bir bÜtÜn olarak kullanılmasını sağlayanı kodun daha organize ve kolay okunabilirliğini arttıran özelliklerdir.
+
+        //Normal şartlarda aynı namespace altında birden fazla aynı isimde yapı bulundurulamaz!
+        //Amma velâkin bu yapılar partial olarak tasarlanıyorsa bu mümkündür.
+        //Bu tanımlamalar fiziksel olarak farklı olsalar da compiler açısından bir bütünün parçalarıdır.
+        //Yani yandaki gibi bu sınıftan bir nesne retilmeye çalışıldığı zaman özünde tek bir nesne üretilecektir.
+        //Bu tanımlar ister aynı ister farklı dosya içerisinde tanımlanabilir.
+        //Tabi unutmamak lazımdır ki, fiziksel olarak farklı olan bu tanımların birbirlerinin parçaları olabilmesi için aynı namespace içerisinde, aynı isimde ve aynı yapıda olmaları gerekmektedir.
+
+        #region Kullanım Amaçaları
+        //        Kod Bölümleme
+        //Büyük ve karmaşık yapıdaki sınıfları daha okunabilir ve düzenlenebilir parçalara bölmek için kullanılabilir.
+
+        //        İş Bölümü
+        //Ekiplerin, aynı sınıfın farklı kısımlarını aynı anda geliştirebilmeleri için kullanılabilir.
+
+        //        Code Generator
+        //Code Generator sistemleri tarafından yazdığınız kodun ezilmemesi için kullanılabilir.
+        #endregion
+
+        #region Sınırlar Nelerdir?
+        // Parça olması amaçlanan tüm yapılar partial keyword'ü ile işaretlenmelidir.
+        //İç içe partial türler kullanılabilir.
+        //Tüm partal yapılar aynı namespace altında bulunmalıdır. Farklı projeler yahut
+        //modüllere yayılamaz!
+        //parlial olan bir yapının tüm parçalarının türleri ve isimleri aynı olmak zorundadır.
+
+        #endregion
+
+        #region PARTIAL OLABİLEN YAPILAR
+        //Class
+        //Struct
+        //Record
+        //İnterface
+        //Abstract Class
+        #endregion
+        #region Partial Metotlar Nelerdir?
+        //Partial metotlar, sınıfın bir parçasında geliştiricinin metot bildiriminde bulunmasını sağlar.Başka bir parçasında ise diğer geliştirici tarafından bu metot tanımlanabilir.Bunun yararlı olduğu iki senaryo vardır;
+
+        //1. Template Code
+        //Geliştirilen kodda metotlara dair bir şablon oluşturmak için kullanılabilir.
+        //Bu şablonların uygulanıp uygulanmayacağına dair geliştiricinin karar vermesine olanak tanınır. 
+        //Eğer şablonu tanımlanan metot uygulanmazsa derleyici tarafından metodun imzası ve o metoda dair yapılan tum çağrılar/tetiklemeler kaldırılır.
+        //Yani anlayacağınız, partial bir metot tanımlandığı taktirde ister uygulansın ister uygulanmasın herhangi bir farklı noktadan çağrılabilir/tetiklenebilir.Ancak uygulanmadığı taktirde herhangi bir derleme yahut çalışma zamanı hatası alınmayacaktır.
+
+        //2 Source Generator
+        //• Source generator sistemleri ile sınıflarda tanımlanmış olan par-tial metot imzalarına karşılık govdeler oluşturulabilir.
+        //Geliştirici, uygulanacak  metodun partial bir şekilde şablonunu ekledikten sonra source generator derleme sırasında bu metodun uygulamasını sağlar.
+        //Tabi geliştirici isterse, bu metotların govdeleri source generator tarafından üretilmeden önce ya da bir başka deyişle bu metotlar uygulanmadan once başka bir noktada çğrırabilir/ tetiklenebilir.
+
+        #region Kuralları
+        //partial metotların runtime'da var olacağı kesin değildir. Eğer implementation edilmedilerse partial metotlar derleme sırasında yok sayılırlar.
+        //Yukarıdaki durumdan dolayı partial metotlar delegate'ler ile temsil edilemezler.
+        //partial metotlar;
+        //ancak partal yapılar içerisinde tanımlanabilirler.
+        //geri dönüş tipleri her daim void olmak zorundadır.
+        ////static veya generic olabilirler.
+        //out parametresi alamazlar lakin ref parametresi alabilirler.
+        //extern ve virtual olamazlar.
+        //Aynı classllar da olduğu gibi paftial metodun hem tanımı hem de gövdesi partial ile işaretlenmelidir.
+        //Bir metot imzasına karşılık tanım ve gövde olabilir.
+        //Eğer ki partial metotlar başka bir metot tarafından çağrılırlarsa compiler tarafından var oldukları bilinecektir yok eğer çağrılmazlarsa compiler derleme aşamasında ilgili metodu hiç görmeyecektir.
+        //Gövdeleri tanımlı olduğu halde public olarak işaretlenebilir aksi halde gövde tanımlı değilse izin vermez erişim default olarak  private olarak kalır
+
+        #endregion
+        #endregion
+        #region partial Keywordü
+
+        #endregion
+        #endregion
     }
     public class Employee
     {
@@ -924,6 +1025,94 @@ namespace A_dan_Z_ye_OOP
             return _boy * _en;
         }
     }
+    #endregion
+    #endregion
+
+    #region Seald Keyword Örneği
+    //sealed class SealdClass
+    // {
+    //     public virtual void SealedMethod() 
+    //     {
+
+    //     }
+    // }
+    class SealdClass
+    {
+        public virtual void SealedMethod()
+        {
+
+        }
+    }
+    class CaseClass : SealdClass
+    {
+        sealed public override void SealedMethod()
+        {
+            Console.WriteLine("Ben bir sealed örneği methodum");
+        }
+    }
+    class ExampClass : CaseClass
+    {
+        //  override // burdan itibaren varsa alttaki miras alan sınıflarda method override edileemz
+    }
+    sealed record SealedRecord
+    {
+
+    }
+    #endregion
+
+    #region partial Örneği
+    #region partial class
+    public partial class PartialClass
+    {
+        public void A()
+        {
+
+        }
+        partial void X();
+        partial void Y();
+        partial void Z();
+
+        partial void Y()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public partial class PartialClass
+    {
+        public void B()
+        {
+
+        }
+    }
+    #endregion
+    #region partial record
+    partial record PartialRecord
+    {
+
+    }
+    partial record PartialRecord
+    {
+
+    }
+    #endregion
+    #region partial abstract class
+    abstract partial class AbstractPartialClass
+    {
+
+    }
+    abstract partial class AbstractPartialClass
+    {
+
+    }
+    #endregion
+    #region partial struct
+    partial struct PartialStruct { }
+    partial struct PartialStruct { }
+    #endregion
+    #region partial interface
+    partial interface IPartialInterFace { }
+    partial interface IPartialInterFace { }
     #endregion
     #endregion
 }
