@@ -722,7 +722,47 @@ namespace A_dan_Z_ye_OOP
 
         #endregion
         #endregion
-        #region partial Keywordü
+
+        #endregion
+
+        #region Abstraction (Soyutlama)
+        //Felsefesi için https://youtu.be/WyjOvw40jUA?list=PLQVXoXFVVtp306cqgKyC8NoxCmHIuWVBK video izlenmeli
+        //Temel olarak: Gerekli olanları göster, gereksiz olanları gösterme
+        #region Abstraction Nasıl Uygulanır
+        //Abstraction 'ın interface 'ler yahut abstract Class 'lorla doğrudan hiçbir ilgisi alakası yoktur!
+        //Abstraction bir davranıştır.
+        //Dikkat ederseniz eğer abstraction davranışı; member'ları ayıkladığı/gizlediği için 'encapsulation' , kalıtımsal işlem gerektirdiği için 'inheritance' ve farklı referanslar kullandırdığı için 'polimorfizm' kavramlarıyla doğrudan bağlantılı bir davranıştır.
+        #endregion
+        #region Ana Hedefi
+        //Abstraction'ın amacı, gelbiş!geliştirriciden sınıfa karşın olabilecek gereksiz ayrıntıla" pizleycrek karmaşıklığın üstesinden gelmektir.
+        //O sınıftan üretilmiş bir instance'ı kullanırken o instancelın sadece ne yapabileceğini göstermek lakin nasıl yapabileceği hakkında bilgi vermemektir.
+        //Ayrıca yerine göre uygulama ayrıntılarını gizleyerek sadece ilgili davranışların erişilebilir olmasını sağlamakta abstraction'ın bir hedefidir diyebiliriz.
+        #endregion
+        #region Örnek Senaryolar
+        //        Bir araba esasında birçok parçanın bir araya gelerek
+        //bütünsel olarak işlemesi neticesinde işlevsellik
+        //göstermektedir.Lakin şoför için araba sadece bir
+        //arabadır, yani şoför açısından arabanın motorunda
+        //dönen tüm fiziksel kurallar soyutlanmıştır. şoför arabanın
+        //nasıl çalıştığını bilemeyebilir lakin çalıştığını bilir. işte
+        //bu abstraction'dır.
+
+        //        Amazon hesabına giriş sürecinde kullanılacak bir nesneyi
+        //düşürsek eğer bu nesnenin o anda bizlerden sadece
+        //username ve password'ü alacak metoduna erişebilmemiz
+        //ve diğer konudan alakasız metotlarına erişmememiz bir
+        //abstraction davranış neticesidir.
+
+        //        Evlerimizdeki prizler ve o prizlere takılan fişler arasında
+        //bir abstraction durumu söz konusudur.Bir prizin görevi
+        //kendisine takılan fiş üzerinden ilgili cihazlara elektrik
+        //göndermektir.Tabi bir prize birden çok fiş takılabilir amma
+        //velakin priz hangi cihaza bağlı olduğunu asla bilmez.
+        //Burada priz açısından elektrik göndereceği cihazın
+        //detayları fiş sayesinde soyutlanmıştır.Priz sadece kendisine
+        //takılacak fişi bilir. Belki bu
+        //akla dependency inversion prensibini de getirebilir :)
+        //Doğrudur, bir yandan dabir abstraction örneğidir...
 
         #endregion
         #endregion
