@@ -86,4 +86,6 @@ PartialClass partial = new PartialClass();
 partial.A();
 partial.B();
 
+new MyManager();
+
 Console.ReadLine(); 

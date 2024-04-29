@@ -766,6 +766,54 @@ namespace A_dan_Z_ye_OOP
 
         #endregion
         #endregion
+
+        #region Abstract Class
+        //Yazılım süreçlerinde abstract class'lan kullanma nedeni herhangi bir ihtiyaca istinaden değildir! Abstract class'lar tercihen kullanılan yapılardır!
+        //Şöyle ki, bir abstract Class ile kalıtımsal olarak aktarmak istediğiniz davranışlarla birlikte zoraki olarak uygulatmak istediğinizvdavranıştan bir bütün olarak tasarlayabilirsiniz.
+
+        #region Özellikler
+        //Abstract Class İle Nesne Arasındaki İlişki
+        //Abstract Class'lar soyut yapılanmalar olduğu için yapısal olarak iradeli bir şekilde(new operatörü ile vs.) nesne üretilebilir bir tür değildir!
+
+        //new MyClass();
+        //Yani bu şekilde bir abstract class'tan nesne üretmeye çalışmak mümkün değildir!
+        //Ama bu abstract Class türünden bir nesne hiçbir zaman olamaz anlamına gelmemektedir.
+        //Kalıtımsal olarak bir abstract Class herhangi bir sınıfa miras verdiği taktirde buradaki davranış şöyle olacaktır; 1176.satır
+        //1176. satırdaki  gibi kalıtımsal durumun söz konusu olduğu durumlarda
+        //new MyClass2();
+        //komutu ile MyClass2 isimli sınıftan bir nesne üretilirse eğer burada kalıtımsal hiyerarşinin gereği olarak abstract class'ın da dahil normal class'ın nesneleri üretilecektir.
+        //İşte bu durumda abstract class'lann nesneleri de varlık Qöstermektedir.
+
+        //Abstract Class'ta Constructor Tanımlama
+        //Kalıtımsal durumlarda abstract class'lann nesneleri oluşturuluyorsa eğer bu constructor'lan tetikleniyor demektir! Haliyle bizler irademizle her ne kadar abstract class'lardan nesne üretemesekte, içerisinde constructor tanımlayabilir ve alıtımsal süreçlerdeki üretilecek olan nesneyi yapılandırabiliriz.
+
+        #endregion
+
+        #region Tanımalama ve İnşa Etme Kuralları
+        //Bir abstract Class tanımlayabilmek için abstract Class keyword'ü kullanılır!
+        //Bir abstract Class içerisine member'lar bilinen kurallanyla eklenebilir.
+        //Normal metotlar ve property'ler eklenebilir,
+        //ya da
+        //      Bu abstract class'ı implement edecek olan sınıflarda zoraki tanımlanmasını isteyeceğimiz member imzalan da eklenebilir.Bu imzalar, gövdeleri ilgili alt sınıflara bırakılacak şekilde abstract keyword'ü ile işaretlenerek tanımlanmalıdır. Tabi abstract keyword'ü ile işaretlenmiş olan member'lar kendilerini uygulayan sınıflar tarafından erişileceği için zoraki public olmak zorundadır.
+
+        //Bir abstract class'l uygulayan sınıf içerisine normal member'lar direkt miras yoluyla aktarılırken, abstract ile işaretlenmiş ola membe 'lar ise ilgili sınıf içerisinde override edilmek zorundadır.
+        //Ayrıca bir sınıf aym anda birden fazla sınıftan kalıtım alamayacağı gibi abstract class'ı da uygulayamaz!
+
+        //Abstract Class'ı uygulayan/implemente eden sınıflara terminolojik olarak Concrete Class denir!
+
+        //Abstarct Class içerisindeki abstract apıların concrete class içerisindeki tanımları pubLic oLmak zorundadır.
+
+        #endregion
+        #region Abstract Class'ın Abstract class'tan Türemesi
+        //Bir abstract Class, başka bir abstract class'a miras verebilir.
+        //Burada dikkat ederseniz bir abstract class'ın başka bir abstract class'a miras vermesi implementation olarak nitelendirilmemektedir.
+                //Bu düp uz bir kalıtımdır.Çünkü abstract class'lar içlerinde abstract olarak işaretlenmiş olan yapıları zoraki olarak sadece kendilerini uygulayan sınıflara uygulattırırlar, abstract class'lara değil!
+
+        #endregion
+
+        #endregion
+
+
     }
     public class Employee
     {
@@ -1154,5 +1202,48 @@ namespace A_dan_Z_ye_OOP
     partial interface IPartialInterFace { }
     partial interface IPartialInterFace { }
     #endregion
+    #endregion
+
+    #region abstract class örneği
+    abstract class MyAbstractClass
+    {
+        abstract public void AtadanGelen();
+    }
+    abstract class MyService:MyAbstractClass
+    {
+        int a;
+        public int MyProperty { get; set; }
+        abstract public string AbstractProp { get; set; }
+        public MyService()
+        {
+            Console.WriteLine("Abstract Class Tetiklendi");
+        }
+        abstract public void Z();
+        abstract public void Q();
+    }
+    class MyManager : MyService
+    {
+        public MyManager()
+        {
+            Console.WriteLine("Somut Class Tetiklendi");
+        }
+
+        public override string AbstractProp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override void AtadanGelen()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Q()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Z()
+        {
+            throw new NotImplementedException();
+        }
+    }
     #endregion
 }
