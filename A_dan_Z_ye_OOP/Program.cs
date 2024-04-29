@@ -88,4 +88,10 @@ partial.B();
 
 new MyManager();
 
+MyClass myClass = new MyClass(); //Explicity Implements in çağrılma yöntemi
+IA a = myClass;
+a.X();
+IB b = myClass;
+b.X();
+
 Console.ReadLine(); 

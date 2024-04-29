@@ -813,7 +813,7 @@ namespace A_dan_Z_ye_OOP
 
         #endregion
 
-        #region Interface
+        #region Interface Part 1
         #region Nedir -->>SINIFLARIN İMZASIDIR!
         //Programlama süreçlerinde interface yapılanması, nesnelere direkt olarak bir arayüz/şablon oluşturulmasını ve bu arayüz üzerinden geliştirici ile nesne arasındaki etkileşimin daha da kolaylaştırılmasını sağlayan bir araçtır.
         //Hatta sadece geliştirici ile nesne arasındaki süreci kolaylaştırmamakta, ayrıca bir programın farklı bir programla yahut bileşenle etkileşimini de kolaylaştırmaktadır.
@@ -836,6 +836,55 @@ namespace A_dan_Z_ye_OOP
         #endregion
         #region Çoklu Kalıtım Dururmu
         //C#ta bir Class, farklı bir class'tan kalıtım alırken hem de bir yandan interface'i implement edecekse eğer önce class'tan kalıtım almalı, sonrasında da virgülle interface(ler) tanımlanmalıdır.
+        #endregion
+
+        #region Interface Part 2
+        #region Interface - Explicity Implement 
+        //        Bir sınıf, yandaki gibi aynı imzaya/imzalara sahip iki interface'i implement ederse eğer bu durumda her iki interface'de ilgili member'ı ya da member'ları kendi implementasyonlarıymış gibi kullanacaktırlar.
+        //  Ancak bu tarz bir durumda, ilgili member'ı/member'ları interface'ine göre açıkça ayırmak isteyebilir ve operasyonlarınızı kullanılacak interface'e göre yürütmek isteteyebilirsiniz.
+        //  İşte bunu Explicity Implement ile gerçekleştirebiliyoruz.
+        //   Görüldüğü üzere Explicity Implement'te member'ların hangi interface'den geldiği bu şekilde belirtilmekte ve böylece fark kodsal açıdan yaratılmış olmaktadır.
+        //Yalnız explicity implement edilen member'lar private olarak tanımlanmak mecburiyetindedirler.
+        //  Haliyle bu member'lara Class referansı üzerinden değil, ancak interface referansı üzerinden erişim gösterilebilir.
+
+        //  Birden fazla interface'de aym isimde bulunan imzaların tek bir sınıfa uygulatılmasına Name Hiding denmektedir!
+
+        //Örnek 1312. satırda
+        //Tabi burada name hiding'e düşen bu member'lardan istediğinizi normal bir şekilde implement ederekte direkt ilgili sınıf instance'ı üzerinden erişilebilir hale getirebilir ve diğerlerini explicity implement edebilirsiniz.
+
+
+        //Peki hoca! Base class'ta ki herhangi bir member ile interface içerisindeki imzalar name hiding durumuna düşer mi?
+        //Hayır! Base class'ta bulunan herhangi bir member, interface içerisindeki bir imzayla uyuşuyorsa eğer, ilgili sınıfa o interface'in implementasyonu inheritance yöntemiyle gerçekleştirilecektir.
+        #endregion
+
+        #region Default Implementation
+        //Norma rtlarda interface yapılanması, içerisinde, sade ve sadece kullanılacağı class'lara uygulatacağı member'ların imzalarını barındırmaktadır.Ancak C# 8.0 sürümüyle birlikte interface içerisinde kimi member'ların varsayılan uygulamasını gerçekleştirebileceğimiz ve imzasının eşliğinde övdesini de tanımlayabileceğimiz Default Interface Implementation özelliği tanıtılmıştır.
+        //Bu özellik sayesinde artık interface içerisinde istediğimiz member'ların gövdelerini tammlayabiliyor ve böylece implementation sürecinde bir opsiyonel durum ortaya koyabiliyoruz. Örnk : 1344. satır
+        //Bu şekilde tanımlanmış methodların classlarda uygulanası/implementesi zorunlu olmayacaktır.
+
+        //Defualt implementation ne de olsa kimi durumlarda kullanışlı bir özellikte olabilir.Özellikle, mimaride mevcut olan ve çok fazla noktada kullanılan bir interface'e yeni bir member eklemek bazen ciddi bir külfet doğurabilmektedir.İşte böyle bir durumda geriye dönük uyumluluk sağlayabilmek için default implementation özelliğinden istifade etmek, bizleri ortaya çıkabilecek maliyetten büyük ölçüde törpüleyecektir.
+        #endregion
+
+        #endregion
+        #region Beyin Fırtınası
+        //Sizce neden class'ların imzaları abstrâctclasslar değil de interface'lerdir?
+        //        El cevap
+        //Interface'lerin nesnelerinin üretilmemeleridir! Böylece implementation sürecinde abstract Class yerine interface seçmek kaynak tüketimi açısından daha az maliyetlidir.
+
+        //Neden abstraction'da interface tercih edilir?
+        //        El cevap
+        //Interface ile kullanıcıya bir sınıftaki var olan member'lardan sadece istenilenler gösterilir. Evet, bunu abstract class'lar ile de gerçekleştirebiliriz amma velakin interface'in tercih edilmesinin nedeni biryandan da  implementation sürecinde nesne üretip ekstradan maliyeti arttırmamasıdır.
+
+        #region Interfacelerin İşaretleme Amaçlı Kullanılması
+        //Interface'lerin ne amaca hizmet ettiklerini ve neden kullanıldıklarını artık biliyoruz kanaatindeyim.Biz yazılım geliştiriciler tarafından interface'ler tüm bu vizyonunun dışında ekstradan yazılımdaki belirli instance'ları diğerlerinden ayırabilmek için işaretleme amaçlı da kullanabilmekteyiz.
+
+        //Misal olarak, bir uygulamadaki entity sınıflarını diğer sınıflardan ayırabilmek için 1Entity isimli bir interface'le işaretleme davranışı gösterebiliriz.Ya da uygulamada loglama işlemi yapacak olan sınıfları diğerlerinden yine ayırabilmek için ILogger interface'i ile işaretleyebiliriz. Böylece yapıları davranışlarına yahut kurgudaki rolüne göre interface'ler sayesinde gruplayabilir ve daha emin ve tip güvenli bir şekilde çalışmalar gerçekleştirebiliriz.
+
+        //Bu kullanıma esasında Marker Interface Pattern adı verilmektedir.
+
+        //INTERFACE'LER, CLASS YAHUT ABSTRACT CLASS'LAR GİBİ  KALITIM SÜREÇLERİNDE  EKSTRADAN NESNE OLUŞTURMAZLAR! BU NEDENLE ABSTRACTION VE MARKER (IŞARETLEME) OPERASYONLARINDA CLASS VEYA ABSTRACT CLASS'LARA NAZARAN DAHA PERFORMANSLI ÇALIŞIRLAR
+        #endregion
+
         #endregion
         #endregion
 
@@ -1270,5 +1319,56 @@ namespace A_dan_Z_ye_OOP
             throw new NotImplementedException();
         }
     }
+    #endregion
+
+    #region Interface Örneği
+    class MatematikIslemleri : IMatematikIslemleri
+    {
+        public int Cikarma(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Topla(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    interface IMatematikIslemleri
+    {
+        int Topla(int x, int y);
+        int Cikarma(int x, int y);
+
+    }
+
+    class MyClass : IA, IB
+    {
+        int IB.X()
+        {
+            Console.WriteLine("B-X");
+            return 1;
+        }
+
+        int IA.X()
+        {
+            Console.WriteLine("A-X");
+            return 0;
+        }
+    }
+    interface IA
+    {
+        int X();
+    }
+    interface IB
+    {
+        int X();
+        void DefaultImpl()
+        {
+            Console.WriteLine("Deçault implementation Methûd2");
+        }
+    }
+
+
+    //kodun devamı program.cs 91. satırda
     #endregion
 }
