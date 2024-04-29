@@ -807,12 +807,37 @@ namespace A_dan_Z_ye_OOP
         #region Abstract Class'ın Abstract class'tan Türemesi
         //Bir abstract Class, başka bir abstract class'a miras verebilir.
         //Burada dikkat ederseniz bir abstract class'ın başka bir abstract class'a miras vermesi implementation olarak nitelendirilmemektedir.
-                //Bu düp uz bir kalıtımdır.Çünkü abstract class'lar içlerinde abstract olarak işaretlenmiş olan yapıları zoraki olarak sadece kendilerini uygulayan sınıflara uygulattırırlar, abstract class'lara değil!
+        //Bu düp uz bir kalıtımdır.Çünkü abstract class'lar içlerinde abstract olarak işaretlenmiş olan yapıları zoraki olarak sadece kendilerini uygulayan sınıflara uygulattırırlar, abstract class'lara değil!
 
         #endregion
 
         #endregion
 
+        #region Interface
+        #region Nedir -->>SINIFLARIN İMZASIDIR!
+        //Programlama süreçlerinde interface yapılanması, nesnelere direkt olarak bir arayüz/şablon oluşturulmasını ve bu arayüz üzerinden geliştirici ile nesne arasındaki etkileşimin daha da kolaylaştırılmasını sağlayan bir araçtır.
+        //Hatta sadece geliştirici ile nesne arasındaki süreci kolaylaştırmamakta, ayrıca bir programın farklı bir programla yahut bileşenle etkileşimini de kolaylaştırmaktadır.
+        //Interface'in nesneye bir arayüz sağlaması, kullanıcı açısından, ilgili nesnenin nasıl çalıştığına dair ayrıntılı bilgiye ihtiyaç duyulmaksızın, sadece arayüzün sunduğu fonksiyonları veya property'leri kullanarak etkileşime girilmesini sağlar.
+        //Yani anlayacağınız interface, o nesneye bir abstraction uygulayarak, belirlenmiş bir arayüz üzerinden çalışılmasını ve böylece ilgili nesne ile geliştirme sürecinin kolaylaştırılmasını sağlamaktadır.
+
+        //Vee Unutmayın! Interface'ler referans türlü değişkenlerdir.Yani bir referanstırlar.
+
+        //imza tanımlama sürecinde Access Modifier eşliğinde metot ve  property'lerin gövdeleri tanımlanmaz! Sadece imzaları tanımlanır!
+
+        //Ayrıca interface içerisinde field tanımının mümkün olmadığını bilmenizde fayda vardır!
+
+        #endregion
+        #region Implementation Naıl Yapılır
+        //Implement Yöntem
+        //Implementasyonun yapılacağı satırda yanda çıkan ampul simgesine tıklandığında ya da ilgili satırda CTRL + . kombinasyonunun kullanılması neticesinde çıkan küçük ekrandaki 'Implement interface' sekmesine tıklanması yeterlidir.
+
+        //explicity implement
+        //Bu yöntemde de açılan küçük pencerede 'Implement all members explicity' sekmesine tıklayarak davranış gerçekleştirilmektedir.Bu yöntemin detaylarına dersimizin devamında Name Hiding başlığı altında gireceğiz.
+        #endregion
+        #region Çoklu Kalıtım Dururmu
+        //C#ta bir Class, farklı bir class'tan kalıtım alırken hem de bir yandan interface'i implement edecekse eğer önce class'tan kalıtım almalı, sonrasında da virgülle interface(ler) tanımlanmalıdır.
+        #endregion
+        #endregion
 
     }
     public class Employee
@@ -1209,7 +1234,7 @@ namespace A_dan_Z_ye_OOP
     {
         abstract public void AtadanGelen();
     }
-    abstract class MyService:MyAbstractClass
+    abstract class MyService : MyAbstractClass
     {
         int a;
         public int MyProperty { get; set; }
