@@ -143,7 +143,7 @@ Scaffold-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Provider]
 Database Provider çeşitleriiçin bknz: https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli
  
  
- PMC ile veritabanını modelleyebilmek için aşağıdaki kütüphanelerin projeye yüklenmesi gerekmektedir;
+ Package Manager Console (PMC) ile veritabanını modelleyebilmek için aşağıdaki kütüphanelerin projeye yüklenmesi gerekmektedir;
 Microsoft.EntityFrameworkCore.Tools
 Database Provider(Örn; Microsoft.EntityFrameworkCore.SqlServer)
 
@@ -267,3 +267,5 @@ await context.Database.MigrateAsync();
 Son Uyarılar! 
 »Veritabanı sınıfları üzerinde yapılan tüm değişiklikleri migration eşliğinde gönderiniz. Böylece her bir değişiklikleri migrationllar ile kayıt altına almış olursunuz(bU da size veritabanı gelişim sürecini verir) ve ihtiyaca binaen istediğiniz noktaya geri dönüş sağlayabilirsiniz.
 » Migration'lara mümkün mertebe dokunmamak lazım. Lakin ileride ihtiyaç doğrultusunda ham sql cümlecikleri ekleyeceğimiz ve hatta Stored Procedure gibi yapıları oluşturacağımız noktalar olacaktır.
+
+
