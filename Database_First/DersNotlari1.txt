@@ -1,0 +1,269 @@
+ORM Nedir?
+Yazılım uygulamalarında veriler fiziksel olarak veritabanların da tutulmaktadır!
+Haliyle yazılım ile veritabanı arasında sürekli bir bağlantı üzerinden iletişim sağlanmalıdır! Ki yazılım dış dünyadan elde ettiği verileri veritabanına işleyebilsin ya da veritabanındaki verileri istediği zaman elde edebilsin.
+işte böyle bir durumda yazılım ile veritabanı arasında biraz önce bahsedildiği üzere bir bağlantı kurularak tüm verişel trafik gerçekleştirilmektedir.
+Yazılım, bu bağlantı üzerinden veritabanına anlayacağı dilden sorgular gönderir ve veritabanı da bu sorgulara istinaden gerekli verişel işlemleri gerçekleştirir.
+Bu sorgular genellikle SQL dilindedir.
+işte bizleri ORM denen şeye götüren süreç tam da burada başlamaktadır :)
+
+Kod İçerisinde SQL Yazmanın Dezavantajları
+Kodun kirlenmesini sağlar!
+Geliştirme ve bakım maliyeti yüksek kod inşasına sebep olur.
+Veritabanı bağımlılığı yaratır.
+Kompleks sorgular manuel bir şekilde oluşturulması gerekir.
+Geliştirici açısından SQL sorumluluğu beklenir!
+Veritabanı sorgulama neticesinde gelen datalar manuel olarak dönüştürulur. Sorgu sürecinde tablo, kolon vs. gibi bağımlılıklar olduğu gibi gelen datalarda da aynı bağımlılıklar söz konusu olacaktır!
+Veritabanında olan değişikliklere uygun bir şekilde kodunda tekrar gerekir! Misal bir kolon adı değiştiğinde ya da bir kolonun herhangi bir kuralı (constraint, validation vs.) değiştiğinde bu durumdan kodun haberdar olması için bilinçli bir review gerekmektedir.
+Kodu aşırı derecede veritabanı seviyesine indirger. BU durum tüm gelişmelerin veritabanıyla uyumlu bir şekilde seyretmesi zorundalığı doğurur.
+Geliştirilen yazılımın sürecinde tüm veritabanı işlemleri, o anki kullanılan programlama dili ve OOP'nin nimetlerinden istifade etmeksizin icra edilir.
+Gün gelir veritabanını değiştirmeniz gerekebilir. İşte boyle bir durumda tüm SQL kodlarını yeni veritabanına gere Refactoring etmeniz aerekecektir!
+
+ORM: Object Relational Mapping
+Yazılım ve veritabanı arasındaki bağlantı üzerinden sorgular eşliğinde veri transferini OOP nimetlerinden istifade ederek sağlayabileceği ve böylece kodun da, geliştiricinin de SQL'e bağlılığı olmaksızın hızlı ve kolayca operasyonları gerçekleştirebileceği bir yaklaşım ortaya konmuştur.
+BU yaklaşımın adı ORM'dir.
+ORM : Object Relational Mapping yani (Nesne ilişkisel Eşleme) şeklinde bir açılıma sahiptir.
+Geliştirilen yazılım içerisinde OOP yapısına uygun olmayan, katı ve kompleks veritabanı sorguları yerine veritabanı objelerinin, bir OOP nesnesi gibi düşünülerek yazılım tarafından kullanılabilmesine olanak sağlayan bir yaklaşımdır!
+BU yaklaşıma göre veritabanı, tablolar ve veriler yazılım tarafında birer nesneye karşılık gelmektedirler. Böylece tüm veritabanı süreçlerini OOP kavramlarıyla rahatlıkla yönetebilir ve kodu SQL'den arındırabiliriz.
+
+ORM Avantajları
+Veritabanı bağımsızlığı sağlar!
+Kullanılan veritabanına göre uygun sorgu oluşturur.
+OOP nimetlerinden faydalanarak SQL mantığı işlenmesini sağlar.
+Geliştiricinin kullanılan veritabanına dair SQL yeteneklerinin olması beklenmez!
+Sorgular otomatik generate edileceğinden dolayı kodu SQL bağımlılığından soyutlar.
+
+
+EF Core Nedir?
+Entity Framework Core Nedir?
+EF Core, ORM yaklaşımını benimsemiş bir araçtır.
+• Kod içerisinde OOP nimetlerinden istifade ederek SQL sorguları oluşturmamızı sağlamaktadır.
+Açık kaynaktır(Open Source)
+Esnektir.
+Geliştirilebilir.
+Kod içerisinde ihtiyaca binaen geliştirilmiş olan tekrarlı SQL sorgucuklarından bizleri kurtarmaktadır.
+Code First ve Database First yaklaşımları eşliğinde veritabanı ile yazılım arasındaki koordinasyonu sağlamaktadır.
+
+Kod üzerinden;
+Veritabanı ve tablo,
+Constraint,
+Sequence.
+İlişkili sorgular.
+View
+Stored Procedure
+Function
+Temporal Table
+gibi veritabanı nesneleri oluşturmamızı ve kullanmamızı sağlamaktadır.
+
+ORM Olarak Neden EF- Core Seçilmelidir?
+EF Coreı her ne kadar hızlı ve performanslı bir yapıya sahip olsa da piyasadaki en hızlı ORM aracıdır diyemeyiz.
+Misal olarak; minimal özelliklere sahip olan Dapperı Raw(ham) sorgular kullandığından dolayı kelimenin tam anlamıyla EF Coreldan çok daha hızlıdır.
+Lakin her bir güncellemesinde performansının arttığı gözlemlenen EF Core'un ise birçok özelliği mevcuttur.
+OOP nimetlerinden istifade etmemizi sağlayan EF Core ile Class oluşturma, nesne değişikliklerini izleme(Change Tracker)ı mapping vs. gibi türlü işlemleri gerçekleştirebiliriz.
+
+EF Core Nasıl Yüklenir?
+Yüklenecek araçlar
+.NET Core command-line interface (CLI) tools
+ve
+Package Manager Console (PMC) tools
+olmak üzere
+iki farklı kümede değerlendirilebilir.
+
+.NET Core command-line ınterface (CLI) tools
+dotnet-ef ile başlayan CLI komutlarını ilgili PCde aktif olarak kullanabilmemizi sağlayan toolldur.
+Install-->> dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
+Check-->> dotnet ef
+
+Tool'u yükledikten sonra belirli bir projede kullanabilmek için ilgili projede şu paketin de yüklü olması gerekmektedir. 
+{Microsoft.EntityFrameworkCore.Design}
+
+Package Manager Console (PMC) tools
+Visual Studio, Package Manager Console üzerinden talimatlar vermemizi sağlayan bir toolldur.
+Haliyle Package Manager Console üzerinden talimatlar verebilmek için şu paketin ilgili projede yüklü olması gerekmektedir.
+{Microsoft. EntityFrameworkCore. Tools}
+
+EF Core Yaklaşımlar
+
+EF Core, veritabanlarıyla iki farklı yaklaşımı baz alarak çalışmalar sergilemektedir.
+BU yaklaşımlar;
+Database First
+Code First
+olmak üzere iki tanedir.
+
+Veritabanı Nesnesi - DbContext
+
+Bir class'ın adında DbContext geçmesi yeterli değildir! Bir class'ın veritabanına karşılık gelen DbContext olabilmesi için Mıcrosoft.EntityFromeworkCore namespace'indeki DbContext sınıfından türemesi gerekmektedir.
+
+DbContext Nesnesinin Sorumlu OldUğU Faaliyetler Nelerdir?
+
+Konfigürasyon
+Veritabanı bağlantısı, model yapılanmaları ve veritabanı nesnesi ile tablo  nesneleri arasındaki ilişkileri sağlar.
+
+Sorgulama
+Sorgulama operasyonlarını yürütür. Kod tarafında gerçekleştirilen sorgulama adımlarını SQL sorgusuna dönüştürür ve veritabanına gönderir.
+
+Change Tracking
+Sorgulama neticesinde elde edilen veriler üzerindeki değişiklikleri takip eder.
+
+Veri Kalıcılığı
+Verilerin kayıt edilmesi, güncellenmesi ve silinmesi operasyonlarını gerçekleştirir.
+
+» Caching
+
+
+Tablo Nesnesi - Entity Nedir?
+
+EF Core'da tabloları temsil edecek sınıflar Entity olarak nitelendirilmektedir.
+
+Yer yüzündeki herhangi bir olguyu/nesneyi/objeyi modelleyen sınıfa Entity(varlık) denrnektedir. EF Core açısından baktığımızda entity, bir veritabanı tablosunu modelleyen sınıftır.
+Dikkat! Veritabanında tablo adı çoğul olur, lakin o tabloyu modelleyen entity sınıfının adı tekil olur!
+Tüm entity sınıftan DbContext sınıfı içerisine DbSet olarak eklenmelidir. Böylece veriaobanı sınıfı ile entity sınıflan arasında bir ilişki kurulacak ve EF Core veritabanındaki tabloları hangi sınıflarla temsil ettiğini bu ilişki üzerinden anlayacaktır.
+Burada şunu demiş oluyoruz! DbSet<T> modeline karşılık bir tablo bulunmaktadır. işte bu tabloyu şu property ile temsil et.
+Aynca bu DbSet property isimlerinin çoğul olduğuna dikkat ediniz. Entity sınıflan tekil isimken, bu entity sınıfı türüne karşılık gelen tabloyu temsil eden property çoğul isimli olmalıdır.
+
+Tablo Kolonları
+EF Corelda bir tabloyu temsil eden sınıfa entity demiştik. Ee haliyle kolonlar da entity sınıfları içerisinde property olarak tanımlanmalıdırlar.
+Bir entity içerisindeki property'ler, o entity'nin modellediği tablo içerisindeki kolonlara karşılık gelmektedir!
+
+Verier
+Veritabanındaki veriler ise entity'lerin instance'larına karşılık gelmektedir.
+
+
+Database First Yaklaşımı
+
+Tersine Mühendislik(Reverse Engineering)
+Tersine mühendislik, bir sunucusundaki veritabanının iskelesini kod kısmında oluşturma sürecidir.
+BU süreci Package Manager Console(PMC) ya da Dotnet CLI aracılığıyla iki farklı şekilde yürütebiliriz.
+
+PMC ile Tersine Mühendislik
+
+Scaffold-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Provider]
+ Not: Connection String' i tüm veritabanları için https://www.connectionstrings.com/ adresinden öğrenebiliriz.
+ Provider ise kullanılan veritabanının adı oalcak (Ms-Sql,PostgresSql vs)
+Database Provider çeşitleriiçin bknz: https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli
+ 
+ 
+ PMC ile veritabanını modelleyebilmek için aşağıdaki kütüphanelerin projeye yüklenmesi gerekmektedir;
+Microsoft.EntityFrameworkCore.Tools
+Database Provider(Örn; Microsoft.EntityFrameworkCore.SqlServer)
+
+
+Scaffold-DbContext 'Server=(localdb)\local;Database=Northwind;User Id=TestUser;Password=Test_123' Microsoft.EntityFrameworkCore.SqlServer;
+
+
+Dotnet CLI ile Tersine Mühendislik
+
+dotnet tool install --global dotnet-ef
+
+dotnet ef dbcontext scaffold 'Connection String' Microsoft.EntityFrameworkCore.[Provider]
+
+Dotnet CLI ile veritabanını modelleyebilmek için aşağıdaki kütüphanelerin projeye yüklenmesi gerekmektedir;
+Microsoft.EntityFrameworkCore.Design
+Database Provider(Örn; Microsoft.EntityFrameworkCore.SqIServer)
+
+
+Tabloları Belirtme
+Varsayılan olarak veritabanındaki tüm tablolar modellenir. Sadece istenilen tabloların modellenebilmesi için aşağıdaki gibi talimatların verilmesi yeterlidir.
+Package Manager:
+ScaffoId-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Provider] - Tables Tableı, Table2 ...
+
+Dotnet CLI:
+dotnet ef dbcontext scaffold 'Connection String' Microsoft.EntityFrameworkCore.[Provider] --table Tablel --table Table2 ...
+
+DbContext Adını Belirtme
+Scaffold ile modellenen veritabanı için oluşturulacak context nesnesi adını veritabanından alacaktır. Eğer ki context nesnesinin adını değiştirmek istiyorsanız aşağıdaki gibi çalışabilirsiniz.
+
+Package Manager:
+Scaffold-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Providerl -Context ContextName
+
+Dotnet CLI:
+dotnet ef dbcontext scaffold 'Connection String' --context ContextName
+
+Path ve Namespace Belirtme
+Entity'ler ve DbContext sınıfı, default olarak direkt projenin kök dizinine modellenir ve projenin varsayılan namespacelini kullanırlar. Eğer ki bunlara müdahale etmek istiyorsanız aşağıdaki gibi talimat verebilirsiniz.
+Path :
+Package Manager:
+Scaffold-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Provider] -ContextDir Data —OutputDir Models
+
+Dotnet CLI:
+dotnet ef dbcontext scaffold 'Connection String' Microsoft.EntityFrameworkCore.[Provider] --context-dir Data --output-dir Models
+
+Namespace :
+Package Manager:
+ScaffoId-DbContext 'Connection String' Microsoft.EntityFrameworkCore.[Provider] -Namespace YourNamespace -ContextNamespace YourNameSpace
+
+Dotnet CLI:
+dotnet ef dbcontext scaffold 'Connection String' Microsoft.EntityFrameworkCore.[Provider] --namespace YourNamespace --context-namespace YourContexNamespace
+
+
+Model Güncelleme
+Veritabanında olan değişiklikleri kod kısmına yansıtabilmek için Scaffold talimatını tekrar vermeniz gerekmektedir lakin verilen talimat neticesinde ilgili sınıfların zaten var olduğuna dair hata mesajı sizleri yüksek ihtimalle karşılayacaktır.
+
+		The following file(s) already exist in directory . . Use the Force flag to overwrite these files.
+Böyle bir durumda veritabanı modeline değişiklikleri manuel olarak yansıtabileceğimiz gibi (ki tavsiye etmeyiz!), dosyalar var olsa dahi zorla yeniden en güncel haliyle modellenmesini sağlayabiliriz. Bunun için aşağıdaki gibi Force talimatının verilmesi yeterli olacaktır.
+
+ScaffoId-DbContext 'Connection String' Microsoft.EntityFrameworkCore.(Provider] -Force
+dotnet ef dbcontext scaffold 'Connection String' Microsoft.EntityFrameworkCore.[Provider] --force
+
+
+Modellerin Özelleştirilmesi
+Database First yaklaşımında veritabanı nesneleri otomatik olarak modellenmekte ve generate edilmektedir. Bazen bu otomatize olan süreçte manuelde olsa entity'ler de yahut context nesnesinde özelleştirmeler yapmak isteyebiliriz.
+Ama biliyorusunuz ki, veritabanında yapılan değişiklikler neticesinde Force komutu eşliğinde tüm değişiklikler kod kısmına sıfırdan yansıtılabilir ve bu da yapılan değişikliklerin ezilme riskinin söz konUSU olduğu anlamına gelir.
+BU tarz özelleştirme durumlarında bizzat model sınıflarını kullanmaktansa bunların partial class'ları üzerinde çalışmak en doğrUSUdUr!
+
+
+-----------------------------
+
+Code First Yaklaşımı
+
+Migration & Migrate Kavramları Nelerdir?
+
+Migration Oluşturmak için Temel Gereksinimler Nelerdir? 
+Migration oluşturmak için temelde EF Core aktörleri olan DbContext ve Entity classllarını oluşturmak gerekir. Bunları oluşturduktan sonra migration Package Manager Console ve Dotnet CLI olmak üzere iki türlü talimatla verilebilir.
+Her iki yöntemi de kullanabilmek için Microsoft.EntityFrameworkCore.TooIs kütüphanesini uygulamaya yüklemeniz gerekmektedir.
+
+Migration Oluşturma
+Package Manager Console:
+add-migration (Migration Name]
+Dotnet CLI:
+dotnet ef migrations add [Migration Name]
+
+Migration Path'i Belirleme
+Package Manager Console:
+add-migration [Migration Namel -OutputDir [Path]
+Dotnet CLI:
+dotnet ef migrations add [Migration Namel --output-dir [Path]
+
+Migration Silme
+Package Manager Console:
+remove-migration
+Dotnet CLI:
+dotnet ef migrations remove
+
+Migrationlları Listeleme
+Package Manager Console
+get-migration
+Dotnet CLI
+dotnet ef migrations list
+
+Migrationlları Migrate Etme! (Up Fonksiyonu)
+Package Manager Console:
+update-database
+Dotnet CLI:
+dotnet ef database update
+
+Migrationlları Geri Alma! (Down Fonksiyonu)
+
+Package Manager Console
+update-database [Migration Name]
+Dotnet CLI
+dotnet ef database update [Migration Name]
+
+Kod Üzerinden Migrate Operasyonu
+Migration'ları tool aracılığıyla migrate edebildiğimiz gibi kod üzerinden de uygulamanın ayakta olduğu süreçte(runtime'da) veritabanını migrate edebiliyoruz.
+AppDbContext context = new();
+await context.Database.MigrateAsync();
+
+Son Uyarılar! 
+»Veritabanı sınıfları üzerinde yapılan tüm değişiklikleri migration eşliğinde gönderiniz. Böylece her bir değişiklikleri migrationllar ile kayıt altına almış olursunuz(bU da size veritabanı gelişim sürecini verir) ve ihtiyaca binaen istediğiniz noktaya geri dönüş sağlayabilirsiniz.
+» Migration'lara mümkün mertebe dokunmamak lazım. Lakin ileride ihtiyaç doğrultusunda ham sql cümlecikleri ekleyeceğimiz ve hatta Stored Procedure gibi yapıları oluşturacağımız noktalar olacaktır.
