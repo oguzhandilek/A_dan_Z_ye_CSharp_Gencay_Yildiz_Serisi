@@ -71,17 +71,93 @@ ETİcaretContext context = new();
 #region ToListAsync
 //üretilen sorguyu execute ettirmemizi sağlayan fonksiyondur.
 #region Method Syntax
-var urunler=await context.Urunler.ToListAsync();
+//var urunler=await context.Urunler.ToListAsync();
 #endregion
 #region Query Syntax
-var urunler2 = await (from urun in context.Urunler
-               select urun).ToListAsync();
-var urunler3 = from urun in context.Urunler
-               select urun;
-var datas=await urunler3.ToListAsync();
+//var urunler2 = await (from urun in context.Urunler
+//               select urun).ToListAsync();
+//var urunler3 = from urun in context.Urunler
+//               select urun;
+//var datas=await urunler3.ToListAsync();
 
 #endregion
 #endregion
+
+#region Where
+//O1uşturu1an sorguya where şartı eklememizi sağlayan bir fonksiyondur.
+
+#region Method Syntax
+//var urunler=await context.Urunler
+//    .Where(u => u.Id > 100 && u.UrunAdi.Contains("5"))
+//    .ToListAsync();
+//Console.WriteLine();
+
+#endregion
+
+#region Query Syntax
+//var urunler = from urun in context.Urunler
+//              where urun.Id > 50 && urun.UrunAdi.StartsWith("7")
+//              select urun;
+//var datas=await urunler.ToListAsync();
+
+#endregion
+#endregion
+
+#region OrderBy
+// Sorgu üzerinde sıralama yapmamızı sağlayan bir fonksiyondur.(Ascending)
+#region Method Syntax
+//var urunler = await context.Urunler
+//   .Where(u=> u.Id>50)
+//   .OrderBy(u=> u.UrunAdi) 
+//   .ToListAsync();
+#endregion
+#region Query Syntax
+//var urunler2 = from urun in context.Urunler
+//               where urun.Id>20 && urun.UrunAdi.EndsWith("5")
+//               orderby urun.UrunAdi 
+//               select urun;
+//await urunler2.ToListAsync();
+
+#endregion
+
+#endregion
+
+#region ThenBy
+//OrderBy üzerinde yapılan sıralama işlemini farklı kolonlarada uygulamamızı sağlayan bir fonksiyondur.(Ascending)
+//var urunler = context.Urunler
+//    .Where(u => u.Id > 100)
+//    .OrderBy(u => u.UrunAdi)
+//    .ThenBy(u => u.Fiyat);
+//await urunler.ToListAsync();
+
+//var urunler=from urun in context.Urunler
+//where urun.UrunAdi.Contains("20") && urun.Fiyat < 50
+//orderby urun.Fiyat, urun.Id
+//select urun;
+
+#endregion
+
+#region OrderByDescending && ThenByDescending
+//Descending olarak sıralama yapmamızı sağlayan bir fonksiyondur.
+#region Method Syntax
+//var urunler = context.Urunler
+//    .OrderByDescending(u => u.Id)
+//    .ThenByDescending(u=> u.Fiyat);
+#endregion
+#region Query Syntax
+//var urunler = from urun in context.Urunler
+//              orderby urun.Id,urun.Fiyat descending
+//              select urun;
+
+#endregion
+#endregion
+//foreach (var u in urunler)
+//{
+//    Console.WriteLine($"Id:{u.Id} Urun Adı: {u.UrunAdi} Fiyatı: {u.Fiyat}");
+//}
+#endregion
+
+#region Tekil Veri Getiren Sorgulama Fonksiyonları
 
 #endregion
 public class ETİcaretContext:DbContext
