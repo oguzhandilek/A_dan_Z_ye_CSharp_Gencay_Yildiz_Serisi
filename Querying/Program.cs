@@ -247,6 +247,106 @@ ETİcaretContext context = new();
 
 
 #endregion
+
+#region Diğer Sorgulama Fonksiyonları
+
+
+#region CountAsync
+//01uşturuLan sorgunun execute edilmesi neticesinde kaç adet satırın elde edileceğini sayısal olarak (int)bizlere bildiren fonksiyondur.
+//var urunCount = (await context.Urunler.ToListAsync()).Count(); // Bu şekilede IEnumerable 'da önce veritabanından tüm sorguyu çekip sonra memory'de satır sayısını sadık. bu işlem maliyetlidir tercih edilmemeli.
+//var urunCount = await context.Urunler.CountAsync(u=> u.Id>200);
+//Console.WriteLine(urunCount);
+#endregion
+
+#region LongCountAsync
+//01uşturuLan sorgunun execute edilmesi neticesinde kaç adet satırın elde edileceğini sayısal olarak (long)bizlere bildiren fonksiyondur.
+//var countUrun = await context.Urunler.LongCountAsync();
+//Console.WriteLine(countUrun);
+#endregion
+
+#region AnyAsync
+// Sorgu neticesinde verinin gelip gelmediğini bool türünde dönen fonksiyondur. SQL'de Existis fonksiyonuna eş değerdir.
+//var checkOut = await context.Urunler.AnyAsync(u => u.UrunAdi.Contains("1"));
+//var checkIn = await context.Urunler.Where(u=> u.UrunAdi.Contains("2")).AnyAsync();
+//Console.WriteLine(checkOut);
+//Console.WriteLine(checkIn);
+#endregion
+
+#region MaxAsync
+//VeriLen kolondaki max değeri getirir.
+//var maxFiayat = await context.Urunler.MaxAsync(u => u.Fiyat);
+//Console.WriteLine(maxFiayat);
+#endregion
+
+#region MinAsync
+//VeriLen kolondaki min değeri getirir.
+//var minFiyat = await context.Urunler.MinAsync(u => u.Fiyat);
+//Console.WriteLine(minFiyat);
+#endregion
+
+#region Distinct
+// Sorguda mükerrer kayıtlar varsa bunları tekilleştiren bir işleve sahip fonksiyondur.
+var tekilGetir = await context.Urunler.Distinct().ToListAsync();
+
+#endregion
+
+#region AllAsync
+//Bir sorgu neticesinde gelen verilerin, verilen şarta uyup uymadığını kontrol etmektedir. Eğer ki tüm veriler şarta uyuyorsa true, uymuyorsa false döndürecektir. SQL'deki Not Exists iel eşdeğerdir.
+var notExists = await context.Urunler.AllAsync(u => u.Fiyat > 1500);
+Console.WriteLine(notExists);
+#endregion
+
+#region SumAsync
+//Vermiş olduğumuz sayısal proeprtynin toplamını alır.
+var toplamFiyat = await context.Urunler.SumAsync(u=> u.Fiyat);
+Console.WriteLine(toplamFiyat);
+#endregion
+
+#region AvarageAsync
+// Vermiş olduğumuz sayısal proeprtynin aritmatik ortalamasını aLır.
+var ortlamaFiyat= await context.Urunler.AverageAsync(u=> u.Fiyat);
+Console.WriteLine(ortlamaFiyat);
+#endregion
+
+#region Contains
+// Like '%... %' sorgusu oluşturmamızı sağlar.
+//var icinde = await context.Urunler
+//    .Where(u => u.UrunAdi.Contains("5"))
+//    .ToListAsync();
+//foreach (var item in icinde)
+//{
+//    Console.WriteLine(item.UrunAdi);
+//}
+#endregion
+
+#region StartsWith
+// Like '... %' sorgusu oluşturmamızı sağlar.
+//var basinda = await context.Urunler
+//    .Where(u => u.UrunAdi.StartsWith("Ü"))
+//    .ToListAsync();
+//foreach (var item in basinda)
+//{
+//    Console.WriteLine(item.UrunAdi);
+//}
+#endregion
+
+#region EndsWith
+// Like '%...' sorgusu oluşturmamızı sağlar.
+//var sonunda = await context.Urunler
+//    .Where(u => u.UrunAdi.EndsWith("Ü"))
+//    .ToListAsync();
+//foreach (var item in sonunda)
+//{
+//    Console.WriteLine(item.UrunAdi);
+//}
+#endregion
+#endregion
+
+#region Sorgu Sonucu Dönüşüm Fonksiyonlar
+
+#endregion
+
+
 Console.WriteLine();
 public class ETİcaretContext:DbContext
 {
@@ -255,7 +355,9 @@ public class ETİcaretContext:DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=ETicaret;User Id=TestUser;Password=Test_123;");
+        //optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=ETicaret;User Id=TestUser;Password=Test_123;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ETicaret;Trusted_Connection=True;");
+
     }
 }
 
