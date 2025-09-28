@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("AlbeyazımSoft!");
@@ -436,6 +437,7 @@ ETİcaretContext context = new();
 //});
 #endregion
 #endregion
+
 
 
 Console.WriteLine();
