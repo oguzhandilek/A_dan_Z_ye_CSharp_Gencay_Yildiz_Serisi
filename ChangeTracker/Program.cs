@@ -124,8 +124,8 @@ EticaretContext context = new();
 
 #region Entry Metodu
 #region OriginalVaLues Property ' si
-var urunFiyati = context.Entry(urun).OriginalValues.GetValue<float>(nameof(Urunler.Fiyat));
-var urunAdi = context.Entry(urun).OriginalValues.GetValue<string>(nameof(Urunler.UrunAdi));
+//var urunFiyati = context.Entry(urun).OriginalValues.GetValue<float>(nameof(Urunler.Fiyat));
+//var urunAdi = context.Entry(urun).OriginalValues.GetValue<string>(nameof(Urunler.UrunAdi));
 
 #endregion
 #region CurrentValues Property'si
