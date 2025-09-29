@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Tracking.Migrations
 {
     [DbContext(typeof(ETicaretContext))]
-    partial class ETicaretContextModelSnapshot : ModelSnapshot
+    [Migration("20250929221612_mig_3")]
+    partial class mig_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +109,7 @@ namespace Tracking.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roller");
+                    b.ToTable("Rol");
                 });
 
             modelBuilder.Entity("Yazar", b =>
