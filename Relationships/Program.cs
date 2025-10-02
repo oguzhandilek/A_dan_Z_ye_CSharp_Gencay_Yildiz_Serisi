@@ -57,3 +57,35 @@ public class Depertman
 //Çoka çok ilişki
 #endregion
 #endregion
+#region Entity Framework Core 'da İlişki Yapılandırma Yöntemleri
+#region Default Conventıons
+// Varsayılan entity kurallarını kullanarak yapılan ilişki yapılandırma yöntemleridir.
+//Navigation property 'leri kullanarak ilişki şablonlarını çıkarmaktadır. I
+#endregion
+#region Data Annotations Attributes
+//Entity ' nin niteliklerine göre ince ayarlar yapmamızı sağlayan attribute ' lardır .
+//[ForeignKey], [Key]
+#endregion
+
+#region Fluent API
+// Entity modellerindeki İL işkileri yapılandırırken daha detaylı çalışmamızı sağlayan yöntemdir.
+
+#region HasOne
+// İlgili entity'nin İLİşkise1 entity'ye birebir ya da bire çok olacak şekilde ilişkisini yapılandırmaya başlayan metottur.
+
+#endregion
+
+#region HasMany
+// İlgili entity 'nin ilişkisel entity'ye çoka bir ya da çoka çok olacak şekilde ilişkisini yapıulandırmaya başlayan metottur.
+#endregion
+
+#region WithOne
+//HasOne ya da HasMany' den sonra bire bir ya da çoka bir olacak şekilde ilişki yapılandırmasını tamamlayan metottur.
+#endregion
+
+#region WithMany
+//HasOne ya da HasMany' den sonra bire çok ya da çoka çokl olacak şekilde ilişki yapılandırmasını tamamlayan metottur.
+#endregion
+#endregion
+
+#endregion
