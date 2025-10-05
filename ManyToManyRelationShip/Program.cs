@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 Console.WriteLine("Hello, World!");
 #region Default Convention
@@ -38,42 +39,111 @@ Console.WriteLine("Hello, World!");
 #region Data Annotations
 //Cross table manuel olarak oluşturulmak zorundadır.
 //Entity'Ierde oluşturduğumuz cross table entity si ile bire çok bir ilişki kurulmalı.
-//CTlda composite primary keyli data ile manuel kuramıyoruz. Bunun için de FLuent API 'da çalışma yaopmamız gerekiyor.
-//Cross tabLela karşılık bir entity modeli oluşturuyorsak eğer bunu context sınıfı içerisinde DbSet property 'si olarka bildirmek mecburiyetinde değiliz!
+//CTlda composite primary key'i data ile manuel kuramıyoruz. Bunun için de FLuent API 'da çalışma yapmamız gerekiyor.
+//Cross table'a karşılık bir entity modeli oluşturuyorsak eğer bunu context sınıfı içerisinde DbSet property 'si olarkta bildirmek mecburiyetinde değiliz!
+//public class Yazar
+//{
+//    public int Id { get; set; }
+//    public string YazarAdi { get; set; }
+
+
+//    public ICollection<KitapYazar> Kitaplar { get; set; }
+//}
+//public class Kitap
+//{
+//    public int Id { get; set; }
+//    public string KitapAdi { get; set; }
+
+//    public ICollection<KitapYazar> Yazarlar { get; set; }
+//}
+//public class KitapYazar
+//{
+
+//    public int KitapId { get; set; }
+
+//    public int YazarId { get; set; }
+//    //[ForeignKey(nameof(Kitap))]
+//    //public int KId { get; set; }
+//    //[ForeignKey(nameof(Yazar))]
+//    //public int YId { get; set; }
+
+//    public Yazar Yazar { get; set; }
+//    public Kitap Kitap { get; set; }
+//}
+//public class EKitapDbContext : DbContext
+//{
+//    public DbSet<Yazar> Yazarlar { get; set; }
+//    public DbSet<Kitap> Kitaplar { get; set; }
+
+//    //KitapYazar Dbset'ini oluşturmaya gerek yok açıklamasaı yukarıda
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//    {
+
+//        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=EKitapDb;Trusted_Connection=True;");
+
+//    }
+
+//    protected override void OnModelCreating(ModelBuilder modelBuilder)
+//    {
+//        modelBuilder.Entity<KitapYazar>()
+//            .HasKey(ky => new { ky.KitapId, ky.YazarId });
+//    }
+//}
 #endregion
-public class Yazar
-{
-    public int Id { get; set; }
-    public string YazarAdi { get; set; }
 
+#region Fluent API
+//Cross table manuel oluşturulmalı
+//DbSet olarak eklenmesine lüzum yok,
+//Composite PK Haskey metodu ile kurulmalı!
 
-    public ICollection<KitapYazar> Kitaplar { get; set; }
-}
-public class Kitap
-{
-    public int Id { get; set; }
-    public string KitapAdi { get; set; }
+//public class Yazar
+//{
+//    public int Id { get; set; }
+//    public string YazarAdi { get; set; }
 
-    public ICollection<KitapYazar> Yazarlar { get; set; }
-}
-public class KitapYazar
-{
-    [Key]
-    public int KitapId { get; set; }
-    [Key]
-    public int YazarId { get; set; }
+//    public ICollection<KitapYazar> Kitaplar { get; set; }
 
-    public Yazar Yazar { get; set; }
-    public Kitap Kitap { get; set; }
-}
-public class EKitapDbContext : DbContext
-{
-    public DbSet<Yazar> Yazarlar { get; set; }
-    public DbSet<Kitap> Kitaplar { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+//}
 
-        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=EKitapDb;Trusted_Connection=True;");
+//public class Kitap
+//{
+//    public int Id { get; set; }
+//    public string KitapAdi { get; set; }
 
-    }
-}
+//    public ICollection<KitapYazar> Yazarlar { get; set; }
+//}
+
+//public class KitapYazar
+//{
+//    public int YazarId { get; set; }
+//    public int KitapId { get; set; }
+
+//    public Yazar Yazar { get; set; }
+//    public Kitap Kitap { get; set; }
+
+//}
+//public class EKitapDbContext:DbContext
+//{
+//    public DbSet<Yazar> Yazarlar { get; set; }
+//    public DbSet<Kitap> Kitaplar { get; set; }
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//    {
+//        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=EKitapDb;Trusted_Connection=True;");
+//    }
+//    protected override void OnModelCreating(ModelBuilder modelBuilder)
+//    {
+//        modelBuilder.Entity<KitapYazar>()
+//            .HasKey(ky => new { ky.KitapId, ky.YazarId });
+//        modelBuilder.Entity<KitapYazar>()
+//            .HasOne(ky => ky.Kitap)
+//            .WithMany(k => k.Yazarlar)
+//            .HasForeignKey(ky=> ky.KitapId);
+
+//        modelBuilder.Entity<KitapYazar>()
+//            .HasOne(ky=> ky.Yazar)
+//            .WithMany(y=> y.Kitaplar)
+//            .HasForeignKey(ky=> ky.YazarId);
+
+//    }
+//}
+#endregion
