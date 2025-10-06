@@ -103,8 +103,11 @@ class ESirketDbContext:DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Depertman>().HasKey(d=> d.Id);
+
         modelBuilder.Entity<Calisan>()
-            .HasOne(c=> c.Depertman)
-            .WithMany(c=> c.Calisanlar)            .
+            .HasOne(c => c.Depertman)
+            .WithMany(c => c.Calisanlar)
+            .HasForeignKey(c => c.Id);
     }
 }

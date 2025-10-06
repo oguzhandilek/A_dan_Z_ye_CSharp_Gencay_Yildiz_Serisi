@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace One_To_Many_RelationShip.Migrations
+namespace Saving_Related_Data.Migrations
 {
-    [DbContext(typeof(ESirketDbContext))]
-    [Migration("20251001050739_mig_1")]
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20251006205436_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -23,7 +23,7 @@ namespace One_To_Many_RelationShip.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Calisan", b =>
+            modelBuilder.Entity("Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,21 +31,16 @@ namespace One_To_Many_RelationShip.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Adi")
+                    b.Property<string>("AuthorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepertmanId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DepertmanId");
-
-                    b.ToTable("Calisanlar");
+                    b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("Depertman", b =>
+            modelBuilder.Entity("Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,29 +48,57 @@ namespace One_To_Many_RelationShip.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DepertmanAdi")
+                    b.Property<string>("BookName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Depertmanlar");
+                    b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Calisan", b =>
+            modelBuilder.Entity("BookAuthor", b =>
                 {
-                    b.HasOne("Depertman", "Depertman")
-                        .WithMany("Calisanlar")
-                        .HasForeignKey("DepertmanId")
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookAuthor");
+                });
+
+            modelBuilder.Entity("BookAuthor", b =>
+                {
+                    b.HasOne("Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Depertman");
+                    b.HasOne("Book", "Book")
+                        .WithMany("Authors")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("Depertman", b =>
+            modelBuilder.Entity("Author", b =>
                 {
-                    b.Navigation("Calisanlar");
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Book", b =>
+                {
+                    b.Navigation("Authors");
                 });
 #pragma warning restore 612, 618
         }

@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One_to_One_RelationShip", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToManyRelationShip", "ManyToManyRelationShip\ManyToManyRelationShip.csproj", "{5245A90E-EBF5-4761-8321-C0737EBA2356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saving_Related_Data", "Saving_Related_Data\Saving_Related_Data.csproj", "{5AA42744-DA25-43C9-906B-B30796AD1705}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{5245A90E-EBF5-4761-8321-C0737EBA2356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5245A90E-EBF5-4761-8321-C0737EBA2356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5245A90E-EBF5-4761-8321-C0737EBA2356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AA42744-DA25-43C9-906B-B30796AD1705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AA42744-DA25-43C9-906B-B30796AD1705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AA42744-DA25-43C9-906B-B30796AD1705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AA42744-DA25-43C9-906B-B30796AD1705}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

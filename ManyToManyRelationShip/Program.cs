@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 Console.WriteLine("Hello, World!");
 #region Default Convention
-// İki entity arasındaki ilişkiyi navigation propertyler üzerinden çoğul olarak kurmalıyız. (IC011ection, List)
+// İki entity arasındaki ilişkiyi navigation propertyler üzerinden çoğul olarak kurmalıyız. (ICollection, List)
 //DefauLt Convention 'da cross tabLe'ı manuel oluşturmak zorunda değiliz. EF Core tasarıma uygun bir şekilde cross table'ı kendisi otomatik basacak ve generate edecektir. 
 // Ve oluşturulan cross table içerisinde composite primary key'i de otomatik oluşturmuş olacaktır.
 //public class Yazar

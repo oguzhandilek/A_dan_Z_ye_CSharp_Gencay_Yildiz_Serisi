@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ManyToManyRelationShip.Migrations
+namespace Saving_Related_Data.Migrations
 {
     /// <inheritdoc />
     public partial class mig_1 : Migration
@@ -11,72 +11,72 @@ namespace ManyToManyRelationShip.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Kitaplar",
+                name: "Authors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    KitapAdi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kitaplar", x => x.Id);
+                    table.PrimaryKey("PK_Authors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Yazarlar",
+                name: "Books",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    YazarAdi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BookName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Yazarlar", x => x.Id);
+                    table.PrimaryKey("PK_Books", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "KitapYazar",
+                name: "BookAuthor",
                 columns: table => new
                 {
-                    YazarId = table.Column<int>(type: "int", nullable: false),
-                    KitapId = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    AuthorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KitapYazar", x => new { x.KitapId, x.YazarId });
+                    table.PrimaryKey("PK_BookAuthor", x => new { x.AuthorId, x.BookId });
                     table.ForeignKey(
-                        name: "FK_KitapYazar_Kitaplar_KitapId",
-                        column: x => x.KitapId,
-                        principalTable: "Kitaplar",
+                        name: "FK_BookAuthor_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_KitapYazar_Yazarlar_YazarId",
-                        column: x => x.YazarId,
-                        principalTable: "Yazarlar",
+                        name: "FK_BookAuthor_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_KitapYazar_YazarId",
-                table: "KitapYazar",
-                column: "YazarId");
+                name: "IX_BookAuthor_BookId",
+                table: "BookAuthor",
+                column: "BookId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "KitapYazar");
+                name: "BookAuthor");
 
             migrationBuilder.DropTable(
-                name: "Kitaplar");
+                name: "Authors");
 
             migrationBuilder.DropTable(
-                name: "Yazarlar");
+                name: "Books");
         }
     }
 }
