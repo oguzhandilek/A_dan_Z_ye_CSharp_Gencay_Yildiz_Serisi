@@ -159,7 +159,7 @@ public class Post
 {
 
     public int Id { get; set; }
-    public int BlogId { get; set; }
+    public int? BlogId { get; set; } //SetNull için nullable yaptık
     public string Title { get; set; }
 
     public Blog Blog { get; set; }
@@ -224,11 +224,14 @@ public class ApplicationDbContext : DbContext
             .HasOne(p => p.Person)
             .WithOne(p => p.Address)
             .HasForeignKey<Address>(p => p.Id);
+            //.OnDelete(DeleteBehavior.SetNull) SetNull birebir ilişkilerde kullanılmaz çünkü PK ve FK ler aynı kolona tanımlıdır
 
         modelBuilder.Entity<Blog>()
             .HasMany(b => b.Posts)
             .WithOne(b => b.Blog)
-            .HasForeignKey(p => p.BlogId);
+            .HasForeignKey(p => p.BlogId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<BookAuthor>()
             .HasOne(b => b.Author)
