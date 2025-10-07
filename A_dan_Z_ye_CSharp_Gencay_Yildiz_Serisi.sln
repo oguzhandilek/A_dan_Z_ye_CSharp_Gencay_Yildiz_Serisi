@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backing_Fields", "Backing_F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow_Property", "Shadow_Property\Shadow_Property.csproj", "{3FCA85DB-697B-4BF9-BE19-94FC5FAE87C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ef_Core_Configurations", "Ef_Core_Configurations\Ef_Core_Configurations.csproj", "{5F2E2858-DA2E-4913-8389-0B395C070EDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{3FCA85DB-697B-4BF9-BE19-94FC5FAE87C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FCA85DB-697B-4BF9-BE19-94FC5FAE87C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FCA85DB-697B-4BF9-BE19-94FC5FAE87C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2E2858-DA2E-4913-8389-0B395C070EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2E2858-DA2E-4913-8389-0B395C070EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2E2858-DA2E-4913-8389-0B395C070EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2E2858-DA2E-4913-8389-0B395C070EDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
