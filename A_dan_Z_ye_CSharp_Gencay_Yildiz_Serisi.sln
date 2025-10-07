@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updating_Related_Data", "Up
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deleting_Related_Data", "Deleting_Related_Data\Deleting_Related_Data.csproj", "{73E898D0-7220-46E1-A9A4-15741906127A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backing_Fields", "Backing_Fields\Backing_Fields.csproj", "{BEC5CE03-ADCD-4807-887B-87F64FD81A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{73E898D0-7220-46E1-A9A4-15741906127A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E898D0-7220-46E1-A9A4-15741906127A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E898D0-7220-46E1-A9A4-15741906127A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC5CE03-ADCD-4807-887B-87F64FD81A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC5CE03-ADCD-4807-887B-87F64FD81A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC5CE03-ADCD-4807-887B-87F64FD81A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC5CE03-ADCD-4807-887B-87F64FD81A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
