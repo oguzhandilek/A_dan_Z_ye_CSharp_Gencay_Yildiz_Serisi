@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seperate_Configuration_Clas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Seeding", "Data_Seeding\Data_Seeding.csproj", "{D7BA49E2-1696-4C3C-A055-B57AB67D06C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inheritance_Table_Per_Hierarchy", "Inheritance_Table_Per_Hierarchy\Inheritance_Table_Per_Hierarchy.csproj", "{3E52C421-F3F8-4105-85C9-44FD0208DA14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{D7BA49E2-1696-4C3C-A055-B57AB67D06C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7BA49E2-1696-4C3C-A055-B57AB67D06C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7BA49E2-1696-4C3C-A055-B57AB67D06C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E52C421-F3F8-4105-85C9-44FD0208DA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E52C421-F3F8-4105-85C9-44FD0208DA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E52C421-F3F8-4105-85C9-44FD0208DA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E52C421-F3F8-4105-85C9-44FD0208DA14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
