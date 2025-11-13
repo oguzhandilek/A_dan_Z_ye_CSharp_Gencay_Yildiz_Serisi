@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 #region Table Per Hierarchy (TPH) Nedir?
 //KaLıtımsaL ilişkiye sahip olan entityLerin olduğu senaryolarda her bir hiyerarşiye karşılık bir tablo oluşturan davranıştır.
 #endregion
@@ -12,14 +14,37 @@
 //O yüzden herhangi bir konfigüreasyon gerektirmez!
 //Entity1er kendi aralarında kalıtımsal ilişkiye sahip olmalı ve bu entityLerin hepsi DbContext nesnesine DbSet olarak eklenmelidir.
 #endregion
-using Microsoft.EntityFrameworkCore;
 
+#region Discriminator Kolonu Nedir?
+// Table Per Hierarchy yaklaşımı neticesinde kümülatif olarak inşa edilmiş tablonun hangi entitye karşılık veri tuttuğunu ayırt edebilmemizi sağlayan bir kolondur. 
+//EF Core tarafından otomatik olarak tabloya yerleştirilir. 
+//DefauLt olarak içerisinde entity isimlerini tutar. 
+//Discriminator kolonunu komple özelleştirebiliriz.
+#endregion
+
+#region Discriminator Kolon Adı Nasıl Değiştirilir?
+//ÖnceIik1e hiyerarşinin başında hangi sınıf varsa onun Fluent API Ida konfigürasyonuna gidilmeli . 
+// Ardından HasDiscriminator fonksiyonu ile özelleştirilmeli.
+#endregion
+
+
+#region Discriminator Değerleri Nasıl Değiştirilir?
+// Yine hiyearşinin bşaındaki entity konfigürasyonlarına gelip, HasDiscriminator fonksiyonu ile özelleştirmede bulunarak ardından HasVaLue fonksiyonu ile hangi entitye karşılık hangi değerin girieceğini belirtilen türde ifade edebilirsiniz.
+#endregion
+
+
+
+ApplicationDbContext context = new();
+
+Employee employee = new() { Name = "Oğuzhan", Department="Yazılım Şube" };
+await context.AddAsync(employee);
+await context.SaveChangesAsync();
 Console.WriteLine("Hello, World!");
 public class Person
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public string? Department { get; set; }
+    public string? Surname { get; set; }
 }
 public class Employee:Person
 {
@@ -45,5 +70,16 @@ public class ApplicationDbContext:DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ApplicationDb;Trusted_Connection=True;");
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Person>()
+            .HasDiscriminator<int>("ServisTip")
+            .HasValue<Person>(1)
+            .HasValue<Employee>(2)
+            .HasValue<Customer>(3)
+            .HasValue<Technician>(4);
     }
 }

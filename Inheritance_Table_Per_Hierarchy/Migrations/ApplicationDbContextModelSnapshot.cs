@@ -28,22 +28,20 @@ namespace Inheritance_Table_Per_Hierarchy.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Department")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                    b.Property<int>("ServisTip")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Persons");
 
-                    b.HasDiscriminator().HasValue("Person");
+                    b.HasDiscriminator<int>("ServisTip").HasValue(1);
 
                     b.UseTphMappingStrategy();
                 });
@@ -55,14 +53,17 @@ namespace Inheritance_Table_Per_Hierarchy.Migrations
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Customer");
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Employee", b =>
                 {
                     b.HasBaseType("Person");
 
-                    b.HasDiscriminator().HasValue("Employee");
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("Technician", b =>
@@ -72,7 +73,7 @@ namespace Inheritance_Table_Per_Hierarchy.Migrations
                     b.Property<string>("Branch")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Technician");
+                    b.HasDiscriminator().HasValue(4);
                 });
 #pragma warning restore 612, 618
         }
