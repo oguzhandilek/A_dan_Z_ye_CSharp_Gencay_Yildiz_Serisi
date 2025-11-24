@@ -84,6 +84,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Employee>().ToTable("Employees");
         modelBuilder.Entity<Customer>().ToTable("Customers");
         modelBuilder.Entity<Technician>().ToTable("Technicians");
+
     }
 
     
