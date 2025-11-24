@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inheritance_Table_Per_Hierarchy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251113195048_mig_1")]
+    [Migration("20251124050638_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />

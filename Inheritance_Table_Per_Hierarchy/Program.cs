@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 
+ApplicationDbContext context = new();
+
 #region Table Per Hierarchy (TPH) Nedir?
 //KaLıtımsaL ilişkiye sahip olan entityLerin olduğu senaryolarda her bir hiyerarşiye karşılık bir tablo oluşturan davranıştır.
 #endregion
@@ -32,13 +34,49 @@ using Microsoft.EntityFrameworkCore;
 // Yine hiyearşinin bşaındaki entity konfigürasyonlarına gelip, HasDiscriminator fonksiyonu ile özelleştirmede bulunarak ardından HasVaLue fonksiyonu ile hangi entitye karşılık hangi değerin girieceğini belirtilen türde ifade edebilirsiniz.
 #endregion
 
+#region TPH'da Veri Ekleme
+//Davranışların hiçbirinde veri eklerken, silerken, güncellerken vs. normal operasyonların dışında bir işlem yapılmaz!
+//Hangi davranışını kullanıyorsanız EF Core ona göre arkaplanda modellemeyi gerçekleştirecektir.
+
+#endregion
+
+#region TPH'da Veri Silme
+//TPH davranışında silme operasyonu yine entity üzerinden gerçekleştirilir.
+//var getById= await context.Employees.FindAsync(1);
+//context.Employees.Remove(getById);
+//await context.SaveChangesAsync();
+
+//var customers= await context.Customers.ToListAsync();
+//context.Customers.RemoveRange(customers);
+//await context.SaveChangesAsync();
 
 
-ApplicationDbContext context = new();
+#endregion
 
-Employee employee = new() { Name = "Oğuzhan", Department="Yazılım Şube" };
-await context.AddAsync(employee);
-await context.SaveChangesAsync();
+#region TPH'da Veri Güncelleme
+//TPH davranışında güncelleme operasyonu yine entity üzerinden gerçekleştirilir.
+//var updatePerson = await context.Employees.FindAsync(2);
+//updatePerson.Name = "Sülettin";
+//updatePerson.Surname = "Sedengeçti";
+//await context.SaveChangesAsync();
+
+#endregion
+
+#region TPH'da Veri Sorgulama
+// Veri sorgulama oeprasyonu bilinen DbSet propertysi üzerinden sorgulamadır. Ancak burada .dikkat edilmesi gereken bir husus vardır. O da şu;
+var employes=await context.Employees.ToListAsync();
+var techs=await context.Technicians.ToListAsync();
+//kalıtımsal ilişkiye göre yapılan sorgulamada üst sınıf alt sınıftaki verileride kapsamaktadır. O yüzden üst sınıfların sorgulamalarında alt sınıfların verileride gelecektir buna dikkat edilmelidir.
+// Sorgulama süreçlerinde EF Core generate edilen sorguya bir where şartı eklemektedir.l
+#endregion
+
+#region Ferklı Entity'lerde Aynı İsimde Sütunalrın Olduğu Durumlar
+// Entity1erde mükerrer kolonlar olabilir. Bu kolonları EF core isimsel olarak özelleştirip ayıracaktır .
+#endregion
+
+
+
+
 Console.WriteLine("Hello, World!");
 public class Person
 {
@@ -52,6 +90,7 @@ public class Employee:Person
 }
 public class Customer:Person
 {
+    
     public string? CompanyName { get; set; }    
 }
 
@@ -69,7 +108,7 @@ public class ApplicationDbContext:DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ApplicationDb;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=TPH;Trusted_Connection=True;");
 
     }
 
