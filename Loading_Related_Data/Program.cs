@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 ApplicationDbContext context = new();
 
@@ -118,9 +120,9 @@ ApplicationDbContext context = new();
 #endregion
 
 #region Collection'Iar da Aggregate Operatör Uygulamak
-var employee= await context.Employees.FirstOrDefaultAsync(e=> e.Id == 1);
-var count = await context.Entry(employee).Collection(e=> e.Orders).Query().CountAsync();
-Console.WriteLine();
+//var employee= await context.Employees.FirstOrDefaultAsync(e=> e.Id == 1);
+//var count = await context.Entry(employee).Collection(e=> e.Orders).Query().CountAsync();
+//Console.WriteLine();
 #endregion
 #region Collection'larda Filtreleme Gerçekleştirmek
 //var employe= await context.Employees.FirstOrDefaultAsync(e=> e.Id == 2);
@@ -128,47 +130,221 @@ Console.WriteLine();
 #endregion
 #endregion
 
+
+
+
 #region Lazy Loading
+//var employee = await context.Employees.FirstOrDefaultAsync(e => e.Id == 3);
+
+//Console.WriteLine(employee.Region.Name);
+
+#region Lazy Loading Nedir?
+//Navigation propertylLer üzerinde bir işlem yapılmaya çalışıldığı taktirde ilgili propertynin/ ye/ temsil ettiği/ karşılık gelen tabloya özel bir sorgu oluşturulup execute edilmesini ve verilerin yüklenmesini sağlayan bir yaklaşımdır.
+#endregion
+
+#region Proxy'lerle Lazy Loading 
+//Microsoft.EntityFrameworkCore.Proxies
+#region Propertylerin virtual Olması
+//Eğer ki proxler üzerinden lazy Ioading operasyonu gerçekleştiriyorsanız Navigtation Propertylerin virtual ile işaretlenmiş olması gerekmektedir. Aksi taktirde patlama meydana gelecektir . 
+#endregion
+#endregion
+
+#region Proxy Olmaksızın Lazy Loading
+// Prox'ler tüm platformlarda desteklenmeyebilir. Böyle bir durumda manuel bir şekilde lazy loading'i uygulamak mecburiyetinde kalabiliriz .
+//ManueL yapılan Lazy Loading operasyonlarında Navigation Proeprtylerin virtual ile işaretlenmesine gerek yoktur!
+var employee = await context.Employees.FindAsync(1);
+Console.WriteLine(employee.Region.Name);
+Console.WriteLine(employee.Orders[1].OrderDate.Month);
+#region ILazyLoader Interface'i İle Lazy Loading
+//Microsoft.EntityFrameworkCore.Abstractions
+#endregion
+#region Delegate İle Lazy Loading
 
 #endregion
 
+#region N+1 Problemi
+//Lazy Loading, kullanım açısından oldukça maliyetli ve performans düşürücü bir etkiye sahip yöntemdir. O yüzden kullanırken mümkün mertebe dikkatli olmalı ve özellikle navigation propertylerin döngüsel tetiklenme durumlarında Lazy Loading'i tercih etmemeye odaklanmalıyız. Aksi taktirde her bir tetiklemeye karşılık aynı sorguları üretip execute edecektir. Bu durumu N+1 Problemi olarak nitelendirmekteyiz .
+//Mümkün mertebe, ilişkisel verileri eklerken Lazy Loading kullanmamaya özen göstermeliyiz.
+#endregion
+#endregion
+
+#endregion
 #endregion
 
 Console.WriteLine("Hello, World!");
 
+#region ILazyLoader Interface'i ile LazyLaoding 
+//public class Person
+//{
+//    public int Id { get; set; }
+//}
+//public class Employee
+//{
+//    private readonly ILazyLoader _lazyLoader;
+//    private Region _region;
+//    private List<Order> _orders;
+//    public Employee()
+//    {
+//    }
+//    public Employee(ILazyLoader lazyLoader)
+//        => _lazyLoader = lazyLoader;
+
+//    public int Id { get; set; }
+//    public int RegionId { get; set; }
+//    public string? Name { get; set; }
+//    public string? Surname { get; set; }
+//    public int Salary { get; set; }
+
+//    //LazyLoadig operasyonunu aşağıdaki gibi manuel olarak kullanacaksak virtual ile işaretlemeye gerek yok
+//    public virtual Region Region
+//    {
+//        get => _lazyLoader?.Load(this, ref _region);
+//        set => _region = value;
+//    }
+//    public virtual List<Order> Orders
+//    {
+//        get => _lazyLoader.Load(this, ref _orders);
+//        set => value = _orders;
+//    }
+
+
+//}
+
+//public class Region
+//{
+//    private readonly ILazyLoader _lazyLoader;
+//    private ICollection<Employee> _employees;
+
+//    public Region()
+//    {
+//    }
+//    public Region(ILazyLoader lazyLoader)
+//    {
+//        _lazyLoader = lazyLoader;
+//    }
+
+//    public int Id { get; set; }
+//    public string Name { get; set; }
+
+//    public virtual ICollection<Employee> Employees
+//    {
+//        get => _lazyLoader.Load(this, ref _employees);
+//        set => _employees = value;
+//    }
+//}
+
+//public class Order
+//{
+//    private readonly ILazyLoader _lazyLoader;
+//    private Employee _employee;
+
+//    public Order()
+//    {
+//    }
+//    public Order(ILazyLoader lazyLoader)
+//    {
+//        _lazyLoader = lazyLoader;
+//    }
+
+//    public int Id { get; set; }
+//    public int EmployeeId { get; set; }
+//    public DateTime OrderDate { get; set; }
+
+//    public virtual Employee Employee
+//    {
+//        get => _lazyLoader.Load(this, ref _employee);
+//        set => value = _employee;
+//    }
+
+//}
+#endregion
+
+#region Delegate İle LazyLaoding
 public class Person
 {
     public int Id { get; set; }
 }
 public class Employee
 {
+    private readonly ILazyLoader _lazyLoader;
+    private Region _region;
+    private List<Order> _orders;
+    public Employee()
+    {
+    }
+    public Employee(ILazyLoader lazyLoader)
+        => _lazyLoader = lazyLoader;
+
     public int Id { get; set; }
     public int RegionId { get; set; }
     public string? Name { get; set; }
     public string? Surname { get; set; }
     public int Salary { get; set; }
 
-    public Region Region { get; set; }
-    public virtual List<Order> Orders { get; set; }
+    //LazyLoadig operasyonunu aşağıdaki gibi manuel olarak kullanacaksak virtual ile işaretlemeye gerek yok
+    public virtual Region Region
+    {
+        get => _lazyLoader?.Load(this, ref _region);
+        set => _region = value;
+    }
+    public virtual List<Order> Orders
+    {
+        get => _lazyLoader.Load(this, ref _orders);
+        set => value = _orders;
+    }
+
+
 }
 
 public class Region
 {
+    private readonly ILazyLoader _lazyLoader;
+    private ICollection<Employee> _employees;
+
+    public Region()
+    {
+    }
+    public Region(ILazyLoader lazyLoader)
+    {
+        _lazyLoader = lazyLoader;
+    }
+
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public virtual ICollection<Employee> Employees { get; set; }
+    public virtual ICollection<Employee> Employees
+    {
+        get => _lazyLoader.Load(this, ref _employees);
+        set => _employees = value;
+    }
 }
 
 public class Order
 {
+    private readonly ILazyLoader _lazyLoader;
+    private Employee _employee;
+
+    public Order()
+    {
+    }
+    public Order(ILazyLoader lazyLoader)
+    {
+        _lazyLoader = lazyLoader;
+    }
+
     public int Id { get; set; }
     public int EmployeeId { get; set; }
     public DateTime OrderDate { get; set; }
 
-    public Employee Employee { get; set; }
+    public virtual Employee Employee
+    {
+        get => _lazyLoader.Load(this, ref _employee);
+        set => value = _employee;
+    }
 
 }
+#endregion
+
 
 public class ApplicationDbContext:DbContext
 {
@@ -178,7 +354,11 @@ public class ApplicationDbContext:DbContext
     public DbSet<Region> Regions { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=LRDDb;Trusted_Connection=True;");
+        optionsBuilder
+            .UseLazyLoadingProxies(false) //manuel lazy loading iin false çektik
+            .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=LRDDb;Trusted_Connection=True;");
+
+        //optionsBuilder.UseLazyLoadingProxies();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
