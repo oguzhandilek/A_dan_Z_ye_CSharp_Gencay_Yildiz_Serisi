@@ -27,22 +27,21 @@ namespace Loading_Related_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    RegionId = table.Column<int>(type: "int", nullable: true),
+                    RegionId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salary = table.Column<int>(type: "int", nullable: true)
+                    Salary = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Persons_Regions_RegionId",
+                        name: "FK_Employees_Regions_RegionId",
                         column: x => x.RegionId,
                         principalTable: "Regions",
                         principalColumn: "Id",
@@ -62,9 +61,9 @@ namespace Loading_Related_Data.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Persons_EmployeeId",
+                        name: "FK_Orders_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Persons",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -79,14 +78,14 @@ namespace Loading_Related_Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Persons",
-                columns: new[] { "Id", "Discriminator", "Name", "RegionId", "Salary", "Surname" },
+                table: "Employees",
+                columns: new[] { "Id", "Name", "RegionId", "Salary", "Surname" },
                 values: new object[,]
                 {
-                    { 1, "Employee", "Enver", 1, 1000, "İttihat" },
-                    { 2, "Employee", "Talat", 2, 2000, "Terakki" },
-                    { 3, "Employee", "Cemal", 1, 3000, "Perver" },
-                    { 4, "Employee", "Hamit", 1, 5000, "Saltanat" }
+                    { 1, "Enver", 1, 1000, "İttihat" },
+                    { 2, "Talat", 2, 2000, "Terakki" },
+                    { 3, "Cemal", 1, 3000, "Perver" },
+                    { 4, "Hamit", 1, 5000, "Saltanat" }
                 });
 
             migrationBuilder.InsertData(
@@ -107,14 +106,14 @@ namespace Loading_Related_Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employees_RegionId",
+                table: "Employees",
+                column: "RegionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_EmployeeId",
                 table: "Orders",
                 column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Persons_RegionId",
-                table: "Persons",
-                column: "RegionId");
         }
 
         /// <inheritdoc />
@@ -124,7 +123,7 @@ namespace Loading_Related_Data.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Regions");

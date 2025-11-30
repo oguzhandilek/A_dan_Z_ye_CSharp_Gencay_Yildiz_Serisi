@@ -95,7 +95,37 @@ ApplicationDbContext context = new();
 #endregion
 
 #region Explicit Loading
+//OLuşturuLan sorguya eklenecek verilerin şartlara bağlı bir şekilde/ ihtiyaçlara istinaden yüklenmesini sağlayan bir yaklaşımdır.
 
+#region Reference
+//Exp1icit Loading sürecinde ilişkisel olarak sorguya eklenmek istenen tablonun navigation propertysi eğer ki tekil bir türse bu tabloyu reference ile sorguya ekleyebilemkteyiz.
+
+//var employee = await context.Employees.FirstOrDefaultAsync(e=> e.Id == 1);
+//
+//
+//
+//await context.Entry(employee).Reference(e=> e.Region).LoadAsync();
+#endregion
+#region Collection
+//ExpLicit Loading sürecinde ilişkisel olarak sorguya eklenmek istenen tablonun navigation propertysi eğer ki çoğul/koleksiyoneL bir türse bu tabloyu Collection ile sorguya ekleyebilemkteyiz. 
+
+//var employe = await context.Employees.FirstOrDefaultAsync(e => e.Id == 2);  
+////
+////
+////
+////
+//await context.Entry(employe).Collection(w=> w.Orders).LoadAsync();
+#endregion
+
+#region Collection'Iar da Aggregate Operatör Uygulamak
+var employee= await context.Employees.FirstOrDefaultAsync(e=> e.Id == 1);
+var count = await context.Entry(employee).Collection(e=> e.Orders).Query().CountAsync();
+Console.WriteLine();
+#endregion
+#region Collection'larda Filtreleme Gerçekleştirmek
+//var employe= await context.Employees.FirstOrDefaultAsync(e=> e.Id == 2);
+//var orders= await context.Entry(employe).Collection(e=> e.Orders).Query().Where(o=> o.OrderDate.Month==DateTime.Now.Month).ToListAsync();
+#endregion
 #endregion
 
 #region Lazy Loading
@@ -110,12 +140,12 @@ public class Person
 {
     public int Id { get; set; }
 }
-public class Employee:Person
+public class Employee
 {
-    //public int Id { get; set; }
+    public int Id { get; set; }
     public int RegionId { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
+    public string? Name { get; set; }
+    public string? Surname { get; set; }
     public int Salary { get; set; }
 
     public Region Region { get; set; }
@@ -142,13 +172,13 @@ public class Order
 
 public class ApplicationDbContext:DbContext
 {
-    public DbSet<Person> Persons { get; set; }
+    //public DbSet<Person> Persons { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<Region> Regions { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=LRDDb;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=LRDDb;Trusted_Connection=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

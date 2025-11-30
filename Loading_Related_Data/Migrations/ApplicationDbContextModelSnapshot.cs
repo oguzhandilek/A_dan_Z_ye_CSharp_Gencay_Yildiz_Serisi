@@ -21,6 +21,67 @@ namespace Loading_Related_Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Enver",
+                            RegionId = 1,
+                            Salary = 1000,
+                            Surname = "İttihat"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Talat",
+                            RegionId = 2,
+                            Salary = 2000,
+                            Surname = "Terakki"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Cemal",
+                            RegionId = 1,
+                            Salary = 3000,
+                            Surname = "Perver"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Hamit",
+                            RegionId = 1,
+                            Salary = 5000,
+                            Surname = "Saltanat"
+                        });
+                });
+
             modelBuilder.Entity("Order", b =>
                 {
                     b.Property<int>("Id")
@@ -104,28 +165,6 @@ namespace Loading_Related_Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Persons");
-
-                    b.HasDiscriminator().HasValue("Person");
-
-                    b.UseTphMappingStrategy();
-                });
-
             modelBuilder.Entity("Region", b =>
                 {
                     b.Property<int>("Id")
@@ -157,59 +196,13 @@ namespace Loading_Related_Data.Migrations
 
             modelBuilder.Entity("Employee", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasOne("Region", "Region")
+                        .WithMany("Employees")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RegionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Salary")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("RegionId");
-
-                    b.HasDiscriminator().HasValue("Employee");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Enver",
-                            RegionId = 1,
-                            Salary = 1000,
-                            Surname = "İttihat"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Talat",
-                            RegionId = 2,
-                            Salary = 2000,
-                            Surname = "Terakki"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Cemal",
-                            RegionId = 1,
-                            Salary = 3000,
-                            Surname = "Perver"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hamit",
-                            RegionId = 1,
-                            Salary = 5000,
-                            Surname = "Saltanat"
-                        });
+                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("Order", b =>
@@ -225,23 +218,12 @@ namespace Loading_Related_Data.Migrations
 
             modelBuilder.Entity("Employee", b =>
                 {
-                    b.HasOne("Region", "Region")
-                        .WithMany("Employees")
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Region");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Region", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("Employee", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
