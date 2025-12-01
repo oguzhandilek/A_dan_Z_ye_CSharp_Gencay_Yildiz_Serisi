@@ -6,9 +6,60 @@ ApplicationDbContext context = new();
 
 #region Join
 #region Query Syntax
+//var query = from photo in context.Photos
+//            join person in context.Persons
+//            on photo.PersonId equals person.Id
+//            select new
+//            {
+//                person.Name,
+//                photo.Url,
+//            };
+//var datas=await query.ToListAsync();
 
+//var ordersQeury = from order in context.Orders
+//                  join person in context.Persons
+//                  on order.PersonId equals person.Id
+//                  where person.Name.Contains("uh")
+//                  select new
+//                  {
+//                      person.Name,
+//                      order.Description,
+//                  };
+//var orders= await ordersQeury.ToListAsync();
 #endregion
 #region Method Syntax
+//var query = context.Photos
+//    .Join(context.Persons,
+//    photo=> photo.PersonId,
+//    person=> person.Id,
+//    (photo,person)=> new {
+//    person.Name,
+//    photo.Url,
+//    });
+//var datas= await query.ToListAsync();
+
+//var orders = await context.Orders
+//    .Join(context.Persons, order =>
+//    order.PersonId,
+//    person => person.Id,
+//    (order, person) => new
+//    {
+//        person.Name,
+//        order.Description,
+//    })
+//    .Where(person => person.Name.Contains("u"))
+//    .ToListAsync();
+
+//var getByNameContainsPhotoUrl= await context.Persons
+//    .Join(context.Photos,
+//    person=> person.Id,
+//    photo=> photo.PersonId,
+//    (person,photo)=>new
+//    {
+//        person.Name,
+//        photo.Url,
+//    })
+//    .FirstOrDefaultAsync(p=> p.Name.Contains("muh"));
 
 #endregion
 #endregion
@@ -38,8 +89,8 @@ public class Photo
 }
 public enum Gender
 {
-    Man=1,
-    Woman=2
+    Man = 1,
+    Woman = 2
 }
 public class Order
 {
@@ -51,11 +102,11 @@ public class Order
 
 }
 
-public class ApplicationDbContext:DbContext
+public class ApplicationDbContext : DbContext
 {
     public DbSet<Person> Persons { get; set; }
     public DbSet<Order> Orders { get; set; }
-    public DbSet<Photo> Photos  { get; set; }
+    public DbSet<Photo> Photos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
