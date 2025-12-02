@@ -1,6 +1,7 @@
 ﻿
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ApplicationDbContext context = new();
 #region CompLext Query Operators
 
@@ -157,9 +158,110 @@ ApplicationDbContext context = new();
 #endregion
 
 //Left ya da right join işlemleri query syntax üzerinden gerçekleşir dolayısıyla method syntaxda left ya da right join işlemini arama!
+//DefauLtIfEmpty : Sorgulama sürecinde iLişkiseL olarak karşılığı olmayan verilere deşault değerini yazdıran yani LEFT JOIN sorgusunu oluşturtan bir fonksiyondur.
 #region Left Join
+//Person addPerson = new() { Name = "Gıyasettin", Gender = Gender.Man };
+//await context.AddAsync(addPerson);
+//await context.SaveChangesAsync();
+//var query = from person in context.Persons
+//            join order in context.Orders
+//             on person.Id equals order.PersonId into personOrders
+//            from order in personOrders.DefaultIfEmpty()
+//            select new
+//            {
+//                person.Name,
+//                order.Description
+//            };
+//var datas= await query.ToListAsync();
+#endregion
+
+#region Right Join
+//SOrgu neticesinde yine sql de left join yapmış oluyoruz. ama mantık olarak tabloların yerini değiştirmiş olduk.
+//var query = from order in context.Orders
+//            join person in context.Persons
+//             on order.PersonId equals person.Id into orderPersons
+//            from person in orderPersons.DefaultIfEmpty()
+//            select new
+//            {
+//                person.Name,
+//                order.Description,  
+//            };
+//var datas= await query.ToListAsync();
+#endregion
+
+#region Full Join
+//var leftQuery = from person in context.Persons
+//                join order in context.Orders
+//                on person.Id equals order.PersonId into personOrders
+//                from order in personOrders.DefaultIfEmpty()
+//                select new
+//                {
+//                    person.Name,
+//                    order.Description,
+//                };
+//var rightQuery = from order in context.Orders
+//                 join person in context.Persons
+//                 on order.PersonId equals person.Id into orderPersons
+//                 from person in orderPersons.DefaultIfEmpty()
+//                 select new { person.Name, order.Description, };
+
+////var fullJoin = leftQuery.Union(rightQuery); 
+//var fullJoin = leftQuery.Concat(rightQuery);
+
+//var fullDatas=await fullJoin.ToListAsync();
 
 #endregion
+
+#region Cross Join
+//var crossQuery = from person in context.Persons
+//                 from order in context.Orders
+//                 select new
+//                 {
+//                     person.Name,
+//                     order.Description
+//                 };
+//var datas= await crossQuery.ToListAsync();
+#endregion
+
+#region Collection Selector' da Where Kullanma Durumu
+//var query = from order in context.Orders
+//            from person in context.Persons.Where(p => p.Id == order.PersonId) //Bu şekilde bir sorgulama ef core tarafında inner join davranışına sebep olacaktır.
+//            select new
+//            {
+//                person,
+//                order
+//            };
+//var datas= await query.ToListAsync();
+#endregion
+
+#region Cross Apply
+
+#endregion
+
+#region Cross Apply
+//Inner Join
+var query = from person in context.Persons
+            from order in context.Orders.Select(o => person.Name)
+            select new
+            {
+                person.Name,
+                order
+            };
+var datas= await query.ToListAsync();
+#endregion
+
+#region Outer Apply
+//left join
+var query2 = from person in context.Persons
+            from order in context.Orders.Select(o => person.Name).DefaultIfEmpty()
+            select new
+            {
+                person.Name,
+                order
+            };
+var datas2 = await query2.ToListAsync();
+#endregion
+
 #endregion
 Console.WriteLine("Hello, World!");
 
