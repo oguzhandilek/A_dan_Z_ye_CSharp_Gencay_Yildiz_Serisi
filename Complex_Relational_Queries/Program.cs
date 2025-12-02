@@ -116,29 +116,49 @@ ApplicationDbContext context = new();
 //var datas= await query.ToListAsync();
 #endregion
 #region Method Syntax
-var query = context.Photos
-    .Join(context.Persons,
-    photo => photo.PersonId,
-    person => person.Id,
-    (photo, person) => new
-    {
-        photo.Url,
-        person.Id,
-        person.Name
-    })
-    .Join(context.Orders,
-    oncekiSorgu => oncekiSorgu.Id,
-    order => order.PersonId,
-    (oncekiSorgu, order) => new
-    {
+//var query = context.Photos
+//    .Join(context.Persons,
+//    photo => photo.PersonId,
+//    person => person.Id,
+//    (photo, person) => new
+//    {
+//        photo.Url,
+//        person.Id,
+//        person.Name
+//    })
+//    .Join(context.Orders,
+//    oncekiSorgu => oncekiSorgu.Id,
+//    order => order.PersonId,
+//    (oncekiSorgu, order) => new
+//    {
 
-        oncekiSorgu.Name,
-        oncekiSorgu.Url,
-        order.Description
-    });
-var datas= await query.ToListAsync();
+//        oncekiSorgu.Name,
+//        oncekiSorgu.Url,
+//        order.Description
+//    });
+//var datas= await query.ToListAsync();
 #endregion
 #endregion
+
+#region Group Join- GroupBy Değil!
+//var query = from person in context.Persons
+//            join order in context.Orders
+//                on person.Id equals order.PersonId into personOrders
+//            select new
+//            {
+//                person.Name,
+//                Count = personOrders.Count(),
+//                personOrders
+//            };
+//var datas=await query.ToListAsync();
+#endregion
+
+
+#endregion
+
+//Left ya da right join işlemleri query syntax üzerinden gerçekleşir dolayısıyla method syntaxda left ya da right join işlemini arama!
+#region Left Join
+
 #endregion
 #endregion
 Console.WriteLine("Hello, World!");
@@ -187,7 +207,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=ComplexQueries;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ComplexQueries;Trusted_Connection=True;");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
