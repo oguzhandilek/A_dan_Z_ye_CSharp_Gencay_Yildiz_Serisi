@@ -62,7 +62,25 @@ ApplicationDbContext context = new();
 #endregion
 #endregion
 
-#region Dynamic SQL Oluşturma ve Parametre Girme
+#region Dynamic SQL Oluşturma ve Parametre Girme - FromSqlRaw
+//string columnName = "Id", value = "3";
+//var persons= await context.Persons.FromSql($"Select * from Persons Where {columnName}={value}").ToListAsync();
+
+// EF Core dinamik olarak oluşturulan sorgularda özellikle kolon isimleri parametreleştirilmişse o sorguyu ÇALIŞTIRMAYACAKTIR!
+//string columName = "Id";
+//SqlParameter value = new("Id", "3");
+//var persons= await context.Persons.FromSqlRaw($"Select * from Persons Where {columName}=@Id",value).ToListAsync();
+
+//string columnName = "Name";
+//string nameValue = "Cucume";
+//SqlParameter value= new("Name",nameValue);
+//var persons=await context.Persons.FromSqlRaw($"Select * from Persons Where {columnName}=@Name",value).ToListAsync();
+
+//FromSqL ve FromSq11nterpoLated metotlarında SQL Injection vs. gibi güvenlik önlemleri alınmış vaziyettedir. Lakin dinamik olarak sorguları oluşturuyorsanız eğer burada güvenlik geliştirici sorumludur. Yani gelen sorguda/veri yorumlar, noktalı virgüller yahut SQL'e özel karakterlerin algılanması ve bunların temizlenmesi geliştirici tarafından gerekmektedir.
+
+#endregion
+
+#region SqlQuery - Entity Olmayan Scalar Sorguların Çalıştırılması - Non Entity - Ef Core 7.0
 
 #endregion
 
