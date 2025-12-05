@@ -81,9 +81,30 @@ ApplicationDbContext context = new();
 #endregion
 
 #region SqlQuery - Entity Olmayan Scalar Sorguların Çalıştırılması - Non Entity - Ef Core 7.0
+//Entity'si olmayan scaLar sorguların çalıştırılıp sonucunu elde etmemizi sağlayan yeni bir fonksiyondur.
+//var data = await context.Database.SqlQuery<int>($"Select Id From Persons").ToListAsync();
+//var names = await context.Database.SqlQuery<string>($"Select Name From Persons").ToListAsync();
 
+//var datas = await context.Database.SqlQuery<int>($"Select Id Value From Persons").Where(p => p > 3).ToListAsync();
+
+//Sq1Query'de LINQ operatörleriyle sorguya ekstradan katkıda bulunmak istiyorsanız eğer bu sorgu neticesinde gelecek olan kolonun adını Value olarak bildirmeniz gerekmektedir. Çünkü, SqLQuery metodu sorguyu bir subquery olarak generate etmektedir. Haliyle bu durumdan dolayı LINQ ile verilen şart ifadeleri statik olarka Value kolonuna göre tasarlanmıştır. O yüzden bu şekilde bir çalışma zorunlu gerekmektedir.
 #endregion
 
+#region ExecuteSql - ExecuteSqlAsync
+//Insert, update, delete
+//await context.Database.ExecuteSqlAsync($"Update Orders Set Description='ExecuteSqlAsync' Where Id=1");
+#endregion
+
+#region Sınırlılıklar
+//QueryLer entity türünün tüm Propertyler için kolonlarda değer döndürmelidir.
+var query = await context.Persons.FromSql($"Select Name,Id from Persons").ToListAsync();
+// Sütun isimleri proıperty isimleriyle aynı olmalıdır.
+
+// SQL Sorgusu Join yapısı İÇEREMEZ! !! Haliyle bu tarz ihtiyaç noktalarında Include Fonksiyonu KULLANILMALIDIR!
+var queries= await context.Persons.FromSql($"Select * from Persons")
+    .Include(p=> p.Orders)
+    .ToListAsync();
+#endregion
 
 Console.WriteLine("Hello, World!");
 
@@ -107,7 +128,7 @@ public class Order
 
 }
 
-public class ApplicationDbContext:DbContext
+public class ApplicationDbContext : DbContext
 {
     public DbSet<Person> Persons { get; set; }
     public DbSet<Order> Orders { get; set; }
