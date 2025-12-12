@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stored_Procedures", "Stored_Procedures\Stored_Procedures.csproj", "{33F68B41-D1D7-47A6-892D-5D93A0B0BB1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "Functions\Functions.csproj", "{A797FCC1-FA30-4E1B-8B06-1CB1E3F5B5A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +221,10 @@ Global
 		{33F68B41-D1D7-47A6-892D-5D93A0B0BB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F68B41-D1D7-47A6-892D-5D93A0B0BB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F68B41-D1D7-47A6-892D-5D93A0B0BB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A797FCC1-FA30-4E1B-8B06-1CB1E3F5B5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A797FCC1-FA30-4E1B-8B06-1CB1E3F5B5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A797FCC1-FA30-4E1B-8B06-1CB1E3F5B5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A797FCC1-FA30-4E1B-8B06-1CB1E3F5B5A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
