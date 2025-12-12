@@ -12,6 +12,8 @@ namespace Stored_Procedures.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+           
+
             migrationBuilder.CreateTable(
                 name: "Persons",
                 columns: table => new
@@ -84,6 +86,7 @@ namespace Stored_Procedures.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Orders");
+
 
             migrationBuilder.DropTable(
                 name: "Persons");

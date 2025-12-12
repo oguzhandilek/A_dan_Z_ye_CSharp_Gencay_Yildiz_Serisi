@@ -5,24 +5,28 @@
 namespace Stored_Procedures.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_2 : Migration
+    public partial class mig_4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql($@"create proc usp_PersonOrders
+            migrationBuilder.Sql($@"create proc [dbo].[usp_PersonOrders2]
+(
+	@PersonId int,
+	@Name Nvarchar(max) OUTPUT
+)
                             as
-                            Select p.[Name],Count (*) [Count] from Persons p
+                            Select @Name= p.[Name]from Persons p
                             left join Orders o
                             on p.Id=o.PersonId
-                            Group by p.[Name]
-                            order by (p.Name) ");
+							where p.Id=@PersonId
+                         ");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql($@"drop proc usp_PersonOrders");
+            migrationBuilder.Sql($@"drop proc usp_PersonOrders2");
         }
     }
 }

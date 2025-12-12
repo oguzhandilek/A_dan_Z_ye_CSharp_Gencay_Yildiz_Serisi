@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Stored_Procedures.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251206231030_mig_1")]
-    partial class mig_1
+    [Migration("20251212083540_mig_3")]
+    partial class mig_3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,6 +142,18 @@ namespace Stored_Procedures.Migrations
                             Id = 4,
                             Name = "Cucume"
                         });
+                });
+
+            modelBuilder.Entity("PersonOrder", b =>
+                {
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("PersonOrders");
                 });
 
             modelBuilder.Entity("Order", b =>

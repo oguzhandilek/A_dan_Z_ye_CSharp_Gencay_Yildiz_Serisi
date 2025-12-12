@@ -1,5 +1,8 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 ApplicationDbContext context = new();
@@ -60,14 +63,39 @@ ApplicationDbContext context = new();
 #endregion
 
 #region Geriye Değer Döndüren Stored Proc Kullanma
+//SqlParameter sqlParameter = new()
+//{
+//    ParameterName = "count",
+//    SqlDbType = System.Data.SqlDbType.Int,
+//    Direction = System.Data.ParameterDirection.Output,
 
+//};
+//await context.Database.ExecuteSqlRawAsync($"Exec @count=usp_bestSellingStaff",sqlParameter);
+//Console.WriteLine(sqlParameter.Value);
 #endregion
 
 #region Parametreli Stored Proc Kullanma
+#region Input Parametreli SP
+
+#endregion
+#region Output Parametreli
 
 #endregion
 
+SqlParameter parameter = new()
+{
+    ParameterName = "name",
+    SqlDbType = System.Data.SqlDbType.NVarChar,
+    Direction = System.Data.ParameterDirection.Output,
+    Size=1000
+};
+Console.WriteLine(parameter.Value);
+await context.Database.ExecuteSqlRawAsync($"EXECUTE dbo.usp_PersonOrders2 3, @name output");
 #endregion
+
+#endregion
+
+
 
 Console.WriteLine("Hello, World!");
 
@@ -91,7 +119,8 @@ public class Order
     public Person Person { get; set; } = default!;
 
 }
-
+//Bu class'ı stored proc için kullandığımızdan dolayı migrate yapılınca tablo olarak migrate olmasını istemiyoruz. Bu nedenle NotMapped attr.ile işaretledik.
+[NotMapped]
 public class PersonOrder
 {
     public string Name { get; set; }
@@ -111,6 +140,6 @@ public class ApplicationDbContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=StoredProcDb;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=StoredProcDb;Trusted_Connection=True;");
     }
 }
