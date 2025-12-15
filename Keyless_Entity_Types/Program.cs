@@ -15,9 +15,9 @@ ApplicationDbContext context = new ApplicationDbContext();
 // 2. Bu entity' nin DbSet property 'si olarak DbContext nesnesine eklenmesi gerekmektedir.
 // 3. Tanımlamış olduğumuz entity'e OnModeLCreating fonksiyonu içerisinde girip bunun bir key'i olmadığını bildirmeli (HasNoKey) ve hangi sorgunun çalıştırılacağı da ToView vs. gibi işlemlerle ifade edilmelidir.
 
-var datas= await context.PersonOrderCounts.ToListAsync();
+//var datas= await context.PersonOrderCounts.ToListAsync();
 #region Keyless Attribute'u
-
+//[Keyless]
 #endregion
 #region HasNoKey Fluent API'ı
 
@@ -25,7 +25,9 @@ var datas= await context.PersonOrderCounts.ToListAsync();
 #endregion
 
 #region Keyless Entity Types Özellikleri
-
+//Primary Key kolonu OLMAZ!
+//Change Tracker mekanizması aktif olmayacaktır.
+//TPH olarak entity hiyerarşisinde kullanılabilir Lakin diğer kalıtımsal ilişkilerde kullanılamaz!
 #endregion
 Console.WriteLine("Hello, World!");
 public class Person
@@ -47,6 +49,7 @@ public class Order
 
 }
 
+//[Keyless]
 public class PersonOrderCount
 {
     public string? Name { get; set; }
