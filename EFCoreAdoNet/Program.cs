@@ -1,8 +1,10 @@
 ﻿
 
-using System.Reflection;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Reflection;
 
 ApplicationDbContext context = new();
 
@@ -58,6 +60,67 @@ bool connect = context.Database.CanConnect();
 //var name = "Şeref";
 //var result=context.Database.ExecuteSqlRaw($"Insert Person values({name})");
 #endregion
+
+#region SqlQuery
+//SqLQuery fonksiyonu her ne kadar erişilebilir olsada artık desteklenememktedir. Bunun yerine DbSet propertysi üzerinden erişilebilen FromSqL fonksiyonu gelmiştir/kullanılmaktadır.
+#endregion
+
+#region SqlQueryRaw
+//SqLQueryRaw fonksiyonu her ne kadar erişilebilir olsada artık desteklenememktedir. Bunun yerine DbSet propertysi üzerinden erişilebilen FromSqLraw fonksiyonu gelmiştir/kullanılmaktadır.
+#endregion
+
+#region GetMigrations
+//Uygu1amada üretilmiş olan tüm migration 'ları runtime'da programatik olarak elde etmemizi sağlayan metottur.l
+//var migs =context.Database.GetMigrations();
+
+#endregion
+
+#region GetAppliedMigrations
+//UyguLamada migrate edilmiş olan tüm migrationları elde etmemizi sağlayan bir fonksiyondur.
+//var appliedMigs=context.Database.GetAppliedMigrations();
+#endregion
+
+#region GetPendingMigrations
+//UyguLamada migrate edilmemiş olan tüm migrationları elde etmemizi sağlayan bir fonksiyondur.
+//var migs = context.Database.GetPendingMigrations();
+#endregion
+
+#region Migrate
+//Migration 'Ları programatik olarak runtime'da migrate etmek için kullanılan bir fonksiyondur.
+//context.Database.Migrate();
+//EnsureCreated fonksiyonu migration 'Ları kapsamamaktadır. O yüzden migraton'lar içerisinde yapılan çalışmalar ilgili fonksiyonda geçerli olmayacaktır.
+#endregion
+
+#region OpenConnection
+// Veritabanı bağlantısını manuel açar.
+//context.Database.OpenConnection();
+#endregion
+
+#region CloseConnection
+// Veritabanı bav lantısını manuel kapatır.
+//context.Database.CloseConnection();
+#endregion
+
+#region GetConnectionString
+// İlgili context pesnesinin o anda kullandığı connectionstring değeri ne ise onu elde etmenizi sağlar.
+//var connectionString=context.Database.GetConnectionString();
+#endregion
+
+#region GetDbConnection
+//EF Core'un kullanmış olduğu Ado.NET altyapısının kullandığı DbConnection nesnesini elde etmemizi sağlayan bir fonksiyondur. Yaniiii bizleri Ado.NET kanadına götürür.
+//SqlConnection connection = (SqlConnection)context.Database.GetDbConnection();
+#endregion
+
+#region SetDbConnection
+//OzeLLeştırıLmış connectıon nesnelerını EF Core mımarısıne dahli etmemızı sagLayan bır fonksıyondur.
+//context.Database.SetDbConnection(connection);
+#endregion
+
+#region ProviderName Property'si
+/// EF Core 'un kullanmış olduğu provider neyse onun bilgisini getiren bir proeprty ' dir.
+Console.WriteLine(context.Database.ProviderName);
+#endregion
+
 Console.WriteLine("Hello, World!");
 
 public class Person
@@ -85,7 +148,7 @@ public class ApplicationDbContext:DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EfCoreAdonetDb;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\local;Database=EfCoreAdonetDb;Trusted_Connection=True;");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
