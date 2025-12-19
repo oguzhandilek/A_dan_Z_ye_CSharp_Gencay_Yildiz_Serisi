@@ -15,7 +15,8 @@ ApplicationDbContext context = new ApplicationDbContext();
 // 2. Bu entity' nin DbSet property 'si olarak DbContext nesnesine eklenmesi gerekmektedir.
 // 3. Tanımlamış olduğumuz entity'e OnModeLCreating fonksiyonu içerisinde girip bunun bir key'i olmadığını bildirmeli (HasNoKey) ve hangi sorgunun çalıştırılacağı da ToView vs. gibi işlemlerle ifade edilmelidir.
 
-//var datas= await context.PersonOrderCounts.ToListAsync();
+var datas = await context.PersonOrderCounts.ToListAsync();
+var data = await context.Set<PersonOrderCount>().ToListAsync();
 #region Keyless Attribute'u
 //[Keyless]
 #endregion

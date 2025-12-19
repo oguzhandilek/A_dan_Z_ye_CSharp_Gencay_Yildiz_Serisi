@@ -15,12 +15,12 @@ ApplicationDbContext context = new();
 //Eager Loading operasyonunu yapmamızı sağlayan bir fonksiyondur. 
 // Yani üretilen bir sorguya diğer ilişkisel tabloların dahil edilmesini sağlayan bir işleve sahiptir..
 
-//var employees= await context.Employees
-//    .Where(e=> e.Orders.Count > 2)
-//    .Include(e=> e.Orders)
-//    //.Include("Orders") // Bu atnımlama genellikle Shadow Prop.larda kullanılır
-//    .Include(e=> e.Region)
-//    .ToListAsync();
+var employees = await context.Employees
+    .Where(e => e.Orders.Count > 2)
+    .Include(e => e.Orders)
+    //.Include("Orders") // Bu atnımlama genellikle Shadow Prop.larda kullanılır
+    .Include(e => e.Region)
+    .ToListAsync();
 #endregion
 
 #region ThenInclude
@@ -134,9 +134,9 @@ ApplicationDbContext context = new();
 
 
 #region Lazy Loading
-//var employee = await context.Employees.FirstOrDefaultAsync(e => e.Id == 3);
+var employee = await context.Employees.FirstOrDefaultAsync(e => e.Id == 3);
 
-//Console.WriteLine(employee.Region.Name);
+Console.WriteLine(employee.Region.Name);
 
 #region Lazy Loading Nedir?
 //Navigation propertylLer üzerinde bir işlem yapılmaya çalışıldığı taktirde ilgili propertynin/ ye/ temsil ettiği/ karşılık gelen tabloya özel bir sorgu oluşturulup execute edilmesini ve verilerin yüklenmesini sağlayan bir yaklaşımdır.
@@ -152,7 +152,7 @@ ApplicationDbContext context = new();
 #region Proxy Olmaksızın Lazy Loading
 // Prox'ler tüm platformlarda desteklenmeyebilir. Böyle bir durumda manuel bir şekilde lazy loading'i uygulamak mecburiyetinde kalabiliriz .
 //ManueL yapılan Lazy Loading operasyonlarında Navigation Proeprtylerin virtual ile işaretlenmesine gerek yoktur!
-var employee = await context.Employees.FindAsync(1);
+//var employee = await context.Employees.FindAsync(1);
 Console.WriteLine(employee.Region.Name);
 Console.WriteLine(employee.Orders[1].OrderDate.Month);
 #region ILazyLoader Interface'i İle Lazy Loading
