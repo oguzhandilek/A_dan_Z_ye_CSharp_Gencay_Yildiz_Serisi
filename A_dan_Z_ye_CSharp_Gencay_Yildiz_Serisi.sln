@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Query_Log", "Query_Log\Quer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Query_Tags", "Query_Tags\Query_Tags.csproj", "{A9A96827-8CBF-4C7B-BAEE-A12C93BA7CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Globsl_Query_Filters", "Globsl_Query_Filters\Globsl_Query_Filters.csproj", "{488A98FE-8DEE-40B8-991F-126ED4BBA8D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -255,6 +257,10 @@ Global
 		{A9A96827-8CBF-4C7B-BAEE-A12C93BA7CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9A96827-8CBF-4C7B-BAEE-A12C93BA7CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9A96827-8CBF-4C7B-BAEE-A12C93BA7CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488A98FE-8DEE-40B8-991F-126ED4BBA8D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488A98FE-8DEE-40B8-991F-126ED4BBA8D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488A98FE-8DEE-40B8-991F-126ED4BBA8D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488A98FE-8DEE-40B8-991F-126ED4BBA8D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
