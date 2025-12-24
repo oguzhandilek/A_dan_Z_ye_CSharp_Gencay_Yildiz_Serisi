@@ -33,7 +33,7 @@ ApplicationDbContext context = new();
 //.EnableSensitiveDataLogging() 
 
 #endregion
-#region Ezception Ayrıntısını Loglama - EnableDetailedErrors
+#region Exception Ayrıntısını Loglama - EnableDetailedErrors
 //.EnableDetailedErrors();
 #endregion
 #region Log Levels
