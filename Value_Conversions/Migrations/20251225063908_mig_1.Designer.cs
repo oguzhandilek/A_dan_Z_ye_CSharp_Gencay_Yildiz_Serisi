@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Value_Conversions.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251224130058_mig_2")]
-    partial class mig_2
+    [Migration("20251225063908_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,13 @@ namespace Value_Conversions.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Maried")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titles")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -51,6 +57,7 @@ namespace Value_Conversions.Migrations
                             Id = 1,
                             Gender = "M",
                             Gender2 = "Male",
+                            Maried = true,
                             Name = "Abdulhamit"
                         },
                         new
@@ -58,6 +65,7 @@ namespace Value_Conversions.Migrations
                             Id = 2,
                             Gender = "M",
                             Gender2 = "Male",
+                            Maried = true,
                             Name = "Eşref"
                         },
                         new
@@ -65,6 +73,7 @@ namespace Value_Conversions.Migrations
                             Id = 3,
                             Gender = "M",
                             Gender2 = "Male",
+                            Maried = true,
                             Name = "Bartu"
                         },
                         new
@@ -72,6 +81,7 @@ namespace Value_Conversions.Migrations
                             Id = 4,
                             Gender = "F",
                             Gender2 = "Female",
+                            Maried = true,
                             Name = "Cucume"
                         },
                         new
@@ -79,6 +89,7 @@ namespace Value_Conversions.Migrations
                             Id = 5,
                             Gender = "F",
                             Gender2 = "Female",
+                            Maried = false,
                             Name = "Halime"
                         },
                         new
@@ -86,6 +97,7 @@ namespace Value_Conversions.Migrations
                             Id = 6,
                             Gender = "F",
                             Gender2 = "Female",
+                            Maried = true,
                             Name = "Keriye"
                         });
                 });

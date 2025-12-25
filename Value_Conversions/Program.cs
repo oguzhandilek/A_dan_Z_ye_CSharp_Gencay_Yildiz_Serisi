@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 
 ApplicationDbContext context = new();
 
@@ -63,6 +64,19 @@ Console.WriteLine();
 //https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions
 #endregion
 
+#region İlkel Koleksiyonların Serilizasyonu
+// İçerisinde ilkel türlerden oluşturuLmuş koleksiyonları barındıran modelleri migrate etmeye çalıştığımızda hata ile karşılaşmaktayız. Bu hatadan kurtuLmak ve ilgili veriye koleksiyondaki verileri serilize ederek işleyebilmek için bu koleksiyonu normal metinsel değerlere dönüştürmemize fırsat veren bir conversion operasyonu gerçekleştireibliriz.
+
+//var person=new Person {Name ="Filanca",Gender="M",Gender2=Gender.Male, Maried=true,Titles=new() { "A", "B", "C" } };
+//await context.AddAsync(person);
+//await context.SaveChangesAsync();
+//var _person = await context.Persons.FindAsync(person.Id);
+#endregion
+
+#region .Net 6 - Value Converter For Nullable Fields
+// . NET 6 dan önce value converterllar nu1L değerlerin dönüşüşmünü desteklememekteydi. . NET 6 i Le artık nuL Ideğerler de dönüştürülebilmektedir.
+#endregion
+
 Console.WriteLine("Hello, World!");
 
 public class Person
@@ -72,6 +86,7 @@ public class Person
     public string? Gender { get; set; }
     public Gender Gender2 { get; set; }
     public bool Maried { get; set; }
+    public List<string>? Titles { get; set; }
 }
 public enum Gender
 {
@@ -137,15 +152,15 @@ public class ApplicationDbContext:DbContext
         #endregion
 
         #region ValueConverter Sınıfı
-        //ValueConverter<Gender, string> valueConverter = new(
-        //    //INSERT-UPDATE
-        //    g=> g.ToString()
-        //    ,
-        //    //SELECT
-        //    g=> (Gender)Enum.Parse(typeof(Gender),g)
-        //    );
+        ValueConverter<Gender, string> valueConverter = new(
+            //INSERT-UPDATE
+            g => g.ToString()
+            ,
+            //SELECT
+            g => (Gender)Enum.Parse(typeof(Gender), g)
+            );
 
-        //modelBuilder.Entity<Person>().Property(p=> p.Gender2).HasConversion(valueConverter);
+        modelBuilder.Entity<Person>().Property(p => p.Gender2).HasConversion(valueConverter);
         #endregion
 
         #region Custom ValueConverter Sınıfı
@@ -167,6 +182,18 @@ public class ApplicationDbContext:DbContext
         #region BoolToTwoValuesConverter
         //BoolToTwoValuesConverter<char> converter = new('B', 'E');
         //modelBuilder.Entity<Person>().Property(P => P.Maried).HasConversion(converter);
+        #endregion
+
+        #region İlkel Koleksiyonların Serilizasyonu
+        modelBuilder.Entity<Person>()
+            .Property(p => p.Titles)
+            .HasConversion(
+            //INSERT-UPDATE
+            t=> JsonSerializer.Serialize(t,new JsonSerializerOptions { PropertyNameCaseInsensitive=true})
+            ,
+            //SELECT 
+            t=> JsonSerializer.Deserialize<List<string>>(t,new JsonSerializerOptions { PropertyNameCaseInsensitive = true})
+            );
         #endregion
 
     }

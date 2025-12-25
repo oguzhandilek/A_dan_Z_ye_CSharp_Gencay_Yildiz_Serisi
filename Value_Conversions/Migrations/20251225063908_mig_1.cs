@@ -19,7 +19,10 @@ namespace Value_Conversions.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Maried = table.Column<bool>(type: "bit", nullable: false),
+                    Titles = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,15 +31,15 @@ namespace Value_Conversions.Migrations
 
             migrationBuilder.InsertData(
                 table: "Persons",
-                columns: new[] { "Id", "Gender", "Name" },
+                columns: new[] { "Id", "Gender", "Gender2", "Maried", "Name", "Titles" },
                 values: new object[,]
                 {
-                    { 1, "M", "Abdulhamit" },
-                    { 2, "M", "Eşref" },
-                    { 3, "M", "Bartu" },
-                    { 4, "F", "Cucume" },
-                    { 5, "F", "Halime" },
-                    { 6, "F", "Keriye" }
+                    { 1, "M", "Male", true, "Abdulhamit", null },
+                    { 2, "M", "Male", true, "Eşref", null },
+                    { 3, "M", "Male", true, "Bartu", null },
+                    { 4, "F", "Female", true, "Cucume", null },
+                    { 5, "F", "Female", false, "Halime", null },
+                    { 6, "F", "Female", true, "Keriye", null }
                 });
         }
 
