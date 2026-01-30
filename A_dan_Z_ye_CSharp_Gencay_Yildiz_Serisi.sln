@@ -97,6 +97,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Concurrency", "Data_Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Value_Conversions", "Value_Conversions\Value_Conversions.csproj", "{CCCCDBD8-0B39-4125-8AE6-70F445D24EFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transaction", "Transaction\Transaction.csproj", "{2C8E1D18-0263-4F79-BD28-8023CE7DA435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +293,10 @@ Global
 		{CCCCDBD8-0B39-4125-8AE6-70F445D24EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCCCDBD8-0B39-4125-8AE6-70F445D24EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCCCDBD8-0B39-4125-8AE6-70F445D24EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C8E1D18-0263-4F79-BD28-8023CE7DA435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C8E1D18-0263-4F79-BD28-8023CE7DA435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C8E1D18-0263-4F79-BD28-8023CE7DA435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C8E1D18-0263-4F79-BD28-8023CE7DA435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
