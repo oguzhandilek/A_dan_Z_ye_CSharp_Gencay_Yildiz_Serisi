@@ -103,6 +103,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_In_Memory_Database"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_Efficient_Querying", "EF_Core_Efficient_Querying\EF_Core_Efficient_Querying.csproj", "{61BF002A-6E1C-4135-ACAC-30C940CF96DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF-Core_7_Bulk_Update_And_Delete", "EF-Core_7_Bulk_Update_And_Delete\EF-Core_7_Bulk_Update_And_Delete.csproj", "{0FB8183C-E956-4183-AACE-3262CEB7AF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_Entity_Splitting", "EF_Core_Entity_Splitting\EF_Core_Entity_Splitting.csproj", "{14EE2F6D-E8EB-41BF-8C8F-B89B463F226A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +313,14 @@ Global
 		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB8183C-E956-4183-AACE-3262CEB7AF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB8183C-E956-4183-AACE-3262CEB7AF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB8183C-E956-4183-AACE-3262CEB7AF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB8183C-E956-4183-AACE-3262CEB7AF73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EE2F6D-E8EB-41BF-8C8F-B89B463F226A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EE2F6D-E8EB-41BF-8C8F-B89B463F226A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EE2F6D-E8EB-41BF-8C8F-B89B463F226A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EE2F6D-E8EB-41BF-8C8F-B89B463F226A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
