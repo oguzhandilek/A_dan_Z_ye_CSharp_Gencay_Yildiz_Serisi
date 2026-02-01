@@ -101,6 +101,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transaction", "Transaction\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_In_Memory_Database", "EF_Core_In_Memory_Database\EF_Core_In_Memory_Database.csproj", "{FF0D7CEF-7F38-4667-9FCC-DBAEC46A77CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_Efficient_Querying", "EF_Core_Efficient_Querying\EF_Core_Efficient_Querying.csproj", "{61BF002A-6E1C-4135-ACAC-30C940CF96DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +305,10 @@ Global
 		{FF0D7CEF-7F38-4667-9FCC-DBAEC46A77CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0D7CEF-7F38-4667-9FCC-DBAEC46A77CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF0D7CEF-7F38-4667-9FCC-DBAEC46A77CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BF002A-6E1C-4135-ACAC-30C940CF96DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
